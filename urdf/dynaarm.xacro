@@ -3,6 +3,7 @@
 
   <xacro:arg name="prefix" default="" />
   <xacro:arg name="use_sim" default="true" />
+  <xacro:arg name="use_gazebo" default="false" />
   <xacro:arg name="ethercat_bus" default="enp86s0" />
   
   <xacro:include filename="$(find duatic_ros2_description)/urdf/dynaarm.urdf.xacro" />
@@ -23,6 +24,7 @@
   <xacro:dynaarm_ros2_control name="DynaarmRos2Control" 
                               ethercat_bus="$(arg ethercat_bus)" 
                               prefix="$(arg prefix)" 
-                              use_sim="$(arg use_sim)" />
+                              use_sim="$(arg use_sim)"
+                              use_gazebo="$(arg use_gazebo)" />
 
 </robot>
