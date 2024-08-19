@@ -2,7 +2,7 @@
   xmlns:xacro="http://www.ros.org/wiki/xacro">
 
   <xacro:arg name="prefix" default="" />
-  <xacro:arg name="use_sim" default="true" />
+  <xacro:arg name="use_sim" default="false" />
   <xacro:arg name="use_gazebo" default="false" />
   <xacro:arg name="ethercat_bus" default="enp86s0" />
   

@@ -21,7 +21,7 @@
 	<xacro:property name="base_mesh" value="base_mesh" />
 	<xacro:property name="link01_mesh" value="shoulder_mesh" />
 	<xacro:property name="link02_mesh" value="upperarm_mesh" />
-  <xacro:property name="link03_mesh" value="elbow_mesh" />       
+    <xacro:property name="link03_mesh" value="elbow_mesh" />       
 
 	<xacro:property name="joint_base_name"	value="joint_base" />
 	<xacro:property name="joint_base_type" value="fixed" />
