@@ -6,8 +6,8 @@
   <xacro:arg name="use_gazebo" default="false" />
   <xacro:arg name="ethercat_bus" default="enp86s0" />
   
-  <xacro:include filename="$(find duatic_ros2_description)/urdf/dynaarm.urdf.xacro" />
-  <xacro:include filename="$(find duatic_ros2_description)/urdf/dynaarm.ros2_control.xacro" />
+  <xacro:include filename="$(find duatic_description)/urdf/dynaarm.urdf.xacro" />
+  <xacro:include filename="$(find duatic_description)/urdf/dynaarm.ros2_control.xacro" />
 
   <!-- create world link and link it to the dynaarm base -->
   <link name="world"/>    

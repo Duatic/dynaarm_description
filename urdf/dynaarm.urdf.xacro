@@ -3,7 +3,7 @@
 
 	<xacro:macro name="dynaarm" params="parent prefix *origin">
 
-		<xacro:include filename="$(find duatic_ros2_description)/urdf/dynaarm_parameters.urdf.xacro"/>
+		<xacro:include filename="$(find duatic_description)/urdf/dynaarm_parameters.urdf.xacro"/>
 
 		<!-- World - Base -->
 		<joint name="${prefix}${joint_base_name}" type="${joint_base_type}">
@@ -20,7 +20,7 @@
 			</inertial>
 			<visual>				
 				<geometry>
-					<mesh filename="file://$(find duatic_ros2_description)/meshes/100_base_mesh.dae" />
+					<mesh filename="file://$(find duatic_description)/meshes/100_base_mesh.dae" />
 				</geometry>
 				<material name="carbon_fiber">
 					<color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
@@ -28,7 +28,7 @@
 			</visual>
 			<collision>
 				<geometry>
-					<mesh filename="file://$(find duatic_ros2_description)/meshes/100_base_mesh_col.dae" />
+					<mesh filename="file://$(find duatic_description)/meshes/100_base_mesh_col.dae" />
 				</geometry>
 			</collision>
 		</link>
@@ -42,7 +42,7 @@
 			</inertial>
 			<visual>
 				<geometry>
-					<mesh filename="file://$(find duatic_ros2_description)/meshes/101_shoulder_mesh.dae"/>
+					<mesh filename="file://$(find duatic_description)/meshes/101_shoulder_mesh.dae"/>
 				</geometry>
 				<material name="carbon_fiber">
 					<color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
@@ -50,7 +50,7 @@
 			</visual>
 			<collision>
 				<geometry>
-					<mesh filename="file://$(find duatic_ros2_description)/meshes/101_shoulder_mesh_col.dae"/>
+					<mesh filename="file://$(find duatic_description)/meshes/101_shoulder_mesh_col.dae"/>
 				</geometry>
 			</collision>
 		</link>
@@ -64,7 +64,7 @@
 			</inertial>
 			<visual>
 				<geometry>
-					<mesh filename="file://$(find duatic_ros2_description)/meshes/102_upperarm_mesh.dae"/>
+					<mesh filename="file://$(find duatic_description)/meshes/102_upperarm_mesh.dae"/>
 				</geometry>
 				<material name="carbon_fiber">
 					<color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
@@ -72,7 +72,7 @@
 			</visual>
 			<collision>
 				<geometry>
-					<mesh filename="file://$(find duatic_ros2_description)/meshes/102_upperarm_mesh_col.dae"/>
+					<mesh filename="file://$(find duatic_description)/meshes/102_upperarm_mesh_col.dae"/>
 				</geometry>
 			</collision>
 		</link>
@@ -86,7 +86,7 @@
 			</inertial>
 			<visual>
 				<geometry>
-					<mesh filename="file://$(find duatic_ros2_description)/meshes/103_elbow_mesh.dae"/>
+					<mesh filename="file://$(find duatic_description)/meshes/103_elbow_mesh.dae"/>
 				</geometry>
 				<material name="carbon_fiber">
 					<color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
@@ -94,7 +94,7 @@
 			</visual>
 			<collision>
 				<geometry>
-					<mesh filename="file://$(find duatic_ros2_description)/meshes/103_elbow_mesh_col.dae"/>
+					<mesh filename="file://$(find duatic_description)/meshes/103_elbow_mesh_col.dae"/>
 				</geometry>
 			</collision>
 		</link>
