@@ -41,9 +41,12 @@
 	<xacro:property name="joint_2_type" value="revolute" />
 	<xacro:property name="joint_2_axis_xyz" value="0 0 -1" />
 	<xacro:property name="joint_2_origin_xyz" value="0 0 0.0" />
-	<xacro:property name="joint_2_origin_rpy" value="${J_PI/2} -${J_PI/2} 0" />
-	<xacro:property name="joint_2_lower_limit" value="${-J_PI/2 - 0.3}" />
-	<xacro:property name="joint_2_upper_limit" value="${J_PI/2 + 0.3}" />
+	<xacro:property name="joint_2_origin_rpy" value="${J_PI/2} 0 0" />
+	<!-- <xacro:property name="joint_2_origin_rpy" value="${J_PI/2} -${J_PI/2} 0" /> -->
+	<xacro:property name="joint_2_lower_limit" value="${-J_PI - 0.3}" />
+	<xacro:property name="joint_2_upper_limit" value="0.3" />
+	<!-- <xacro:property name="joint_2_lower_limit" value="${-J_PI/2 - 0.3}" />
+	<xacro:property name="joint_2_upper_limit" value="${J_PI/2 + 0.3}" /> -->
 	
 	<xacro:property name="joint_3_name" value="EL_FLE" />
 	<xacro:property name="joint_3_type" value="revolute" />
