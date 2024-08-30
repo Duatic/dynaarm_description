@@ -2,7 +2,7 @@
   xmlns:xacro="http://www.ros.org/wiki/xacro">
 
   <xacro:arg name="prefix" default="" />
-  <xacro:arg name="use_sim" default="false" />
+  <xacro:arg name="use_fake" default="true" />
   <xacro:arg name="use_gazebo" default="false" />
   <xacro:arg name="ethercat_bus" default="enp86s0" />
   
@@ -24,7 +24,7 @@
   <xacro:dynaarm_ros2_control name="DynaarmRos2Control" 
                               ethercat_bus="$(arg ethercat_bus)" 
                               prefix="$(arg prefix)" 
-                              use_sim="$(arg use_sim)"
+                              use_fake="$(arg use_fake)"
                               use_gazebo="$(arg use_gazebo)" />
 
 </robot>

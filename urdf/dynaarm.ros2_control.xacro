@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
-  <xacro:macro name="dynaarm_ros2_control" params="name prefix use_sim use_gazebo ethercat_bus">
+  <xacro:macro name="dynaarm_ros2_control" params="name prefix use_fake use_gazebo ethercat_bus">
     
     <xacro:property name="initial_positions_filename" value="$(find duatic_description)/config/initial_positions.yaml"/>
     <xacro:property name="initial_positions" value="${xacro.load_yaml(initial_positions_filename)['initial_positions']}"/>
@@ -9,7 +9,7 @@
 
     <ros2_control name="${name}" type="system">
 
-      <xacro:if value="$(arg use_sim)">
+      <xacro:if value="$(arg use_fake)">
         <hardware>
             <xacro:unless value="$(arg use_gazebo)">
               <plugin>mock_components/GenericSystem</plugin>
@@ -19,7 +19,7 @@
             </xacro:if>
         </hardware>        
       </xacro:if>
-      <xacro:unless value="$(arg use_sim)">
+      <xacro:unless value="$(arg use_fake)">
         <hardware>
           <plugin>dynaarm_driver/DynaArmHardwareInterface</plugin>          
           <param name="ethercat_bus">${ethercat_bus}</param>
@@ -131,7 +131,7 @@
 
     </ros2_control>
 
-    <xacro:if value="$(arg use_sim)">
+    <xacro:if value="$(arg use_fake)">
       <gazebo>
         <plugin filename="libgz_ros2_control-system.so" name="gz_ros2_control::GazeboSimROS2ControlPlugin">
             <parameters>$(find dynaarm_driver)/config/controllers.yaml</parameters>                
