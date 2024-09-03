@@ -30,7 +30,7 @@ def launch_setup(context, *args, **kwargs):
 
     # Load the robot description
     description_file_path = os.path.join(
-        get_package_share_directory("duatic_description"),
+        get_package_share_directory("dynaarm_description"),
         "urdf",        
         robot_type_xacro_file_name,
     )    
@@ -71,7 +71,7 @@ def launch_setup(context, *args, **kwargs):
         arguments=[
             "-d",
             os.path.join(
-                get_package_share_directory("duatic_description"),
+                get_package_share_directory("dynaarm_description"),
                 "rviz",
                 "config.rviz",
             ),
