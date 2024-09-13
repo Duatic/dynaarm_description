@@ -54,7 +54,7 @@
 	<xacro:property name="joint_3_origin_xyz" value="0.412 0 0" />
 	<xacro:property name="joint_3_origin_rpy" value="${J_PI} ${J_PI} 0" />
 	<xacro:property name="joint_3_lower_limit" value="-${J_PI}" />
-	<xacro:property name="joint_3_upper_limit" value="0.0" />
+	<xacro:property name="joint_3_upper_limit" value="0.05" />
 	
 	<xacro:property name="joint_4_name" value="FA_ROT" />
 	<xacro:property name="joint_4_type" value="revolute" />
