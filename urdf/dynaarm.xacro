@@ -5,6 +5,7 @@
   <xacro:arg name="use_fake" default="true" />
   <xacro:arg name="use_gazebo" default="false" />
   <xacro:arg name="ethercat_bus" default="enp86s0" />
+  <xacro:arg name="drive_config_file_path" default="" />
   
   <xacro:include filename="$(find dynaarm_description)/urdf/dynaarm.urdf.xacro" />
   <xacro:include filename="$(find dynaarm_description)/urdf/dynaarm.ros2_control.xacro" />
@@ -25,6 +26,7 @@
                               ethercat_bus="$(arg ethercat_bus)" 
                               prefix="$(arg prefix)" 
                               use_fake="$(arg use_fake)"
-                              use_gazebo="$(arg use_gazebo)" />
+                              use_gazebo="$(arg use_gazebo)" 
+                              drive_config_file_path="$(arg drive_config_file_path)"/>
 
 </robot>

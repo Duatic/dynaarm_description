@@ -1,6 +1,6 @@
 # Author: Timo Schwarzer
 # Last-Updated: Mai 31, 2024
-# Description: Visualize the Duatic Duaarm
+# Description: Visualize the Duatic Dynaarm
 
 import os
 import xacro
@@ -11,21 +11,15 @@ from launch.substitutions import LaunchConfiguration
 from launch_ros.actions import Node
 from ament_index_python.packages import get_package_share_directory
 
-
 def launch_setup(context, *args, **kwargs):
 
-    robot = LaunchConfiguration("robot")
-    gripper = LaunchConfiguration("gripper")
+    robot = LaunchConfiguration("robot")    
     gui = LaunchConfiguration("gui")
-    use_rviz = LaunchConfiguration("use_rviz")
 
-    robot_value = robot.perform(context)
-    gripper_value = gripper.perform(context)
+    robot_value = robot.perform(context)    
 
     # Set the path to the URDF file
-    if gripper_value:
-        robot_type_xacro_file_name = f"{robot_value}_{gripper_value}.xacro"
-    else:
+    if robot_value == "dynaarm":
         robot_type_xacro_file_name = f"dynaarm.xacro"
 
     # Load the robot description
@@ -62,8 +56,7 @@ def launch_setup(context, *args, **kwargs):
     )
 
     # Launch RViz
-    rviz_node = Node(
-        condition=IfCondition(use_rviz),
+    rviz_node = Node(        
         package="rviz2",
         executable="rviz2",
         name="rviz2",
@@ -98,28 +91,14 @@ def generate_launch_description():
             default_value="True",
             description="Flag to enable joint_state_publisher_gui",
         )
-    )
-    declared_arguments.append(
-        DeclareLaunchArgument(
-            name="use_rviz", 
-            default_value="True", 
-            description="Whether to start RVIZ"
-        )
-    )
+    )    
     declared_arguments.append(
         DeclareLaunchArgument(
             name="robot",
             default_value="dynaarm",
-            description="Select the desired mitsubishi robot model",
+            description="Select the desired duatic robot model",
         )
-    )
-    declared_arguments.append(
-        DeclareLaunchArgument(
-            name="gripper",
-            default_value="",
-            description="Select the attached gripper",
-        )
-    )
+    )    
 
     return LaunchDescription(
         declared_arguments + [OpaqueFunction(function=launch_setup)]

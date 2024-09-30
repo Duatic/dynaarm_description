@@ -1,10 +1,9 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
-  <xacro:macro name="dynaarm_ros2_control" params="name prefix use_fake use_gazebo ethercat_bus">
+  <xacro:macro name="dynaarm_ros2_control" params="name prefix use_fake use_gazebo ethercat_bus drive_config_file_path">
     
     <xacro:property name="initial_positions_filename" value="$(find dynaarm_description)/config/initial_positions.yaml"/>
-    <xacro:property name="initial_positions" value="${xacro.load_yaml(initial_positions_filename)['initial_positions']}"/>
-    <xacro:property name="drive_config_file" value="$(find dynaarm_driver)/config/dynadrive.yaml"/>
+    <xacro:property name="initial_positions" value="${xacro.load_yaml(initial_positions_filename)['initial_positions']}"/>    
     <xacro:property name="J_PI" value="3.1415926535897931" />
 
     <ros2_control name="${name}" type="system">
@@ -24,7 +23,7 @@
           <plugin>dynaarm_driver/DynaArmHardwareInterface</plugin>          
           <param name="ethercat_bus">${ethercat_bus}</param>
           <param name="prefix">duatic</param>
-          <param name="drive_config_file">${drive_config_file}</param>
+          <param name="drive_config_file_path">${drive_config_file_path}</param>
         </hardware>
       </xacro:unless>
 
