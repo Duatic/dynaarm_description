@@ -1,7 +1,7 @@
 <robot name="dynaarm" xmlns:xacro="http://www.ros.org/wiki/xacro">
 
   <!-- 4dof, 6dof -->
-  <xacro:arg name="dynaarm_dof_configuration_arg" default="4dof" />
+  <xacro:arg name="dynaarm_dof_configuration_arg" default="6dof" />
   <!-- real, mock, sim -->
   <xacro:arg name="hardware_interface_type_arg" default="mock" />
   <!-- physical ethercat bus, only used for real -->
