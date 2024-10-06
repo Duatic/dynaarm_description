@@ -1,0 +1,99 @@
+<?xml version="1.0"?>
+
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <!-- Links -->
+    <xacro:property name="base" value="dynaarm_base" />
+    <!-- Meshes -->
+    <xacro:property name="base_cover_mesh" value="base_cover_mesh" />
+    <xacro:property name="link01_cover_mesh" value="shoulder_cover_mesh" />
+    <xacro:property name="link02_cover_mesh" value="upperarm_cover_mesh" />
+    <xacro:property name="link03_cover_mesh" value="elbow_cover_mesh" />
+    <xacro:property name="link04_cover_mesh" value="forearm_cover_mesh" />
+    <xacro:property name="link05_cover_mesh" value="wrist_1_cover_mesh" />
+    <xacro:property name="link06_cover_mesh" value="wrist_2_cover_mesh" />
+
+    <!-- Inertia properties -->
+    <xacro:property name="mm2_to_m2" value="0.000001" />
+    <xacro:property name="mm_to_m" value="0.001" />
+
+    <xacro:property name="base_cover_inertial">
+        <inertial>
+            <mass value="0.098" />
+            <origin xyz="${0.0*mm_to_m} ${0.0*mm_to_m} ${-60.7*mm_to_m}" rpy="0 0 0" />
+            <inertia ixx="${0.000349}" iyy="${0.000338}" izz="${0.000649}" ixy="${0.000000018}"
+                ixz="${-0.000000001}" iyz="${-0.000000002}" />
+        </inertial>
+    </xacro:property>
+
+    <xacro:property name="link01_cover_inertial">
+        <inertial>
+            <mass value="0.135" />
+            <origin xyz="${-0.039*mm_to_m} ${-0.015*mm_to_m} ${-31.709*mm_to_m}" rpy="0 0 0" />
+            <inertia ixx="${0.00068}" iyy="${0.000517}" izz="${0.000646}" ixy="${-0.000000318}"
+                ixz="${-0.000000206}" iyz="${-0.000000074}" />
+        </inertial>
+    </xacro:property>
+
+    <xacro:property name="link02_cover_inertial">
+        <inertial>
+            <mass value="0.743" />
+            <origin xyz="${167.97*mm_to_m} ${0.081*mm_to_m} ${0.0*mm_to_m}" rpy="0 0 0" />
+            <inertia ixx="${0.0054}" iyy="${0.025}" izz="${0.0293}" ixy="${-0.000004814}"
+                ixz="${-0.000000101}" iyz="${0.000000134}" />
+        </inertial>
+    </xacro:property>
+
+    <xacro:property name="link03_cover_inertial">
+        <inertial>
+            <mass value="0.383" />
+            <origin xyz="${37.807*mm_to_m} ${-101.52*mm_to_m} ${0.184*mm_to_m}" rpy="0 0 0" />
+            <inertia ixx="${0.00139}" iyy="${0.00176}" izz="${0.00225}" ixy="${-0.000150269}"
+                ixz="${0.000002221}" iyz="${-0.000003993}" />
+        </inertial>
+    </xacro:property>
+
+    <xacro:property name="link04_cover_inertial">
+        <inertial>
+            <mass value="0.158" />
+            <origin xyz="${-9.28*mm_to_m} ${-0.008*mm_to_m} ${377.34*mm_to_m}" rpy="0 0 0" />
+            <inertia ixx="${0.000594}" iyy="${0.000846}" izz="${0.000485}" ixy="${-0.000000100}"
+                ixz="${-0.000057116}" iyz="${0.000000128}" />
+        </inertial>
+    </xacro:property>
+
+    <xacro:macro name="dynaarm_covers">
+        <!-- Covers -->
+        <xacro:dynaarm_link link_name="${base}_cover" file_name="${base_cover_mesh}">
+            <link_inertia>
+                <xacro:insert_block name="base_cover_inertial" />
+            </link_inertia>
+        </xacro:dynaarm_link>
+        <xacro:dynaarm_link link_name="${link01}_cover" file_name="${link01_cover_mesh}">
+            <link_inertia>
+                <xacro:insert_block name="link01_cover_inertial" />
+            </link_inertia>
+        </xacro:dynaarm_link>
+        <xacro:dynaarm_link link_name="${link02}_cover" file_name="${link02_cover_mesh}">
+            <link_inertia>
+                <xacro:insert_block name="link02_cover_inertial" />
+            </link_inertia>
+        </xacro:dynaarm_link>
+        <xacro:dynaarm_link link_name="${link03}_cover" file_name="${link03_cover_mesh}">
+            <link_inertia>
+                <xacro:insert_block name="link03_cover_inertial" />
+            </link_inertia>
+        </xacro:dynaarm_link>
+
+        <xacro:dynaarm_joint_fixed joint_name="${base}_cover" parent="${base}" child="${base}_cover"
+            joint_origin_xyz="0 0 0" joint_origin_rpy="0 0 0" />
+        <xacro:dynaarm_joint_fixed joint_name="${link01}_cover" parent="${link01}"
+            child="${link01}_cover" joint_origin_xyz="0 0 0" joint_origin_rpy="0 0 0" />
+        <xacro:dynaarm_joint_fixed joint_name="${link02}_cover" parent="${link02}"
+            child="${link02}_cover" joint_origin_xyz="0 0 0" joint_origin_rpy="0 0 0" />
+        <xacro:dynaarm_joint_fixed joint_name="${link03}_cover" parent="${link03}"
+            child="${link03}_cover" joint_origin_xyz="0 0 0" joint_origin_rpy="0 0 0" />
+
+    </xacro:macro>
+
+</robot>

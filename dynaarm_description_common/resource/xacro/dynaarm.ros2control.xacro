@@ -1,0 +1,147 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <xacro:macro name="dynaarm_joint_ros2control_joint_interfaces">
+    <state_interface name="position" />
+    <state_interface name="velocity" />
+    <state_interface name="effort" />
+    <state_interface name="position_commanded" />
+    <state_interface name="velocity_commanded" />
+    <state_interface name="effort_commanded" />
+    <state_interface name="p_gain_commanded" />
+    <state_interface name="i_gain_commanded" />
+    <state_interface name="d_gain_commanded" />
+    <state_interface name="motor_position" />
+    <state_interface name="motor_velocity" />
+    <state_interface name="motor_effort" />
+    <state_interface name="motor_position_commanded" />
+    <state_interface name="motor_velocity_commanded" />
+    <state_interface name="motor_effort_commanded" />
+    <state_interface name="motor_temperature_system" />
+    <state_interface name="motor_temperature_coil_A" />
+    <state_interface name="motor_temperature_coil_B" />
+    <state_interface name="motor_temperature_coil_C" />
+    <state_interface name="motor_bus_voltage" />
+    <state_interface name="command_freeze_mode" />
+    <command_interface name="position" />
+    <command_interface name="velocity" />
+    <command_interface name="effort" />
+    <command_interface name="p_gain" />
+    <command_interface name="i_gain" />
+    <command_interface name="d_gain" />
+    <command_interface name="command_freeze_mode" />
+  </xacro:macro>
+
+  <xacro:macro name="dynaarm_ros2control_joint" params="name address">
+    <joint name="${name}">
+      <param name="address">${address}</param>
+      <xacro:dynaarm_joint_ros2control_joint_interfaces />
+    </joint>
+  </xacro:macro>
+
+  <xacro:macro name="dynaarm_ros2_control" params="tf_prefix">
+    <ros2_control name="DynaarmSystem" type="system">
+      <hardware>
+        <xacro:if value="${hardware_interface_type == 'sim'}">
+          <plugin>gazebo_ros2_control/GazeboSystem</plugin>
+        </xacro:if>
+        <xacro:if value="${hardware_interface_type == 'mock'}">
+          <plugin>dynaarm_mock_hardware_interface/DynaarmMockHardwareInterface</plugin>
+        </xacro:if>
+        <xacro:if value="${hardware_interface_type == 'real'}">
+          <plugin>dynaarm_hardware_interface/DynaArmHardwareInterface</plugin>
+          <param name="ethercat_bus">${ethercat_bus}</param>
+          <param name="tf_prefix">${tf_prefix}</param>
+        </xacro:if>
+      </hardware>
+      <xacro:dynaarm_ros2control_joint name="${tf_prefix}SH_ROT" address="1" />
+      <xacro:dynaarm_ros2control_joint name="${tf_prefix}SH_FLE" address="2" />
+      <xacro:dynaarm_ros2control_joint name="${tf_prefix}EL_FLE" address="3" />
+      <xacro:dynaarm_ros2control_joint name="${tf_prefix}FA_ROT" address="4" />
+      <xacro:if value="${dynaarm_dof_configuration == '6dof'}">
+        <xacro:dynaarm_ros2control_joint name="${tf_prefix}WRIST_1" address="5" />
+        <xacro:dynaarm_ros2control_joint name="${tf_prefix}WRIST_2" address="6" />
+      </xacro:if>
+    </ros2_control>
+  </xacro:macro>
+
+  <xacro:macro name="gpio_dynaarm_interfaces">
+    <gpio name="gpio_dynaarm_interfaces">
+      <state_interface name="joystick_axis_0" />
+      <command_interface name="joystick_axis_0" />
+      <state_interface name="joystick_axis_1" />
+      <command_interface name="joystick_axis_1" />
+      <state_interface name="joystick_axis_2" />
+      <command_interface name="joystick_axis_2" />
+      <state_interface name="joystick_axis_3" />
+      <command_interface name="joystick_axis_3" />
+      <state_interface name="joystick_axis_4" />
+      <command_interface name="joystick_axis_4" />
+      <state_interface name="joystick_axis_5" />
+      <command_interface name="joystick_axis_5" />
+      <state_interface name="joystick_button_0" />
+      <command_interface name="joystick_button_0" />
+      <state_interface name="joystick_button_1" />
+      <command_interface name="joystick_button_1" />
+      <state_interface name="joystick_button_2" />
+      <command_interface name="joystick_button_2" />
+      <state_interface name="joystick_button_3" />
+      <command_interface name="joystick_button_3" />
+      <state_interface name="joystick_button_4" />
+      <command_interface name="joystick_button_4" />
+      <state_interface name="joystick_button_5" />
+      <command_interface name="joystick_button_5" />
+      <state_interface name="joystick_button_6" />
+      <command_interface name="joystick_button_6" />
+      <state_interface name="joystick_button_7" />
+      <command_interface name="joystick_button_7" />
+      <state_interface name="joystick_button_8" />
+      <command_interface name="joystick_button_8" />
+      <state_interface name="joystick_button_9" />
+      <command_interface name="joystick_button_9" />
+      <state_interface name="joystick_button_10" />
+      <command_interface name="joystick_button_10" />
+      <state_interface name="joystick_button_11" />
+      <command_interface name="joystick_button_11" />
+      <state_interface name="joystick_button_12" />
+      <command_interface name="joystick_button_12" />
+      <state_interface name="joystick_button_13" />
+      <command_interface name="joystick_button_13" />
+      <state_interface name="joystick_button_14" />
+      <command_interface name="joystick_button_14" />
+      <state_interface name="joystick_button_15" />
+      <command_interface name="joystick_button_15" />
+      <state_interface name="joystick_button_16" />
+      <command_interface name="joystick_button_16" />
+      <state_interface name="joystick_button_17" />
+      <command_interface name="joystick_button_17" />
+      <state_interface name="joystick_button_18" />
+      <command_interface name="joystick_button_18" />
+      <state_interface name="joystick_button_19" />
+      <command_interface name="joystick_button_19" />
+      <state_interface name="joystick_button_20" />
+      <command_interface name="joystick_button_20" />
+      <state_interface name="twist_linear_x" />
+      <command_interface name="twist_linear_x" />
+      <state_interface name="twist_linear_y" />
+      <command_interface name="twist_linear_y" />
+      <state_interface name="twist_linear_z" />
+      <command_interface name="twist_linear_z" />
+      <state_interface name="twist_angular_x" />
+      <command_interface name="twist_angular_x" />
+      <state_interface name="twist_angular_y" />
+      <command_interface name="twist_angular_y" />
+      <state_interface name="twist_angular_z" />
+      <command_interface name="twist_angular_z" />
+    </gpio>
+  </xacro:macro>
+
+  <xacro:macro name="dynaarm_gpio_ros2control_interfaces">
+    <ros2_control name="DynaarmGpioInterfacesSystem" type="system">
+      <hardware>
+        <plugin>mock_components/GenericSystem</plugin>
+      </hardware>
+      <xacro:gpio_dynaarm_interfaces />
+    </ros2_control>
+  </xacro:macro>
+</robot>

@@ -1,7 +1,0 @@
-# Default initial positions for dynaarm's ros2_control fake system
-
-initial_positions:
-  SH_ROT: 0.0  
-  SH_FLE: 0.0
-  EL_FLE: 0
-  FA_ROT: 0
