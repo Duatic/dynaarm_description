@@ -2,16 +2,24 @@
 <?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
 <package format="3">
   <name>dynaarm_description</name>
-  <version>0.0.0</version>
-  <description>TODO: Package description</description>
-  <maintainer email="timo@software-byts.de">root</maintainer>
-  <license>TODO: License declaration</license>
+  <version>0.0.1</version>
+  
+  <description>URDF description for the DUATIC Dynaarm robot</description>
+  
+  <license>BSD 3-Clause</license>
+
+  <author email="jpreisig@duatic.com">Jan Preisig</author>
+  <author email="lnachtigall@duatic.com">Lennart Nachtigall</author>
+  <author email="tschwarzer@duatic.com">Timo Schwarzer</author>
+  
+  <maintainer email="tschwarzer@duatic.com">Timo Schwarzer</maintainer>
 
   <buildtool_depend>ament_cmake</buildtool_depend>
 
   <depend>joint_state_publisher</depend>
   <depend>joint_state_publisher_gui</depend>
-
+  <depend>xacro</depend>
+  <depend>robot_state_publisher</depend>
 
   <test_depend>ament_lint_auto</test_depend>
   <test_depend>ament_lint_common</test_depend>

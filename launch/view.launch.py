@@ -1,35 +1,29 @@
-# Author: Timo Schwarzer
-# Last-Updated: Mai 31, 2024
-# Description: Visualize the Duatic Dynaarm
-
 import os
 import xacro
+
+from ament_index_python import get_package_share_directory
+
 from launch import LaunchDescription
 from launch.actions import DeclareLaunchArgument, OpaqueFunction
 from launch.conditions import IfCondition, UnlessCondition
 from launch.substitutions import LaunchConfiguration
 from launch_ros.actions import Node
-from ament_index_python.packages import get_package_share_directory
+from launch_ros.substitutions import FindPackageShare
 
 def launch_setup(context, *args, **kwargs):
 
-    robot = LaunchConfiguration("robot")    
+    dof = LaunchConfiguration("dof")    
     gui = LaunchConfiguration("gui")
+    covers = LaunchConfiguration("covers")
 
-    robot_value = robot.perform(context)    
-
-    # Set the path to the URDF file
-    if robot_value == "dynaarm":
-        robot_type_xacro_file_name = f"dynaarm.xacro"
+    dof_value = dof.perform(context)
+    covers_value = covers.perform(context)
 
     # Load the robot description
-    description_file_path = os.path.join(
-        get_package_share_directory("dynaarm_description"),
-        "urdf",        
-        robot_type_xacro_file_name,
-    )    
-    robot_description_config = xacro.process_file(description_file_path)
-    robot_description = {"robot_description": robot_description_config.toxml()}
+    pkg_share_description = FindPackageShare(package='dynaarm_description').find('dynaarm_description')
+    doc = xacro.parse(open(os.path.join(pkg_share_description, 'xacro/dynaarm_standalone.urdf.xacro')))    
+    xacro.process_doc(doc, mappings={'dof': dof_value, 'covers': covers_value})
+    robot_description = {'robot_description': doc.toxml()}
 
     # Publish the joint state values for the non-fixed joints in the URDF file.
     start_joint_state_publisher_node = Node(
@@ -65,7 +59,7 @@ def launch_setup(context, *args, **kwargs):
             "-d",
             os.path.join(
                 get_package_share_directory("dynaarm_description"),
-                "rviz",
+                "launch",
                 "config.rviz",
             ),
         ],
@@ -94,9 +88,16 @@ def generate_launch_description():
     )    
     declared_arguments.append(
         DeclareLaunchArgument(
-            name="robot",
-            default_value="dynaarm",
-            description="Select the desired duatic robot model",
+            name="dof",
+            default_value="6dof",
+            description="Select the desired degrees of freedom (dof)",
+        )
+    )
+    declared_arguments.append(
+        DeclareLaunchArgument(
+            name="covers",
+            default_value="false",
+            description="Show or hide the covers of the robot",
         )
     )    
 

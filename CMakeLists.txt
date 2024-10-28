@@ -8,7 +8,7 @@ endif()
 find_package(ament_cmake REQUIRED)
 
 install(DIRECTORY
-  launch meshes rviz urdf config
+  launch meshes xacro
   DESTINATION share/${PROJECT_NAME}/
 )
 
