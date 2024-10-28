@@ -1,0 +1,122 @@
+<?xml version="1.0"?>
+
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <!-- -->
+    <!-- DynaArm Base Link Macro -->
+    <!-- -->
+    <xacro:macro name="dynaarm_baselink"
+        params="link_name file_name **base_inertia  **base_collision">
+        <link name="${link_name}">
+            <visual>
+                <geometry>
+                    <mesh                    
+                        filename="file://$(find dynaarm_description)/meshes/${file_name}.dae"
+                        scale="1.0 1.0 1.0" />
+                </geometry>
+                <material name="carbon_fiber">
+					<color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+				</material>
+            </visual>
+            <xacro:insert_block name="base_collision" />
+            <xacro:insert_block name="base_inertia" />
+        </link>
+    </xacro:macro>
+
+    <!-- -->
+    <!-- DynaArm Link Macro -->
+    <!-- -->
+    <xacro:macro name="dynaarm_link"
+        params="link_name file_name **link_inertia ">
+        <link name="${link_name}">
+            <visual>
+                <geometry>
+                    <mesh
+                        filename="file://$(find dynaarm_description)/meshes/${file_name}.dae"
+                        scale="1.0 1.0 1.0" />
+                </geometry>
+            </visual>
+            <xacro:insert_block name="link_inertia" />
+        </link>
+    </xacro:macro>
+
+    <!-- -->
+    <!-- DynaArm Link With Collision Macro -->
+    <!-- -->
+    <xacro:macro name="dynaarm_link_w_collision"
+        params="link_name file_name **link_inertia **link_collision ">
+        <link name="${link_name}">
+            <visual>
+                <geometry>
+                    <mesh
+                        filename="file://$(find dynaarm_description)/meshes/${file_name}.dae"
+                        scale="1.0 1.0 1.0" />
+                </geometry>
+            </visual>
+            <xacro:insert_block name="link_inertia" />
+            <xacro:insert_block name="link_collision" />
+        </link>
+    </xacro:macro>
+
+    <!-- -->
+    <!-- DynaArm Virtual Link Macro -->
+    <!-- -->
+    <xacro:macro name="virtual_link" params="link_name">
+        <link name="${link_name}">
+            <visual>
+                <origin xyz="0 0 0" rpy="0 0 0" />
+                <geometry>
+                    <box size="0.001 0.001 0.001" />
+                </geometry>
+            </visual>
+            <inertial>
+                <origin xyz="0.0 0.0 0.0" rpy="0 0 0" />
+                <mass value="0.001" />
+                <inertia ixx="0.0000001" ixy="0.0" iyy="0.0000001" ixz="0.0" iyz="0.0"
+                    izz="0.0000001" />
+            </inertial>
+        </link>
+        <!-- Gazebo customization -->
+        <!-- Contact model -->
+        <xacro:property name="kp" value="10000.0" />
+        <xacro:property name="kd" value="10.0" />
+        <xacro:property name="mu" value="0.8" />
+        <gazebo reference="${link_name}">
+            <kp>${kp}</kp>
+            <kd>${kd}</kd>
+            <mu1>${mu}</mu1>
+            <mu2>${mu}</mu2>
+        </gazebo>
+    </xacro:macro>
+
+    <!-- -->
+    <!-- DynaArm Revolute Joint Macro -->
+    <!-- -->
+    <xacro:macro name="dynaarm_revolute_joint"
+        params="joint_name parent child joint_axis_xyz joint_origin_xyz joint_origin_rpy joint_lower_limit joint_upper_limit joint_limit_vel joint_limit_effort joint_type">
+        <joint name="${joint_name}" type="${joint_type}">
+            <parent link="${parent}" />
+            <child link="${child}" />
+            <axis xyz="${joint_axis_xyz}" />
+            <limit effort="${joint_limit_effort}" command_effort="${joint_limit_effort}"
+                current="10" gear_velocity="${joint_limit_vel}" velocity="${joint_limit_vel}"
+                lower="${joint_lower_limit}" upper="${joint_upper_limit}" />
+            <!-- limit effort also defines torque limit and freeze controller gains -->
+            <origin xyz="${joint_origin_xyz}" rpy="${joint_origin_rpy}" />
+        </joint>
+    </xacro:macro>
+
+    <!-- -->
+    <!-- DynaArm Fixed Joint Macro -->
+    <!-- -->
+    <xacro:macro name="dynaarm_joint_fixed"
+        params="joint_name parent child joint_origin_xyz joint_origin_rpy">
+        <joint name="${joint_name}" type="fixed">
+            <parent link="${parent}" />
+            <child link="${child}" />
+            <origin xyz="${joint_origin_xyz}" rpy="${joint_origin_rpy}" />
+            <limit effort="2000" velocity="0" lower="0" upper="0" />
+        </joint>
+    </xacro:macro>
+
+</robot>

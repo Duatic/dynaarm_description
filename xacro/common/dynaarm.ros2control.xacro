@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <xacro:macro name="dynaarm_joint_ros2control_joint_interfaces">
+    <state_interface name="position" />
+    <state_interface name="velocity" />
+    <state_interface name="effort" />    
+    <state_interface name="motor_position" />
+    <state_interface name="motor_velocity" />
+    <state_interface name="motor_effort" />   
+    <state_interface name="motor_temperature_system" />
+    <state_interface name="motor_temperature_coil_A" />
+    <state_interface name="motor_temperature_coil_B" />
+    <state_interface name="motor_temperature_coil_C" />
+    <state_interface name="motor_bus_voltage" />
+    <state_interface name="command_freeze_mode" />
+    <command_interface name="position" />
+    <command_interface name="velocity" />
+    <command_interface name="effort" />
+    <command_interface name="p_gain" />
+    <command_interface name="i_gain" />
+    <command_interface name="d_gain" />
+    <command_interface name="command_freeze_mode" />
+  </xacro:macro>
+
+  <xacro:macro name="dynaarm_ros2control_joint" params="name address">
+    <joint name="${name}">
+      <param name="address">${address}</param>
+      <xacro:dynaarm_joint_ros2control_joint_interfaces />
+    </joint>
+  </xacro:macro>
+
+  <xacro:macro name="dynaarm_ros2_control" params="tf_prefix">
+    <ros2_control name="DynaarmSystem" type="system">
+      <hardware>
+        <xacro:if value="${mode == 'sim'}">
+          <plugin>gz_ros2_control/GazeboSimSystem</plugin>
+        </xacro:if>
+        <xacro:if value="${mode == 'mock'}">
+          <plugin>dynaarm_mock_hardware_interface/DynaarmMockHardwareInterface</plugin>
+        </xacro:if>
+        <xacro:if value="${mode == 'real'}">
+          <plugin>dynaarm_hardware_interface/DynaArmHardwareInterface</plugin>
+          <param name="ethercat_bus">${ethercat_bus}</param>
+          <param name="tf_prefix">${tf_prefix}</param>
+        </xacro:if>
+      </hardware>
+      <xacro:dynaarm_ros2control_joint name="${tf_prefix}SH_ROT" address="1" />
+      <xacro:dynaarm_ros2control_joint name="${tf_prefix}SH_FLE" address="2" />
+      <xacro:dynaarm_ros2control_joint name="${tf_prefix}EL_FLE" address="3" />
+      <xacro:dynaarm_ros2control_joint name="${tf_prefix}FA_ROT" address="4" />
+      <xacro:if value="${dof == '6dof'}">
+        <xacro:dynaarm_ros2control_joint name="${tf_prefix}WRIST_1" address="5" />
+        <xacro:dynaarm_ros2control_joint name="${tf_prefix}WRIST_2" address="6" />
+      </xacro:if>
+    </ros2_control>
+  </xacro:macro>  
+ 
+</robot>
