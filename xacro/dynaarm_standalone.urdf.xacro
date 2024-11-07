@@ -9,13 +9,16 @@
   <xacro:arg name="ethercat_bus" default="eth0" />  
   <!-- Change to add covers to the arm -->
   <xacro:arg name="covers" default="false" />
-
+  <!-- v1, v2, ... -->
+  <xacro:arg name="version" default="v2" />
+  
+  <xacro:property name="version" value="$(arg version)" />
   <xacro:property name="dof" value="$(arg dof)" />
   <xacro:property name="mode" value="$(arg mode)" />
   <xacro:property name="ethercat_bus" value="$(arg ethercat_bus)" />
   <xacro:property name="covers" value="$(arg covers)" />
   
-  <xacro:include filename="$(find dynaarm_description)/xacro/common/dynaarm_macro_${dof}.urdf.xacro" />
+  <xacro:include filename="$(find dynaarm_description)/xacro/${version}/dynaarm_macro_${dof}.urdf.xacro" />
 
   <link name="world" />
 
