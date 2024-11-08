@@ -59,7 +59,7 @@ def launch_setup(context, *args, **kwargs):
             "-d",
             os.path.join(
                 get_package_share_directory("dynaarm_description"),
-                "launch",
+                "config",
                 "config.rviz",
             ),
         ],
