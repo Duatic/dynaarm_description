@@ -8,7 +8,7 @@ endif()
 find_package(ament_cmake REQUIRED)
 
 install(DIRECTORY
-  launch meshes xacro
+  config launch meshes xacro
   DESTINATION share/${PROJECT_NAME}/
 )
 
