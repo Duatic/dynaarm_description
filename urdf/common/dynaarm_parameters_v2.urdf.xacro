@@ -1,0 +1,314 @@
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <xacro:property name="J_PI" value="3.14159265359" />
+
+  <xacro:property name="baboon_peak_torque" value="40" />
+  <xacro:property name="baboon_max_speed" value="4" />
+
+  <xacro:property name="mm2_to_m2" value="0.000001" />
+  <xacro:property name="mm_to_m" value="0.001" />
+
+  <!-- Links -->
+  <xacro:property name="base" value="${tf_prefix}base" />
+  <xacro:property name="link01" value="${tf_prefix}SHOULDER" />
+  <xacro:property name="link02" value="${tf_prefix}UPPERARM" />
+  <xacro:property name="link03" value="${tf_prefix}ELBOW" />
+  <xacro:property name="link04" value="${tf_prefix}FOREARM" />
+  <xacro:property name="link05" value="${tf_prefix}WRIST_1" />
+  <xacro:property name="link06" value="${tf_prefix}WRIST_2" />
+  <xacro:property name="end_effector" value="${tf_prefix}END_EFFECTOR" />
+
+  <!-- Meshes -->
+  <xacro:if value="${covers}">
+    <xacro:property name="base_mesh" value="base_mesh.STL" />
+    <xacro:property name="link01_mesh" value="shoulder_mesh.STL" />
+    <xacro:property name="link02_mesh" value="upperarm_mesh.STL" />
+    <xacro:property name="link03_mesh" value="elbow_mesh.STL" />
+    <xacro:property name="link04_mesh" value="forearm_mesh.STL" />
+    <xacro:property name="link05_mesh" value="wrist1_mesh.STL" />
+    <xacro:property name="link06_mesh" value="wrist2_mesh.STL" />
+
+    <xacro:property name="base_cover_mesh" value="base_cover_mesh.STL" />
+    <xacro:property name="link01_cover_mesh" value="shoulder_cover_mesh.STL" />
+    <xacro:property name="link02_cover_mesh" value="upperarm_cover_mesh.STL" />
+    <xacro:property name="link03_cover_mesh" value="elbow_cover_mesh.STL" />
+    <xacro:property name="link04_cover_mesh" value="forearm_cover_mesh.STL" />
+    <xacro:property name="link05_cover_mesh" value="wrist_1_cover_mesh.STL" />
+    <xacro:property name="link06_cover_mesh" value="wrist_2_cover_mesh.STL" />
+  </xacro:if>
+  <xacro:unless value="${covers}">
+    <xacro:property name="base_mesh" value="base_mesh.STL" />
+    <xacro:property name="link01_mesh" value="shoulder_mesh.STL" />
+    <xacro:property name="link02_mesh" value="upperarm_mesh.STL" />
+    <xacro:property name="link03_mesh" value="elbow_mesh.STL" />
+    <xacro:property name="link04_mesh" value="forearm_mesh.STL" />
+    <xacro:property name="link05_mesh" value="wrist1_mesh.STL" />
+    <xacro:property name="link06_mesh" value="wrist2_mesh.STL" />
+  </xacro:unless>
+
+  <!-- Joint properties -->
+  <xacro:property name="joint_base_name" value="${tf_prefix}joint_base" />
+  <xacro:property name="joint_base_joint_type" value="revolute" />
+  <xacro:property name="joint_base_axis_xyz" value="0 0 0" />
+  <xacro:property name="joint_base_origin_xyz" value="0 0 0" />
+  <xacro:property name="joint_base_origin_rpy" value="0 0 0" />
+
+  <xacro:property name="joint_1_name" value="${tf_prefix}SH_ROT" />
+  <xacro:property name="joint_1_joint_type" value="revolute" />
+  <xacro:property name="joint_1_axis_xyz" value="0 0 1" />
+  <xacro:property name="joint_1_origin_xyz" value="0 0 0.06" />
+  <xacro:property name="joint_1_origin_rpy" value="0 0 0" />
+  <xacro:property name="joint_1_lower_limit" value="${-J_PI - J_PI/2}" />
+  <xacro:property name="joint_1_upper_limit" value="${J_PI + J_PI/2}" />
+
+  <xacro:property name="joint_2_name" value="${tf_prefix}SH_FLE" />
+  <xacro:property name="joint_2_joint_type" value="revolute" />
+  <xacro:property name="joint_2_axis_xyz" value="0 0 -1" />
+  <xacro:property name="joint_2_origin_xyz" value="0 0 0.0" />
+  <xacro:property name="joint_2_origin_rpy" value="${J_PI/2} ${-J_PI/2} 0" />
+  <xacro:property name="joint_2_lower_limit" value="${-J_PI/2 - 0.3}" />
+  <xacro:property name="joint_2_upper_limit" value="${J_PI/2 + 0.3}" />
+
+  <xacro:property name="joint_3_name" value="${tf_prefix}EL_FLE" />
+  <xacro:property name="joint_3_joint_type" value="revolute" />
+  <xacro:property name="joint_3_axis_xyz" value="0 0 1" />
+  <xacro:property name="joint_3_origin_xyz" value="0.412 0 0" />
+  <xacro:property name="joint_3_origin_rpy" value="${J_PI} 0 0" />
+  <xacro:property name="joint_3_lower_limit" value="-0.05" />
+  <xacro:property name="joint_3_upper_limit" value="${J_PI}" />
+
+  <xacro:property name="joint_4_name" value="${tf_prefix}FA_ROT" />
+  <xacro:property name="joint_4_joint_type" value="revolute" />
+  <xacro:property name="joint_4_axis_xyz" value="0 0 1" />
+  <xacro:property name="joint_4_origin_xyz" value="0.0325 -0.092 0" />
+  <xacro:property name="joint_4_origin_rpy" value="${J_PI/2} 0 ${J_PI/2}" />
+  <xacro:property name="joint_4_lower_limit" value="${-J_PI - J_PI/2}" />
+  <xacro:property name="joint_4_upper_limit" value="${J_PI + J_PI/2}" />
+
+  <xacro:property name="joint_5_name" value="${tf_prefix}WRIST_1" />
+  <xacro:property name="joint_5_joint_type" value="revolute" />
+  <xacro:property name="joint_5_axis_xyz" value="0 0 1" />
+  <xacro:property name="joint_5_origin_xyz" value="0.0 -0.03 0.4118" />
+  <xacro:property name="joint_5_origin_rpy" value="0 ${-J_PI/2} ${-J_PI/2}" />
+  <xacro:property name="joint_5_lower_limit" value="${-J_PI/2}" />
+  <xacro:property name="joint_5_upper_limit" value="${J_PI/2}" />
+
+  <xacro:property name="joint_6_name" value="${tf_prefix}WRIST_2" />
+  <xacro:property name="joint_6_joint_type" value="revolute" />
+  <xacro:property name="joint_6_axis_xyz" value="0 0 1" />
+  <xacro:property name="joint_6_origin_xyz" value="0.12 0.0 0.03" />
+  <xacro:property name="joint_6_origin_rpy" value="${-J_PI/2} 0 ${-J_PI/2}" />
+  <xacro:property name="joint_6_lower_limit" value="${-J_PI - J_PI/2}" />
+  <xacro:property name="joint_6_upper_limit" value="${J_PI + J_PI/2}" />
+
+  <xacro:property name="joint_ee_name" value="${tf_prefix}ee_fix_joint" />
+  <xacro:property name="joint_ee_xyz" value="0.0 0.0 0.05" />
+  <xacro:property name="joint_ee_origin_xyz" value="0.0 0.0 0.05" />
+  <xacro:property name="joint_ee_origin_4dof_xyz" value="0.0 0.0 0.4" />
+  <xacro:property name="joint_ee_origin_rpy" value="0.0 0.0 ${J_PI/2}" />
+  <xacro:property name="joint_ee_origin_4dof_rpy" value="0.0 0.0 ${J_PI/2}" />
+  <xacro:property name="joint_ee_rpy" value="0 0 0" />
+
+  <!-- Base Robot -->
+  <xacro:property name="base_inertial">
+    <inertial>
+      <mass value="1.894" />
+      <origin
+        xyz="${0.008222641*mm_to_m} ${-0.310936808*mm_to_m} ${-36.738569268*mm_to_m}"
+        rpy="0 0 0" />
+      <inertia ixx="${2767.258474185*mm2_to_m2}" iyy="${2895.160105441*mm2_to_m2}"
+        izz="${3138.952392041*mm2_to_m2}" ixy="${0.393414115*mm2_to_m2}"
+        ixz="${-0.149570272*mm2_to_m2}" iyz="${25.32409214*mm2_to_m2}" />
+    </inertial>
+  </xacro:property>
+
+  <xacro:property name="link01_inertial">
+    <inertial>
+      <mass value="2.644" />
+      <origin xyz="0.0 0.0 ${-1.7336*mm_to_m}" rpy="0 0 0" />
+      <inertia ixx="${10301.21*mm2_to_m2}" iyy="${3016.50*mm2_to_m2}"
+        izz="${10099.04*mm2_to_m2}" ixy="${-50.85*mm2_to_m2}"
+        ixz="${0.0*mm2_to_m2}" iyz="${0.0*mm2_to_m2}" />
+    </inertial>
+  </xacro:property>
+
+  <xacro:property name="link02_inertial">
+    <inertial>
+      <mass value="1.394" />
+      <origin xyz="${211.09*mm_to_m} ${0.022*mm_to_m} ${-0.317*mm_to_m}"
+        rpy="0 0 0" />
+      <inertia ixx="${1161.79*mm2_to_m2}" iyy="${46092.126*mm2_to_m2}"
+        izz="${46279.53*mm2_to_m2}" ixy="${-0.72*mm2_to_m2}"
+        ixz="${-140.45*mm2_to_m2}" iyz="${0.007*mm2_to_m2}" />
+    </inertial>
+  </xacro:property>
+
+  <xacro:property name="link03_inertial">
+    <inertial>
+      <mass value="1.1" />
+      <origin xyz="${6.8*mm_to_m} ${-84.8*mm_to_m} ${-0.6*mm_to_m}" rpy="0 0 0" />
+      <inertia ixx="${1384.3*mm2_to_m2}" iyy="${716.8*mm2_to_m2}"
+        izz="${1130.1*mm2_to_m2}" ixy="${-41.6*mm2_to_m2}"
+        ixz="${8.5*mm2_to_m2}" iyz="${-10.5*mm2_to_m2}" />
+    </inertial>
+  </xacro:property>
+
+  <xacro:property name="link04_inertial">
+    <inertial>
+      <mass value="0.342" />
+      <origin xyz="0.0 0.0 0.2143" rpy="0 0 0" />
+      <inertia ixx="${7000*mm2_to_m2}" iyy="${7000*mm2_to_m2}"
+        izz="${6400*mm2_to_m2}" ixy="${0.0*mm2_to_m2}"
+        ixz="${0.0*mm2_to_m2}" iyz="${0.0*mm2_to_m2}" />
+    </inertial>
+  </xacro:property>
+
+  <xacro:property name="link05_inertial">
+    <inertial>
+      <mass value="1.69" />
+      <origin xyz="0.047 0.0 0.029" rpy="0 0 0" />
+      <inertia ixx="${1672*mm2_to_m2}" iyy="${4985*mm2_to_m2}"
+        izz="${5210*mm2_to_m2}" ixy="${0*mm2_to_m2}"
+        ixz="${129.7*mm2_to_m2}" iyz="${-3.7*mm2_to_m2}" />
+    </inertial>
+  </xacro:property>
+
+  <xacro:property name="link06_inertial">
+    <inertial>
+      <mass value="0.1" />
+      <origin xyz="0.0 0.0 0.0064" rpy="0 0 0" />
+      <inertia ixx="${115*mm2_to_m2}" iyy="${115*mm2_to_m2}"
+        izz="${115*mm2_to_m2}" ixy="${0.0*mm2_to_m2}" ixz="${0*mm2_to_m2}"
+        iyz="${0.0*mm2_to_m2}" />
+    </inertial>
+  </xacro:property>
+
+  <!-- Covers -->
+  <xacro:property name="base_cover_inertial">
+    <inertial>
+      <mass value="0.098" />
+      <origin xyz="${0.0*mm_to_m} ${0.0*mm_to_m} ${-60.7*mm_to_m}" rpy="0 0 0" />
+      <inertia ixx="${0.000349}" iyy="${0.000338}" izz="${0.000649}" ixy="${0.000000018}"
+        ixz="${-0.000000001}" iyz="${-0.000000002}" />
+    </inertial>
+  </xacro:property>
+
+  <xacro:property name="link01_cover_inertial">
+    <inertial>
+      <mass value="0.135" />
+      <origin xyz="${-0.039*mm_to_m} ${-0.015*mm_to_m} ${-31.709*mm_to_m}" rpy="0 0 0" />
+      <inertia ixx="${0.00068}" iyy="${0.000517}" izz="${0.000646}" ixy="${-0.000000318}"
+        ixz="${-0.000000206}" iyz="${-0.000000074}" />
+    </inertial>
+  </xacro:property>
+
+  <xacro:property name="link02_cover_inertial">
+    <inertial>
+      <mass value="0.743" />
+      <origin xyz="${167.97*mm_to_m} ${0.081*mm_to_m} ${0.0*mm_to_m}" rpy="0 0 0" />
+      <inertia ixx="${0.0054}" iyy="${0.025}" izz="${0.0293}" ixy="${-0.000004814}"
+        ixz="${-0.000000101}" iyz="${0.000000134}" />
+    </inertial>
+  </xacro:property>
+
+  <xacro:property name="link03_cover_inertial">
+    <inertial>
+      <mass value="0.383" />
+      <origin xyz="${37.807*mm_to_m} ${-101.52*mm_to_m} ${0.184*mm_to_m}" rpy="0 0 0" />
+      <inertia ixx="${0.00139}" iyy="${0.00176}" izz="${0.00225}" ixy="${-0.000150269}"
+        ixz="${0.000002221}" iyz="${-0.000003993}" />
+    </inertial>
+  </xacro:property>
+
+  <xacro:property name="link04_cover_inertial">
+    <inertial>
+      <mass value="0.158" />
+      <origin xyz="${-9.28*mm_to_m} ${-0.008*mm_to_m} ${377.34*mm_to_m}" rpy="0 0 0" />
+      <inertia ixx="${0.000594}" iyy="${0.000846}" izz="${0.000485}" ixy="${-0.000000100}"
+        ixz="${-0.000057116}" iyz="${0.000000128}" />
+    </inertial>
+  </xacro:property>
+
+  <xacro:property name="link05_cover_inertial">
+    <inertial>
+      <mass value="0.121" />
+      <origin xyz="${54.24*mm_to_m} ${-0.0012*mm_to_m} ${-0.0069*mm_to_m}" rpy="0 0 0" />
+      <inertia ixx="${0.0003}" iyy="${0.00049}" izz="${0.00053}" ixy="${-0.000000004}"
+        ixz="${0.0}" iyz="${-0.000000043}" />
+    </inertial>
+  </xacro:property>
+
+  <!-- Collision properties -->
+  <xacro:property name="base_collision">
+    <collision>
+      <origin xyz="0 0 -0.04" rpy="0 0 0" />
+      <geometry>
+        <cylinder radius="0.06" length="0.08" />
+      </geometry>
+    </collision>
+  </xacro:property>
+
+  <xacro:property name="link01_collision">
+    <collision>
+      <origin xyz="0 0 0" rpy="1.57 0 0" />
+      <geometry>
+        <cylinder radius="0.05" length="0.24" />
+      </geometry>
+    </collision>
+  </xacro:property>
+
+  <xacro:property name="link02_collision">
+    <collision>
+      <origin xyz="0.25 0 0" rpy="1.57 0 1.57" />
+      <geometry>
+        <cylinder radius="0.05" length="0.4" />
+      </geometry>
+    </collision>
+  </xacro:property>
+
+  <xacro:property name="link03_collision">
+    <collision>
+      <origin xyz="0.185 -0.0935 0" rpy="0 1.57 0" />
+      <geometry>
+        <cylinder radius="0.047" length="0.46" />
+      </geometry>
+    </collision>
+  </xacro:property>
+
+  <xacro:property name="link05_collision">
+    <collision>
+      <origin xyz="${0.045} 0 0.03" rpy="0 ${J_PI/2} 0" />
+      <geometry>
+        <cylinder radius="0.055" length="0.18" />
+      </geometry>
+    </collision>
+  </xacro:property>
+
+  <!-- set the ee_parent relative to the DoF -->
+  <xacro:property name="ee_parent" value="${base}" />
+
+  <xacro:if value="${dof >= 1}">
+    <xacro:property name="ee_parent" value="${link01}" />
+  </xacro:if>
+
+  <xacro:if value="${dof >= 2}">
+    <xacro:property name="ee_parent" value="${link02}" />
+  </xacro:if>
+
+  <xacro:if value="${dof >= 3}">
+    <xacro:property name="ee_parent" value="${link03}" />
+  </xacro:if>
+
+  <xacro:if value="${dof >= 4}">
+    <xacro:property name="ee_parent" value="${link04}" />
+  </xacro:if>
+
+  <xacro:if value="${dof >= 5}">
+    <xacro:property name="ee_parent" value="${link05}" />
+  </xacro:if>
+
+  <xacro:if value="${dof >= 6}">
+    <xacro:property name="ee_parent" value="${link06}" />
+  </xacro:if>
+
+</robot>
