@@ -15,14 +15,18 @@ def launch_setup(context, *args, **kwargs):
     dof = LaunchConfiguration("dof")    
     gui = LaunchConfiguration("gui")
     covers = LaunchConfiguration("covers")
+    version = LaunchConfiguration("version")
 
     dof_value = dof.perform(context)
     covers_value = covers.perform(context)
+    version_value = version.perform(context)
 
     # Load the robot description
     pkg_share_description = FindPackageShare(package='dynaarm_description').find('dynaarm_description')
-    doc = xacro.parse(open(os.path.join(pkg_share_description, 'xacro/dynaarm_standalone.urdf.xacro')))    
-    xacro.process_doc(doc, mappings={'dof': dof_value, 'covers': covers_value})
+    doc = xacro.parse(open(os.path.join(pkg_share_description, 'urdf/dynaarm_standalone.urdf.xacro')))    
+    xacro.process_doc(doc, mappings={'dof': dof_value,
+                                     'covers': covers_value,
+                                     'version': version_value})
     robot_description = {'robot_description': doc.toxml()}
 
     # Publish the joint state values for the non-fixed joints in the URDF file.
@@ -89,7 +93,7 @@ def generate_launch_description():
     declared_arguments.append(
         DeclareLaunchArgument(
             name="dof",
-            default_value="6dof",
+            choices=["1", "2", "3", "4", "5", "6"], 
             description="Select the desired degrees of freedom (dof)",
         )
     )
@@ -98,6 +102,14 @@ def generate_launch_description():
             name="covers",
             default_value="false",
             description="Show or hide the covers of the robot",
+        )
+    )
+    declared_arguments.append(
+        DeclareLaunchArgument(
+            name="version",
+            default_value="v2",
+            choices=["v1", "v2"], 
+            description="Select the desired version of robot ",
         )
     )    
 

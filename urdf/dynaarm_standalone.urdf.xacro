@@ -1,0 +1,30 @@
+<robot name="dynaarm" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <xacro:arg name="tf_prefix" default="" />
+  <!-- e.g.: 6-->
+  <xacro:arg name="dof" default="6" />
+  <!-- real, mock, sim -->
+  <xacro:arg name="mode" default="mock" />
+  <!-- physical ethercat bus, only used for real -->
+  <xacro:arg name="ethercat_bus" default="eth0" />
+  <!-- Change to add covers to the arm -->
+  <xacro:arg name="covers" default="false" />
+  <!-- v1, v2, ... -->
+  <xacro:arg name="version" default="v2" />
+
+  <xacro:include filename="$(find dynaarm_description)/urdf/dynaarm.urdf.xacro" />
+
+  <link name="world" />
+
+  <!-- create dynaarm and fix its base, move it up such that is doesn't intersect with the ground -->
+  <xacro:dynaarm tf_prefix="$(arg tf_prefix)"
+                parent_link="world"
+                dof="$(arg dof)"
+                mode="$(arg mode)"
+                ethercat_bus="$(arg ethercat_bus)"
+                covers="$(arg covers)"
+                version="$(arg version)">
+    <origin xyz="0 0 0.085" rpy="0.0 0.0 0.0" />
+  </xacro:dynaarm>
+
+</robot>
