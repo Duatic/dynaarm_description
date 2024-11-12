@@ -37,7 +37,7 @@
     <xacro:property name="link06_cover_mesh" value="wrist_2_cover_mesh.STL" />
   </xacro:if>
   <xacro:unless value="${covers}">
-    <xacro:property name="base_mesh" value="base_mesh.STL" />
+    <xacro:property name="base_mesh" value="base_link.STL" />
     <xacro:property name="link01_mesh" value="shoulder_mesh.STL" />
     <xacro:property name="link02_mesh" value="upperarm_mesh.STL" />
     <xacro:property name="link03_mesh" value="elbow_mesh.STL" />
@@ -112,74 +112,57 @@
   <!-- Base Robot -->
   <xacro:property name="base_inertial">
     <inertial>
-      <mass value="1.894" />
-      <origin
-        xyz="${0.008222641*mm_to_m} ${-0.310936808*mm_to_m} ${-36.738569268*mm_to_m}"
-        rpy="0 0 0" />
-      <inertia ixx="${2767.258474185*mm2_to_m2}" iyy="${2895.160105441*mm2_to_m2}"
-        izz="${3138.952392041*mm2_to_m2}" ixy="${0.393414115*mm2_to_m2}"
-        ixz="${-0.149570272*mm2_to_m2}" iyz="${25.32409214*mm2_to_m2}" />
+      <mass value=" 2.00264891"/>
+      <origin rpy="0 0 0" xyz="0.00346973 0.00328767  -0.04882463"/>
+      <inertia ixx="0.00403356" ixy="0.00040829" ixz="-0.00018772" iyy="0.00417547" iyz="-0.00018208" izz="0.00460221"/>
     </inertial>
   </xacro:property>
 
   <xacro:property name="link01_inertial">
     <inertial>
-      <mass value="2.644" />
-      <origin xyz="0.0 0.0 ${-1.7336*mm_to_m}" rpy="0 0 0" />
-      <inertia ixx="${10301.21*mm2_to_m2}" iyy="${3016.50*mm2_to_m2}"
-        izz="${10099.04*mm2_to_m2}" ixy="${-50.85*mm2_to_m2}"
-        ixz="${0.0*mm2_to_m2}" iyz="${0.0*mm2_to_m2}" />
+      <mass value="2.73096676"/>
+      <origin rpy="0 0 0" xyz="0.00001348 0.00013521 0.04302590"/>
+      <inertia ixx="0.01291668" ixy="0.00000440" ixz=" -0.00000179" iyy="0.00368667" iyz="-0.00001792" izz=" 0.01243431"/>
     </inertial>
   </xacro:property>
 
   <xacro:property name="link02_inertial">
     <inertial>
-      <mass value="1.394" />
-      <origin xyz="${211.09*mm_to_m} ${0.022*mm_to_m} ${-0.317*mm_to_m}"
-        rpy="0 0 0" />
-      <inertia ixx="${1161.79*mm2_to_m2}" iyy="${46092.126*mm2_to_m2}"
-        izz="${46279.53*mm2_to_m2}" ixy="${-0.72*mm2_to_m2}"
-        ixz="${-140.45*mm2_to_m2}" iyz="${0.007*mm2_to_m2}" />
+      <mass value="1.394"/>
+      <origin rpy="0 0 0" xyz="0.21109 2.2e-05 -0.000317"/>
+      <inertia ixx="0.00116179" ixy="-7.2e-07" ixz="-0.00014044999999999997" iyy="0.046092126" iyz="7e-09" izz="0.04627953"/>
     </inertial>
   </xacro:property>
 
   <xacro:property name="link03_inertial">
     <inertial>
-      <mass value="1.1" />
-      <origin xyz="${6.8*mm_to_m} ${-84.8*mm_to_m} ${-0.6*mm_to_m}" rpy="0 0 0" />
-      <inertia ixx="${1384.3*mm2_to_m2}" iyy="${716.8*mm2_to_m2}"
-        izz="${1130.1*mm2_to_m2}" ixy="${-41.6*mm2_to_m2}"
-        ixz="${8.5*mm2_to_m2}" iyz="${-10.5*mm2_to_m2}" />
+      <mass value="1.1"/>
+      <origin rpy="0 0 0" xyz="0.0068 -0.0848 -0.0006"/>
+      <inertia ixx="0.0013843" ixy="-4.16e-05" ixz="8.5e-06" iyy="0.0007168" iyz="-1.05e-05" izz="0.0011300999999999998"/>
     </inertial>
   </xacro:property>
 
   <xacro:property name="link04_inertial">
     <inertial>
-      <mass value="0.342" />
-      <origin xyz="0.0 0.0 0.2143" rpy="0 0 0" />
-      <inertia ixx="${7000*mm2_to_m2}" iyy="${7000*mm2_to_m2}"
-        izz="${6400*mm2_to_m2}" ixy="${0.0*mm2_to_m2}"
-        ixz="${0.0*mm2_to_m2}" iyz="${0.0*mm2_to_m2}" />
+      <mass value="0.342"/>
+      <origin rpy="0 0 0" xyz="0.0 0.0 0.2143"/>
+      <inertia ixx="0.006999999999999999" ixy="0.0" ixz="0.0" iyy="0.006999999999999999" iyz="0.0" izz="0.0063999999999999994"/>
     </inertial>
   </xacro:property>
 
   <xacro:property name="link05_inertial">
     <inertial>
-      <mass value="1.69" />
-      <origin xyz="0.047 0.0 0.029" rpy="0 0 0" />
-      <inertia ixx="${1672*mm2_to_m2}" iyy="${4985*mm2_to_m2}"
-        izz="${5210*mm2_to_m2}" ixy="${0*mm2_to_m2}"
-        ixz="${129.7*mm2_to_m2}" iyz="${-3.7*mm2_to_m2}" />
+      <mass value="1.69"/>
+      <origin rpy="0 0 0" xyz="0.047 0.0 0.029"/>
+      <inertia ixx="0.0016719999999999999" ixy="0.0" ixz="0.00012969999999999998" iyy="0.004985" iyz="-3.7e-06" izz="0.005209999999999999"/>
     </inertial>
   </xacro:property>
 
   <xacro:property name="link06_inertial">
     <inertial>
-      <mass value="0.1" />
-      <origin xyz="0.0 0.0 0.0064" rpy="0 0 0" />
-      <inertia ixx="${115*mm2_to_m2}" iyy="${115*mm2_to_m2}"
-        izz="${115*mm2_to_m2}" ixy="${0.0*mm2_to_m2}" ixz="${0*mm2_to_m2}"
-        iyz="${0.0*mm2_to_m2}" />
+      <mass value="0.1"/>
+      <origin rpy="0 0 0" xyz="0.0 0.0 0.0064"/>
+      <inertia ixx="0.00011499999999999999" ixy="0.0" ixz="0.0" iyy="0.00011499999999999999" iyz="0.0" izz="0.00011499999999999999"/>
     </inertial>
   </xacro:property>
 
