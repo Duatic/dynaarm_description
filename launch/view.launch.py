@@ -94,6 +94,7 @@ def generate_launch_description():
         DeclareLaunchArgument(
             name="dof",
             choices=["1", "2", "3", "4", "5", "6"], 
+            default_value="6",
             description="Select the desired degrees of freedom (dof)",
         )
     )
