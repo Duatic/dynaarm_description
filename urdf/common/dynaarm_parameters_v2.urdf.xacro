@@ -37,7 +37,7 @@
     <xacro:property name="link06_cover_mesh" value="wrist_2_cover_mesh.STL" />
   </xacro:if>
   <xacro:unless value="${covers}">
-    <xacro:property name="base_mesh" value="base_link.STL" />
+    <xacro:property name="base_mesh" value="base_mesh.STL" />
     <xacro:property name="link01_mesh" value="shoulder_mesh.STL" />
     <xacro:property name="link02_mesh" value="upperarm_mesh.STL" />
     <xacro:property name="link03_mesh" value="elbow_mesh.STL" />
