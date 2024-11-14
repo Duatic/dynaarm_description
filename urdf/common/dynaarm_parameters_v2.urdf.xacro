@@ -20,30 +20,30 @@
 
   <!-- Meshes -->
   <xacro:if value="${covers}">
-    <xacro:property name="base_mesh" value="base_mesh.dae" />
-    <xacro:property name="link01_mesh" value="shoulder_mesh.dae" />
-    <xacro:property name="link02_mesh" value="upperarm_mesh.dae" />
-    <xacro:property name="link03_mesh" value="elbow_mesh.dae" />
-    <xacro:property name="link04_mesh" value="forearm_mesh.dae" />
-    <xacro:property name="link05_mesh" value="wrist1_mesh.dae" />
-    <xacro:property name="link06_mesh" value="wrist2_mesh.dae" />
+    <xacro:property name="base_mesh" value="base_mesh.STL" />
+    <xacro:property name="link01_mesh" value="shoulder_mesh.STL" />
+    <xacro:property name="link02_mesh" value="upperarm_mesh.STL" />
+    <xacro:property name="link03_mesh" value="elbow_mesh.STL" />
+    <xacro:property name="link04_mesh" value="forearm_mesh.STL" />
+    <xacro:property name="link05_mesh" value="wrist1_mesh.STL" />
+    <xacro:property name="link06_mesh" value="wrist2_mesh.STL" />
 
-    <xacro:property name="base_cover_mesh" value="base_cover_mesh.dae" />
-    <xacro:property name="link01_cover_mesh" value="shoulder_cover_mesh.dae" />
-    <xacro:property name="link02_cover_mesh" value="upperarm_cover_mesh.dae" />
-    <xacro:property name="link03_cover_mesh" value="elbow_cover_mesh.dae" />
-    <xacro:property name="link04_cover_mesh" value="forearm_cover_mesh.dae" />
-    <xacro:property name="link05_cover_mesh" value="wrist_1_cover_mesh.dae" />
-    <xacro:property name="link06_cover_mesh" value="wrist_2_cover_mesh.dae" />
+    <xacro:property name="base_cover_mesh" value="base_mesh.STL" />
+    <xacro:property name="link01_cover_mesh" value="shoulder_mesh.STL" />
+    <xacro:property name="link02_cover_mesh" value="upperarm_mesh.STL" />
+    <xacro:property name="link03_cover_mesh" value="elbow_mesh.STL" />
+    <xacro:property name="link04_cover_mesh" value="forearm_mesh.STL" />
+    <xacro:property name="link05_cover_mesh" value="wrist1_mesh.STL" />
+    <xacro:property name="link06_cover_mesh" value="wrist2_mesh.STL" />
   </xacro:if>
   <xacro:unless value="${covers}">
-    <xacro:property name="base_mesh" value="base_detailed_mesh.dae" />
-    <xacro:property name="link01_mesh" value="shoulder_detailed_mesh.dae" />
-    <xacro:property name="link02_mesh" value="upperarm_detailed_mesh.dae" />
-    <xacro:property name="link03_mesh" value="elbow_detailed_mesh.dae" />
-    <xacro:property name="link04_mesh" value="forearm_detailed_mesh.dae" />
-    <xacro:property name="link05_mesh" value="wrist1_detailed_mesh.dae" />
-    <xacro:property name="link06_mesh" value="wrist2_detailed_mesh.dae" />
+    <xacro:property name="base_mesh" value="base_mesh.STL" />
+    <xacro:property name="link01_mesh" value="shoulder_mesh.STL" />
+    <xacro:property name="link02_mesh" value="upperarm_mesh.STL" />
+    <xacro:property name="link03_mesh" value="elbow_mesh.STL" />
+    <xacro:property name="link04_mesh" value="forearm_mesh.STL" />
+    <xacro:property name="link05_mesh" value="wrist1_mesh.STL" />
+    <xacro:property name="link06_mesh" value="wrist2_mesh.STL" />
   </xacro:unless>
 
   <!-- Joint properties -->
