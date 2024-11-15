@@ -17,7 +17,7 @@ repos:
       - id: mixed-line-ending
       - id: check-byte-order-marker  # Forbid UTF-8 byte-order markers
       - id: trailing-whitespace
-      
+
   # Python hooks
   - repo: https://github.com/asottile/pyupgrade
     rev: v3.17.0
@@ -50,15 +50,17 @@ repos:
         language: system
         files: CMakeLists.txt$
 
+  # ament_copyright is somehow broken for the BSD-3-Clause license: https://github.com/ament/ament_lint/issues/483
+  # We therefore disable it for now
   # Copyright
-  - repo: local
-    hooks:
-      - id: ament_copyright
-        name: ament_copyright
-        description: Check if copyright notice is available in all files.
-        stages: [pre-commit]
-        entry: ament_copyright
-        language: system
+  #- repo: local
+  #  hooks:
+  #    - id: ament_copyright
+  #      name: ament_copyright
+  #      description: Check if copyright notice is available in all files.
+  #      stages: [pre-commit]
+  #      entry: ament_copyright
+  #      language: system
 
   # Spellcheck in comments and docs
   # skipping of *.svg files is not working...
