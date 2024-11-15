@@ -50,10 +50,10 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS “AS IS” 
           <plugin>gz_ros2_control/GazeboSimSystem</plugin>
         </xacro:if>
         <xacro:if value="${mode == 'mock'}">
-          <plugin>dynaarm_mock_hardware_interface/DynaarmMockHardwareInterface</plugin>
+          <plugin>dynaarm_driver/DynaarmMockHardwareInterface</plugin>
         </xacro:if>
         <xacro:if value="${mode == 'real'}">
-          <plugin>dynaarm_hardware_interface/DynaArmHardwareInterface</plugin>
+          <plugin>dynaarm_driver/DynaArmHardwareInterface</plugin>
           <param name="ethercat_bus">${ethercat_bus}</param>
           <param name="tf_prefix">${tf_prefix}</param>
         </xacro:if>
