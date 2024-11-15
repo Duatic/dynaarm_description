@@ -105,15 +105,15 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS “AS IS” 
     <!-- DynaArm Revolute Joint Macro -->
     <!-- -->
     <xacro:macro name="dynaarm_revolute_joint"
-        params="joint_name 
-                parent 
-                child 
+        params="joint_name
+                parent
+                child
                 joint_axis_xyz
-                joint_lower_limit 
-                joint_upper_limit 
-                joint_limit_vel 
-                joint_limit_effort 
-                joint_type 
+                joint_lower_limit
+                joint_upper_limit
+                joint_limit_vel
+                joint_limit_effort
+                joint_type
                 *origin">
         <joint name="${joint_name}" type="${joint_type}">
             <parent link="${parent}" />
