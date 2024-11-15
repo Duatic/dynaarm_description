@@ -39,14 +39,21 @@ def launch_setup(context, *args, **kwargs):
     gui = LaunchConfiguration("gui")
     covers = LaunchConfiguration("covers")
     version = LaunchConfiguration("version")
+    dual = LaunchConfiguration("dual")
 
     dof_value = dof.perform(context)
     covers_value = covers.perform(context)
     version_value = version.perform(context)
+    dual_value = dual.perform(context)
+
 
     # Load the robot description
     pkg_share_description = FindPackageShare(package='dynaarm_description').find('dynaarm_description')
-    doc = xacro.parse(open(os.path.join(pkg_share_description, 'urdf/dynaarm_standalone.urdf.xacro')))    
+
+    if dual_value:
+        doc = xacro.parse(open(os.path.join(pkg_share_description, 'urdf/dynaarm_standalone_dual.urdf.xacro')))    
+    else:
+        doc = xacro.parse(open(os.path.join(pkg_share_description, 'urdf/dynaarm_standalone.urdf.xacro')))    
     xacro.process_doc(doc, mappings={'dof': dof_value,
                                      'covers': covers_value,
                                      'version': version_value})
@@ -125,7 +132,7 @@ def generate_launch_description():
     declared_arguments.append(
         DeclareLaunchArgument(
             name="covers",
-            default_value="false",
+            default_value="False",
             description="Show or hide the covers of the robot",
         )
     )
@@ -134,6 +141,13 @@ def generate_launch_description():
             name="version",
             default_value="v2",
             choices=["v1", "v2"], 
+            description="Select the desired version of robot ",
+        )
+    )    
+    declared_arguments.append(
+        DeclareLaunchArgument(
+            name="dual",
+            default_value="False",
             description="Select the desired version of robot ",
         )
     )    
