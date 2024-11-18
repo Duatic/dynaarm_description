@@ -45,23 +45,34 @@ def launch_setup(context, *args, **kwargs):
     dof_value = dof.perform(context)
     covers_value = covers.perform(context)
     version_value = version.perform(context)
-    dual_value = dual.perform(context)
+    dual_value = dual.perform(context).strip().lower()
 
     # Load the robot description
     pkg_share_description = FindPackageShare(package="dynaarm_description").find(
         "dynaarm_description"
     )
 
-    if dual_value:
+    is_dual = dual_value == "true"
+    if is_dual:
         doc = xacro.parse(
-            open(os.path.join(pkg_share_description, "urdf/dynaarm_standalone_dual.urdf.xacro"))
+            open(
+                os.path.join(
+                    pkg_share_description, "urdf/dynaarm_standalone_dual.urdf.xacro"
+                )
+            )
         )
     else:
         doc = xacro.parse(
-            open(os.path.join(pkg_share_description, "urdf/dynaarm_standalone.urdf.xacro"))
+            open(
+                os.path.join(
+                    pkg_share_description, "urdf/dynaarm_standalone.urdf.xacro"
+                )
+            )
         )
+
     xacro.process_doc(
-        doc, mappings={"dof": dof_value, "covers": covers_value, "version": version_value}
+        doc,
+        mappings={"dof": dof_value, "covers": covers_value, "version": version_value},
     )
     robot_description = {"robot_description": doc.toxml()}
 
@@ -145,7 +156,7 @@ def generate_launch_description():
     declared_arguments.append(
         DeclareLaunchArgument(
             name="version",
-            default_value="v2",
+            default_value="v1",
             choices=["v1", "v2"],
             description="Select the desired version of robot ",
         )
@@ -158,4 +169,6 @@ def generate_launch_description():
         )
     )
 
-    return LaunchDescription(declared_arguments + [OpaqueFunction(function=launch_setup)])
+    return LaunchDescription(
+        declared_arguments + [OpaqueFunction(function=launch_setup)]
+    )
