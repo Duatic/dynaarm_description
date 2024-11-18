@@ -55,19 +55,11 @@ def launch_setup(context, *args, **kwargs):
     is_dual = dual_value == "true"
     if is_dual:
         doc = xacro.parse(
-            open(
-                os.path.join(
-                    pkg_share_description, "urdf/dynaarm_standalone_dual.urdf.xacro"
-                )
-            )
+            open(os.path.join(pkg_share_description, "urdf/dynaarm_standalone_dual.urdf.xacro"))
         )
     else:
         doc = xacro.parse(
-            open(
-                os.path.join(
-                    pkg_share_description, "urdf/dynaarm_standalone.urdf.xacro"
-                )
-            )
+            open(os.path.join(pkg_share_description, "urdf/dynaarm_standalone.urdf.xacro"))
         )
 
     xacro.process_doc(
@@ -169,6 +161,4 @@ def generate_launch_description():
         )
     )
 
-    return LaunchDescription(
-        declared_arguments + [OpaqueFunction(function=launch_setup)]
-    )
+    return LaunchDescription(declared_arguments + [OpaqueFunction(function=launch_setup)])
