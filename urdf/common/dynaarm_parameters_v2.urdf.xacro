@@ -21,7 +21,7 @@
   <!-- Meshes -->
   <xacro:if value="${covers}">
     <xacro:property name="base_mesh" value="base_mesh.STL" />
-    <xacro:property name="link01_mesh" value="shoulder_mesh.STL" />
+    <xacro:property name="link01_mesh" value="shoulderColor.dae" />
     <xacro:property name="link02_mesh" value="upperarm_mesh.STL" />
     <xacro:property name="link03_mesh" value="elbow_mesh.STL" />
     <xacro:property name="link04_mesh" value="forearm_mesh.STL" />
@@ -29,7 +29,7 @@
     <xacro:property name="link06_mesh" value="wrist2_mesh.STL" />
 
     <xacro:property name="base_cover_mesh" value="base_mesh.STL" />
-    <xacro:property name="link01_cover_mesh" value="shoulder_mesh.STL" />
+    <xacro:property name="link01_cover_mesh" value="shoulderColor.dae" />
     <xacro:property name="link02_cover_mesh" value="upperarm_mesh.STL" />
     <xacro:property name="link03_cover_mesh" value="elbow_mesh.STL" />
     <xacro:property name="link04_cover_mesh" value="forearm_mesh.STL" />
@@ -38,7 +38,7 @@
   </xacro:if>
   <xacro:unless value="${covers}">
     <xacro:property name="base_mesh" value="base_mesh.STL" />
-    <xacro:property name="link01_mesh" value="shoulder_mesh.STL" />
+    <xacro:property name="link01_mesh" value="shoulderColor.dae" />
     <xacro:property name="link02_mesh" value="upperarm_mesh.STL" />
     <xacro:property name="link03_mesh" value="elbow_mesh.STL" />
     <xacro:property name="link04_mesh" value="forearm_mesh.STL" />
