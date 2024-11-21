@@ -16,6 +16,7 @@
   <xacro:property name="link03_cam" value="${tf_prefix}ELBOW_CAMERA_MOUNT" />
   <xacro:property name="link04" value="${tf_prefix}FOREARM" />
   <xacro:property name="link05" value="${tf_prefix}WRIST_1" />
+  <xacro:property name="link05_cam" value="${tf_prefix}WRIST_1_CAMERA_MOUNT" />
   <xacro:property name="link06" value="${tf_prefix}WRIST_2" />
   <xacro:property name="end_effector" value="${tf_prefix}END_EFFECTOR" />
 
@@ -37,6 +38,7 @@
     <xacro:property name="link05_cover_mesh" value="wrist1_mesh.STL" />
     <xacro:property name="link06_cover_mesh" value="wrist2_mesh.STL" />
   </xacro:if>
+
   <xacro:unless value="${covers}">
     <xacro:property name="base_mesh" value="base_mesh.STL" />
     <xacro:property name="link01_mesh" value="shoulderColor.dae" />
@@ -45,7 +47,6 @@
     <xacro:property name="link04_mesh" value="forearm_mesh.STL" />
     <xacro:property name="link05_mesh" value="wrist1_mesh.STL" />
     <xacro:property name="link06_mesh" value="wrist2_mesh.STL" />
-
   </xacro:unless>
 
   <!-- Joint properties -->
@@ -100,6 +101,12 @@
   <xacro:property name="joint_5_origin_rpy" value="0 ${-J_PI/2} 0" />
   <xacro:property name="joint_5_lower_limit" value="${-J_PI/2}" />
   <xacro:property name="joint_5_upper_limit" value="${J_PI/2}" />
+
+  <xacro:property name="joint_5_cam_name" value="${tf_prefix}WRIST_1_CAMERA" />
+  <xacro:property name="joint_5_cam_joint_type" value="fixed" />
+  <xacro:property name="joint_5_cam_axis_xyz" value="0 0 0" />
+  <xacro:property name="joint_5_cam_origin_xyz" value="0.032 0 -0.017" />
+  <xacro:property name="joint_5_cam_origin_rpy" value="0.0 0.0 0.0" />
 
   <xacro:property name="joint_6_name" value="${tf_prefix}WRIST_2" />
   <xacro:property name="joint_6_joint_type" value="revolute" />
@@ -161,6 +168,16 @@
     </inertial>
   </xacro:property>
 
+  <xacro:property name="link03_cam_inertial">
+    <inertial>
+      <mass value="1e-6" />
+      <origin xyz="0.0 0.0 0.0" rpy="0 0 0" />
+      <inertia ixx="1e-6" iyy="1e-6"
+        izz="1e-6" ixy="1e-6"
+        ixz="1e-6" iyz="1e-6" />
+    </inertial>
+  </xacro:property>
+
   <xacro:property name="link04_inertial">
     <inertial>
       <mass value="1.15674546" />
@@ -181,17 +198,7 @@
     </inertial>
   </xacro:property>
 
-  <xacro:property name="link06_inertial">
-    <inertial>
-      <mass value="0.0478406" />
-      <origin xyz="0.00045711 0.00000557 0.00344945" rpy="0 0 0" />
-      <inertia ixx="0.00001366" iyy="0.00001419"
-        izz="0.00002702" ixy="0"
-        ixz="0.00000008" iyz="0" />
-    </inertial>
-  </xacro:property>
-
-  <xacro:property name="link03_cam_inertial">
+  <xacro:property name="link05_cam_inertial">
     <inertial>
       <mass value="1e-6" />
       <origin xyz="0.0 0.0 0.0" rpy="0 0 0" />
@@ -201,6 +208,15 @@
     </inertial>
   </xacro:property>
 
+  <xacro:property name="link06_inertial">
+    <inertial>
+      <mass value="0.0478406" />
+      <origin xyz="0.00045711 0.00000557 0.00344945" rpy="0 0 0" />
+      <inertia ixx="0.00001366" iyy="0.00001419"
+        izz="0.00002702" ixy="0"
+        ixz="0.00000008" iyz="0" />
+    </inertial>
+  </xacro:property>
 
   <!-- Covers -->
   <xacro:property name="base_cover_inertial">
