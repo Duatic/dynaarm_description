@@ -159,7 +159,7 @@
           <xacro:insert_block name="link03_collision" />
         </link_collision>
       </xacro:dynaarm_link_w_collision>
-
+      
       <!-- EL_FLE -->
       <xacro:dynaarm_revolute_joint joint_name="${joint_3_name}"
         parent="${link02}"
@@ -172,6 +172,19 @@
         joint_type="${joint_3_joint_type}">
         <origin xyz="${joint_3_origin_xyz}" rpy="${joint_3_origin_rpy}" />
       </xacro:dynaarm_revolute_joint>
+
+      <!--dynaarm_ELBOW_CAMERA_BASE-->
+      <xacro:dynaarm_link_w_collision link_name="${link03_cam}" file_name="${link03_cam_mesh}">
+        <link_inertia>
+          <xacro:insert_block name="link03_cam_inertial" />
+        </link_inertia>
+
+      <!-- Camera fixed on elbow -->
+        <xacro:dynaarm_joint_fixed joint_name="${joint_03_cam_name}" 
+        parent="${link03}"
+          child="${link03_cam}">
+          <origin xyz="${joint_3_cam_origin_xyz}" rpy="${joint_3_cam_origin_rpy}" />
+        </xacro:dynaarm_joint_fixed>
 
       <!-- 3 Dof & Covers-->
       <xacro:if value="${covers}">

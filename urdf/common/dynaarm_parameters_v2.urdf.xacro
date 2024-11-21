@@ -13,6 +13,7 @@
   <xacro:property name="link01" value="${tf_prefix}SHOULDER" />
   <xacro:property name="link02" value="${tf_prefix}UPPERARM" />
   <xacro:property name="link03" value="${tf_prefix}ELBOW" />
+  <xacro:property name="link03_cam" value="${tf_prefix}ELBOW_CAMERA_MOUNT" />
   <xacro:property name="link04" value="${tf_prefix}FOREARM" />
   <xacro:property name="link05" value="${tf_prefix}WRIST_1" />
   <xacro:property name="link06" value="${tf_prefix}WRIST_2" />
@@ -24,6 +25,7 @@
     <xacro:property name="link01_mesh" value="shoulderColor.dae" />
     <xacro:property name="link02_mesh" value="upperarm_mesh.STL" />
     <xacro:property name="link03_mesh" value="elbow_mesh.STL" />
+    <xacro:property name="link03_cam_mesh" value=<box size="0.01 0.01 0.01"/>/>
     <xacro:property name="link04_mesh" value="forearm_mesh.STL" />
     <xacro:property name="link05_mesh" value="wrist1_mesh.STL" />
     <xacro:property name="link06_mesh" value="wrist2_mesh.STL" />
@@ -41,9 +43,11 @@
     <xacro:property name="link01_mesh" value="shoulderColor.dae" />
     <xacro:property name="link02_mesh" value="upperarm_mesh.STL" />
     <xacro:property name="link03_mesh" value="elbow_mesh.STL" />
+    <xacro:property name="link03_cam_mesh" value=<box size="0.01 0.01 0.01"/>/>
     <xacro:property name="link04_mesh" value="forearm_mesh.STL" />
     <xacro:property name="link05_mesh" value="wrist1_mesh.STL" />
     <xacro:property name="link06_mesh" value="wrist2_mesh.STL" />
+    
   </xacro:unless>
 
   <!-- Joint properties -->
@@ -76,6 +80,12 @@
   <xacro:property name="joint_3_origin_rpy" value="${J_PI} 0 0" />
   <xacro:property name="joint_3_lower_limit" value="-0.05" />
   <xacro:property name="joint_3_upper_limit" value="${J_PI}" />
+
+  <xacro:property name="joint_3_cam_name" value="${tf_prefix}EL_CAMERA" />
+  <xacro:property name="joint_3_cam_joint_type" value="fixed" />
+  <xacro:property name="joint_3_cam_axis_xyz" value="0 0 0" />
+  <xacro:property name="joint_3_cam_origin_xyz" value="0.0345 -0.1235 0" />
+  <xacro:property name="joint_3_cam_origin_rpy" value="0.0 0.0 0.0" />
 
   <xacro:property name="joint_4_name" value="${tf_prefix}FA_ROT" />
   <xacro:property name="joint_4_joint_type" value="revolute" />
@@ -182,6 +192,17 @@
         ixz="0.00000008" iyz="0" />
     </inertial>
   </xacro:property>
+
+  <xacro:property name="link03_cam_inertial">
+    <inertial>
+      <mass value="1e-6" />
+      <origin xyz="0.0 0.0 0.0" rpy="0 0 0" />
+      <inertia ixx="1e-6" iyy="1e-6"
+        izz="1e-6" ixy="1e-6"
+        ixz="1e-6" iyz="1e-6" />
+    </inertial>
+  </xacro:property>
+
 
   <!-- Covers -->
   <xacro:property name="base_cover_inertial">
