@@ -12,7 +12,8 @@
     <xacro:property name="ee_parent" value="${base}" />
 
     <xacro:include filename="$(find dynaarm_description)/urdf/common/dynaarm_common.urdf.xacro" />
-    <xacro:include filename="$(find dynaarm_description)/urdf/common/dynaarm_parameters_${version}.urdf.xacro" />
+    <xacro:include
+      filename="$(find dynaarm_description)/urdf/common/dynaarm_parameters_${version}.urdf.xacro" />
     <xacro:include filename="$(find dynaarm_description)/urdf/common/dynaarm.ros2control.xacro" />
 
     <xacro:dynaarm_joint_fixed joint_name="${joint_base_name}"
@@ -159,7 +160,7 @@
           <xacro:insert_block name="link03_collision" />
         </link_collision>
       </xacro:dynaarm_link_w_collision>
-      
+
       <!-- EL_FLE -->
       <xacro:dynaarm_revolute_joint joint_name="${joint_3_name}"
         parent="${link02}"
@@ -174,17 +175,26 @@
       </xacro:dynaarm_revolute_joint>
 
       <!--dynaarm_ELBOW_CAMERA_BASE-->
-      <xacro:dynaarm_link_w_collision link_name="${link03_cam}" file_name="${link03_cam_mesh}">
-        <link_inertia>
-          <xacro:insert_block name="link03_cam_inertial" />
-        </link_inertia>
+      <link name="${link03_cam}">
+        <visual>
+          <origin rpy="0 0 0" xyz="0 0 0" />
+          <geometry>
+            <box size="0.001 0.001 0.001" />
+          </geometry>
+        </visual>
+        <inertial>
+          <origin rpy="0 0 0" xyz="0.0 0.0 0.0" />
+          <mass value="0.001" />
+          <inertia ixx="0.0000001" ixy="0.0" ixz="0.0" iyy="0.0000001" iyz="0.0" izz="0.0000001" />
+        </inertial>
+      </link>
 
       <!-- Camera fixed on elbow -->
-        <xacro:dynaarm_joint_fixed joint_name="${joint_03_cam_name}" 
+      <xacro:dynaarm_joint_fixed joint_name="${joint_3_cam_name}"
         parent="${link03}"
-          child="${link03_cam}">
-          <origin xyz="${joint_3_cam_origin_xyz}" rpy="${joint_3_cam_origin_rpy}" />
-        </xacro:dynaarm_joint_fixed>
+        child="${link03_cam}">
+        <origin xyz="${joint_3_cam_origin_xyz}" rpy="${joint_3_cam_origin_rpy}" />
+      </xacro:dynaarm_joint_fixed>
 
       <!-- 3 Dof & Covers-->
       <xacro:if value="${covers}">

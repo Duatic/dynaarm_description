@@ -25,7 +25,6 @@
     <xacro:property name="link01_mesh" value="shoulderColor.dae" />
     <xacro:property name="link02_mesh" value="upperarm_mesh.STL" />
     <xacro:property name="link03_mesh" value="elbow_mesh.STL" />
-    <xacro:property name="link03_cam_mesh" value=<box size="0.01 0.01 0.01"/>/>
     <xacro:property name="link04_mesh" value="forearm_mesh.STL" />
     <xacro:property name="link05_mesh" value="wrist1_mesh.STL" />
     <xacro:property name="link06_mesh" value="wrist2_mesh.STL" />
@@ -43,11 +42,10 @@
     <xacro:property name="link01_mesh" value="shoulderColor.dae" />
     <xacro:property name="link02_mesh" value="upperarm_mesh.STL" />
     <xacro:property name="link03_mesh" value="elbow_mesh.STL" />
-    <xacro:property name="link03_cam_mesh" value=<box size="0.01 0.01 0.01"/>/>
     <xacro:property name="link04_mesh" value="forearm_mesh.STL" />
     <xacro:property name="link05_mesh" value="wrist1_mesh.STL" />
     <xacro:property name="link06_mesh" value="wrist2_mesh.STL" />
-    
+
   </xacro:unless>
 
   <!-- Joint properties -->
@@ -119,7 +117,7 @@
   <xacro:property name="joint_ee_origin_4dof_rpy" value="0.0 0.0 ${J_PI/2}" />
   <xacro:property name="joint_ee_rpy" value="0 0 0" />
 
-<!-- Base Robot -->
+  <!-- Base Robot -->
   <xacro:property name="base_inertial">
     <inertial>
       <mass value="2.00205474" />
@@ -259,69 +257,71 @@
     </inertial>
   </xacro:property>
 
-<!-- Collision properties -->
-<xacro:property name="base_collision">
-  <collision>
-    <origin xyz="0 0 0" rpy="0 0 0" />
-    <geometry>
-      <mesh filename="package://dynaarm_description/meshes/collision_meshes/base_collision_mesh.STL" scale="1 1 1" />
-    </geometry>
-  </collision>
-</xacro:property>
+  <!-- Collision properties -->
+  <xacro:property name="base_collision">
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://dynaarm_description/meshes/collision_meshes/base_collision_mesh.STL"
+          scale="1 1 1" />
+      </geometry>
+    </collision>
+  </xacro:property>
 
-<xacro:property name="link01_collision">
-  <collision>
-    <origin xyz="0 0 0.0105" rpy="0 0 0" />
-    <geometry>
-      <cylinder radius="0.05" length="0.24" />
-    </geometry>
-  </collision>
-</xacro:property>
+  <xacro:property name="link01_collision">
+    <collision>
+      <origin xyz="0 0 0.0105" rpy="0 0 0" />
+      <geometry>
+        <cylinder radius="0.05" length="0.24" />
+      </geometry>
+    </collision>
+  </xacro:property>
 
-<xacro:property name="link02_collision">
-  <collision>
-    <origin xyz="0 0 0.047" rpy="${J_PI/2} ${-J_PI/2} 0" />
-    <geometry>
-      <cylinder radius="0.05" length="0.4" />
-    </geometry>
-  </collision>
-</xacro:property>
+  <xacro:property name="link02_collision">
+    <collision>
+      <origin xyz="0 0 0.047" rpy="${J_PI/2} ${-J_PI/2} 0" />
+      <geometry>
+        <cylinder radius="0.05" length="0.4" />
+      </geometry>
+    </collision>
+  </xacro:property>
 
-<xacro:property name="link03_collision">
-  <collision>
-    <origin xyz="0.4127 0 0" rpy="${J_PI} 0 0" />
-    <geometry>
-      <cylinder radius="0.047" length="0.46" />
-    </geometry>
-  </collision>
-</xacro:property>
+  <xacro:property name="link03_collision">
+    <collision>
+      <origin xyz="0.4127 0 0" rpy="${J_PI} 0 0" />
+      <geometry>
+        <cylinder radius="0.047" length="0.46" />
+      </geometry>
+    </collision>
+  </xacro:property>
 
-<xacro:property name="link04_collision">
-  <collision>
-    <origin xyz="0.0262 -0.0855 0" rpy="${J_PI/2} 0 ${J_PI/2}" />
-    <geometry>
-      <cylinder radius="0.05" length="0.2" />
-    </geometry>
-  </collision>
-</xacro:property>
+  <xacro:property name="link04_collision">
+    <collision>
+      <origin xyz="0.0262 -0.0855 0" rpy="${J_PI/2} 0 ${J_PI/2}" />
+      <geometry>
+        <cylinder radius="0.05" length="0.2" />
+      </geometry>
+    </collision>
+  </xacro:property>
 
-<xacro:property name="link05_collision">
-  <collision>
-    <origin xyz="0.0295 0 0.4207" rpy="0 ${-J_PI/2} 0" />
-    <geometry>
-      <cylinder radius="0.055" length="0.18" />
-    </geometry>
-  </collision>
-</xacro:property>
+  <xacro:property name="link05_collision">
+    <collision>
+      <origin xyz="0.0295 0 0.4207" rpy="0 ${-J_PI/2} 0" />
+      <geometry>
+        <cylinder radius="0.055" length="0.18" />
+      </geometry>
+    </collision>
+  </xacro:property>
 
-<xacro:property name="link06_collision">
-  <collision>
-    <origin xyz="0.117 0.0 0.0295" rpy="${-J_PI/2} ${J_PI/2} ${-J_PI/2}" />
-    <geometry>
-      <cylinder radius="0.045" length="0.16" />
-    </geometry>
-  </collision>
-</xacro:property>
+  <xacro:property name="link06_collision">
+    <collision>
+      <origin xyz="0.117 0.0 0.0295" rpy="${-J_PI/2} ${J_PI/2} ${-J_PI/2}" />
+      <geometry>
+        <cylinder radius="0.045" length="0.16" />
+      </geometry>
+    </collision>
+  </xacro:property>
 
   <!-- set the ee_parent relative to the DoF -->
   <xacro:property name="ee_parent" value="${base}" />
