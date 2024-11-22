@@ -15,7 +15,7 @@ repos:
       - id: debug-statements
       - id: end-of-file-fixer
       - id: mixed-line-ending
-      - id: check-byte-order-marker  # Forbid UTF-8 byte-order markers
+      - id: fix-byte-order-marker  # Forbid UTF-8 byte-order markers
       - id: trailing-whitespace
 
   # Python hooks
