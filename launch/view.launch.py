@@ -33,9 +33,10 @@ from launch.substitutions import LaunchConfiguration
 from launch_ros.actions import Node
 from launch_ros.substitutions import FindPackageShare
 
+
 def launch_setup(context, *args, **kwargs):
 
-    dof = LaunchConfiguration("dof")    
+    dof = LaunchConfiguration("dof")
     gui = LaunchConfiguration("gui")
     covers = LaunchConfiguration("covers")
     version = LaunchConfiguration("version")
@@ -45,12 +46,16 @@ def launch_setup(context, *args, **kwargs):
     version_value = version.perform(context)
 
     # Load the robot description
-    pkg_share_description = FindPackageShare(package='dynaarm_description').find('dynaarm_description')
-    doc = xacro.parse(open(os.path.join(pkg_share_description, 'urdf/dynaarm_standalone.urdf.xacro')))    
-    xacro.process_doc(doc, mappings={'dof': dof_value,
-                                     'covers': covers_value,
-                                     'version': version_value})
-    robot_description = {'robot_description': doc.toxml()}
+    pkg_share_description = FindPackageShare(package="dynaarm_description").find(
+        "dynaarm_description"
+    )
+    doc = xacro.parse(
+        open(os.path.join(pkg_share_description, "urdf/dynaarm_standalone.urdf.xacro"))
+    )
+    xacro.process_doc(
+        doc, mappings={"dof": dof_value, "covers": covers_value, "version": version_value}
+    )
+    robot_description = {"robot_description": doc.toxml()}
 
     # Publish the joint state values for the non-fixed joints in the URDF file.
     start_joint_state_publisher_node = Node(
@@ -77,7 +82,7 @@ def launch_setup(context, *args, **kwargs):
     )
 
     # Launch RViz
-    rviz_node = Node(        
+    rviz_node = Node(
         package="rviz2",
         executable="rviz2",
         name="rviz2",
@@ -104,7 +109,7 @@ def launch_setup(context, *args, **kwargs):
 
 
 def generate_launch_description():
-    
+
     # Declare the launch arguments
     declared_arguments = []
     declared_arguments.append(
@@ -113,11 +118,11 @@ def generate_launch_description():
             default_value="True",
             description="Flag to enable joint_state_publisher_gui",
         )
-    )    
+    )
     declared_arguments.append(
         DeclareLaunchArgument(
             name="dof",
-            choices=["1", "2", "3", "4", "5", "6"], 
+            choices=["1", "2", "3", "4", "5", "6"],
             default_value="6",
             description="Select the desired degrees of freedom (dof)",
         )
@@ -133,11 +138,9 @@ def generate_launch_description():
         DeclareLaunchArgument(
             name="version",
             default_value="v2",
-            choices=["v1", "v2"], 
+            choices=["v1", "v2"],
             description="Select the desired version of robot ",
         )
-    )    
-
-    return LaunchDescription(
-        declared_arguments + [OpaqueFunction(function=launch_setup)]
     )
+
+    return LaunchDescription(declared_arguments + [OpaqueFunction(function=launch_setup)])
