@@ -34,6 +34,23 @@ from launch_ros.actions import Node
 from launch_ros.substitutions import FindPackageShare
 
 
+def string_to_bool(string_input):
+    """Converts a string representation of a boolean value to a Python boolean.
+
+    Args:
+        string_input (str): The input string, e.g., "true", "false", "yes", "no".
+
+    Returns:
+        bool: The corresponding boolean value, or raises a ValueError for invalid input.
+    """
+    if string_input.lower() in ["true", "yes", "1"]:
+        return True
+    elif string_input.lower() in ["false", "no", "0"]:
+        return False
+    else:
+        raise ValueError(f"Invalid boolean string: '{string_input}'")
+
+
 def launch_setup(context, *args, **kwargs):
 
     dof = LaunchConfiguration("dof")
@@ -45,14 +62,15 @@ def launch_setup(context, *args, **kwargs):
     dof_value = dof.perform(context)
     covers_value = covers.perform(context)
     version_value = version.perform(context)
-    dual_value = dual.perform(context)
+    dual_value = dual.perform(context).strip().lower()
 
     # Load the robot description
     pkg_share_description = FindPackageShare(package="dynaarm_description").find(
         "dynaarm_description"
     )
 
-    if dual_value:
+    is_dual = string_to_bool(dual_value)
+    if is_dual:
         doc = xacro.parse(
             open(os.path.join(pkg_share_description, "urdf/dynaarm_standalone_dual.urdf.xacro"))
         )
@@ -60,8 +78,10 @@ def launch_setup(context, *args, **kwargs):
         doc = xacro.parse(
             open(os.path.join(pkg_share_description, "urdf/dynaarm_standalone.urdf.xacro"))
         )
+
     xacro.process_doc(
-        doc, mappings={"dof": dof_value, "covers": covers_value, "version": version_value}
+        doc,
+        mappings={"dof": dof_value, "covers": covers_value, "version": version_value},
     )
     robot_description = {"robot_description": doc.toxml()}
 
@@ -145,7 +165,7 @@ def generate_launch_description():
     declared_arguments.append(
         DeclareLaunchArgument(
             name="version",
-            default_value="v2",
+            default_value="v1",
             choices=["v1", "v2"],
             description="Select the desired version of robot ",
         )

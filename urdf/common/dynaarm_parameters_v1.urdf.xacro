@@ -98,7 +98,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS “AS IS” 
   <xacro:property name="joint_4_lower_limit" value="${-J_PI - J_PI/2}" />
   <xacro:property name="joint_4_upper_limit" value="${J_PI + J_PI/2}" />
 
-  <xacro:property name="joint_5_name" value="${tf_prefix}WRIST_1" />
+  <xacro:property name="joint_5_name" value="${tf_prefix}WR_FLE" />
   <xacro:property name="joint_5_joint_type" value="revolute" />
   <xacro:property name="joint_5_axis_xyz" value="0 0 1" />
   <xacro:property name="joint_5_origin_xyz" value="0.0 -0.03 0.4118" />
@@ -106,7 +106,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS “AS IS” 
   <xacro:property name="joint_5_lower_limit" value="${-J_PI/2}" />
   <xacro:property name="joint_5_upper_limit" value="${J_PI/2}" />
 
-  <xacro:property name="joint_6_name" value="${tf_prefix}WRIST_2" />
+  <xacro:property name="joint_6_name" value="${tf_prefix}WR_ROT" />
   <xacro:property name="joint_6_joint_type" value="revolute" />
   <xacro:property name="joint_6_axis_xyz" value="0 0 1" />
   <xacro:property name="joint_6_origin_xyz" value="0.12 0.0 0.03" />

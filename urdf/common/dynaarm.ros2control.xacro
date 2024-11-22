@@ -76,11 +76,11 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS “AS IS” 
       </xacro:if>
 
       <xacro:if value="${dof >= 5}">
-        <xacro:dynaarm_ros2control_joint name="${tf_prefix}WRIST_1" address="5" />
+        <xacro:dynaarm_ros2control_joint name="${tf_prefix}WR_FLE" address="5" />
       </xacro:if>
 
       <xacro:if value="${dof >= 6}">
-        <xacro:dynaarm_ros2control_joint name="${tf_prefix}WRIST_2" address="6" />
+        <xacro:dynaarm_ros2control_joint name="${tf_prefix}WR_ROT" address="6" />
       </xacro:if>
 
     </ros2_control>

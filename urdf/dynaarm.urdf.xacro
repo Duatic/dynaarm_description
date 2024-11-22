@@ -323,7 +323,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS “AS IS” 
     <gazebo>
       <plugin filename="libgz_ros2_control-system.so"
         name="gz_ros2_control::GazeboSimROS2ControlPlugin">
-        <parameters>$(find dynaarm_driver)/config/controllers.yaml</parameters>
+        <parameters>$(find dynaarm_examples)/config/controllers.yaml</parameters>
         <robotNamespace>dynaarm</robotNamespace>
         <robotDescription>dynaarm_description</robotDescription>
         <robotBaseLink>dynaarm_base</robotBaseLink>
