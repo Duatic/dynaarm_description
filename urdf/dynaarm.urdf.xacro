@@ -24,7 +24,8 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS “AS IS” 
     <xacro:property name="ee_parent" value="${base}" />
 
     <xacro:include filename="$(find dynaarm_description)/urdf/common/dynaarm_common.urdf.xacro" />
-    <xacro:include filename="$(find dynaarm_description)/urdf/common/dynaarm_parameters_${version}.urdf.xacro" />
+    <xacro:include
+      filename="$(find dynaarm_description)/urdf/common/dynaarm_parameters_${version}.urdf.xacro" />
     <xacro:include filename="$(find dynaarm_description)/urdf/common/dynaarm.ros2control.xacro" />
 
     <xacro:dynaarm_joint_fixed joint_name="${joint_base_name}"
@@ -185,6 +186,28 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS “AS IS” 
         <origin xyz="${joint_3_origin_xyz}" rpy="${joint_3_origin_rpy}" />
       </xacro:dynaarm_revolute_joint>
 
+      <!--dynaarm_ELBOW_CAMERA_BASE-->
+      <link name="${link03_cam}">
+        <visual>
+          <origin rpy="0 0 0" xyz="0 0 0" />
+          <geometry>
+            <box size="0.001 0.001 0.001" />
+          </geometry>
+        </visual>
+        <inertial>
+          <origin rpy="0 0 0" xyz="0.0 0.0 0.0" />
+          <mass value="0.001" />
+          <inertia ixx="0.0000001" ixy="0.0" ixz="0.0" iyy="0.0000001" iyz="0.0" izz="0.0000001" />
+        </inertial>
+      </link>
+
+      <!-- Camera fixed on elbow -->
+      <xacro:dynaarm_joint_fixed joint_name="${joint_3_cam_name}"
+        parent="${link03}"
+        child="${link03_cam}">
+        <origin xyz="${joint_3_cam_origin_xyz}" rpy="${joint_3_cam_origin_rpy}" />
+      </xacro:dynaarm_joint_fixed>
+
       <!-- 3 Dof & Covers-->
       <xacro:if value="${covers}">
         <xacro:dynaarm_link link_name="${link03}_cover" file_name="${link03_cover_mesh}">
@@ -262,6 +285,28 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS “AS IS” 
         <origin xyz="${joint_5_origin_xyz}" rpy="${joint_5_origin_rpy}" />
       </xacro:dynaarm_revolute_joint>
 
+      <!--dynaarm_WRIST_1_CAMERA_BASE-->
+      <link name="${link05_cam}">
+        <visual>
+          <origin rpy="0 0 0" xyz="0 0 0" />
+          <geometry>
+            <box size="0.001 0.001 0.001" />
+          </geometry>
+        </visual>
+        <inertial>
+          <origin rpy="0 0 0" xyz="0.0 0.0 0.0" />
+          <mass value="0.001" />
+          <inertia ixx="0.0000001" ixy="0.0" ixz="0.0" iyy="0.0000001" iyz="0.0" izz="0.0000001" />
+        </inertial>
+      </link>
+
+      <!-- Camera fixed on wrist1 -->
+      <xacro:dynaarm_joint_fixed joint_name="${joint_5_cam_name}"
+        parent="${link05}"
+        child="${link05_cam}">
+        <origin xyz="${joint_5_cam_origin_xyz}" rpy="${joint_5_cam_origin_rpy}" />
+      </xacro:dynaarm_joint_fixed>
+
       <!-- 5 Dof & Covers-->
       <xacro:if value="${covers}">
         <xacro:dynaarm_link link_name="${link05}_cover" file_name="${link05_cover_mesh}">
@@ -323,7 +368,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS “AS IS” 
     <gazebo>
       <plugin filename="libgz_ros2_control-system.so"
         name="gz_ros2_control::GazeboSimROS2ControlPlugin">
-        <parameters>$(find dynaarm_examples)/config/controllers.yaml</parameters>
+        <parameters>$(find dynaarm_driver)/config/controllers.yaml</parameters>
         <robotNamespace>dynaarm</robotNamespace>
         <robotDescription>dynaarm_description</robotDescription>
         <robotBaseLink>dynaarm_base</robotBaseLink>
