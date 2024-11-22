@@ -2,15 +2,28 @@
 <!--
 Copyright 2024 Duatic AG
 
-Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+Redistribution and use in source and binary forms, with or without modification, are permitted
+provided that the following conditions are met:
 
-1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+1. Redistributions of source code must retain the above copyright notice, this list of conditions
+and the following disclaimer.
 
-2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
+2. Redistributions in binary form must reproduce the above copyright notice, this list of
+conditions and the following disclaimer in the documentation and/or other materials provided with
+the distribution.
 
-3. Neither the name of the copyright holder nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission.
+3. Neither the name of the copyright holder nor the names of its contributors may be used to
+endorse or promote products derived from this software without specific prior written permission.
 
-THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS “AS IS” AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS “AS IS” AND ANY EXPRESS OR
+IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR
+CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER
+IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
+OF
+THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 -->
 <robot name="dynaarm" xmlns:xacro="http://www.ros.org/wiki/xacro">
 
@@ -24,7 +37,8 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS “AS IS” 
     <xacro:property name="ee_parent" value="${base}" />
 
     <xacro:include filename="$(find dynaarm_description)/urdf/common/dynaarm_common.urdf.xacro" />
-    <xacro:include filename="$(find dynaarm_description)/urdf/common/dynaarm_parameters_${version}.urdf.xacro" />
+    <xacro:include
+      filename="$(find dynaarm_description)/urdf/common/dynaarm_parameters_${version}.urdf.xacro" />
     <xacro:include filename="$(find dynaarm_description)/urdf/common/dynaarm.ros2control.xacro" />
 
     <xacro:dynaarm_joint_fixed joint_name="${joint_base_name}"
@@ -185,6 +199,30 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS “AS IS” 
         <origin xyz="${joint_3_origin_xyz}" rpy="${joint_3_origin_rpy}" />
       </xacro:dynaarm_revolute_joint>
 
+      <!--dynaarm_ELBOW_CAMERA_BASE-->
+      <xacro:if value="${version == 'v2'}">
+        <link name="${link03_cam}">
+          <visual>
+            <origin rpy="0 0 0" xyz="0 0 0" />
+            <geometry>
+              <box size="0.001 0.001 0.001" />
+            </geometry>
+          </visual>
+          <inertial>
+            <origin rpy="0 0 0" xyz="0.0 0.0 0.0" />
+            <mass value="0.001" />
+            <inertia ixx="0.0000001" ixy="0.0" ixz="0.0" iyy="0.0000001" iyz="0.0" izz="0.0000001" />
+          </inertial>
+        </link>
+
+        <!-- Camera fixed on elbow -->
+        <xacro:dynaarm_joint_fixed joint_name="${joint_3_cam_name}"
+          parent="${link03}"
+          child="${link03_cam}">
+          <origin xyz="${joint_3_cam_origin_xyz}" rpy="${joint_3_cam_origin_rpy}" />
+        </xacro:dynaarm_joint_fixed>
+      </xacro:if>
+
       <!-- 3 Dof & Covers-->
       <xacro:if value="${covers}">
         <xacro:dynaarm_link link_name="${link03}_cover" file_name="${link03_cover_mesh}">
@@ -261,6 +299,30 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS “AS IS” 
         joint_type="${joint_5_joint_type}">
         <origin xyz="${joint_5_origin_xyz}" rpy="${joint_5_origin_rpy}" />
       </xacro:dynaarm_revolute_joint>
+
+      <xacro:if value="${version == 'v2'}">
+        <!--dynaarm_WRIST_1_CAMERA_BASE-->
+        <link name="${link05_cam}">
+          <visual>
+            <origin rpy="0 0 0" xyz="0 0 0" />
+            <geometry>
+              <box size="0.001 0.001 0.001" />
+            </geometry>
+          </visual>
+          <inertial>
+            <origin rpy="0 0 0" xyz="0.0 0.0 0.0" />
+            <mass value="0.001" />
+            <inertia ixx="0.0000001" ixy="0.0" ixz="0.0" iyy="0.0000001" iyz="0.0" izz="0.0000001" />
+          </inertial>
+        </link>
+
+        <!-- Camera fixed on wrist1 -->
+        <xacro:dynaarm_joint_fixed joint_name="${joint_5_cam_name}"
+          parent="${link05}"
+          child="${link05_cam}">
+          <origin xyz="${joint_5_cam_origin_xyz}" rpy="${joint_5_cam_origin_rpy}" />
+        </xacro:dynaarm_joint_fixed>
+      </xacro:if>
 
       <!-- 5 Dof & Covers-->
       <xacro:if value="${covers}">

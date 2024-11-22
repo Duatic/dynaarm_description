@@ -65,19 +65,13 @@ def launch_setup(context, *args, **kwargs):
     dual_value = dual.perform(context).strip().lower()
 
     # Load the robot description
-    pkg_share_description = FindPackageShare(package="dynaarm_description").find(
-        "dynaarm_description"
-    )
+    pkg_share_description = FindPackageShare(package="dynaarm_description").find("dynaarm_description")
 
     is_dual = string_to_bool(dual_value)
     if is_dual:
-        doc = xacro.parse(
-            open(os.path.join(pkg_share_description, "urdf/dynaarm_standalone_dual.urdf.xacro"))
-        )
+        doc = xacro.parse(open(os.path.join(pkg_share_description, "urdf/dynaarm_standalone_dual.urdf.xacro")))
     else:
-        doc = xacro.parse(
-            open(os.path.join(pkg_share_description, "urdf/dynaarm_standalone.urdf.xacro"))
-        )
+        doc = xacro.parse(open(os.path.join(pkg_share_description, "urdf/dynaarm_standalone.urdf.xacro")))
 
     xacro.process_doc(
         doc,
@@ -165,7 +159,7 @@ def generate_launch_description():
     declared_arguments.append(
         DeclareLaunchArgument(
             name="version",
-            default_value="v1",
+            default_value="v2",
             choices=["v1", "v2"],
             description="Select the desired version of robot ",
         )
