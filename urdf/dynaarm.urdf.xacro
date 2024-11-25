@@ -201,19 +201,9 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
       <!--dynaarm_ELBOW_CAMERA_BASE-->
       <xacro:if value="${version == 'v2'}">
-        <link name="${link03_cam}">
-          <visual>
-            <origin rpy="0 0 0" xyz="0 0 0" />
-            <geometry>
-              <box size="0.001 0.001 0.001" />
-            </geometry>
-          </visual>
-          <inertial>
-            <origin rpy="0 0 0" xyz="0.0 0.0 0.0" />
-            <mass value="0.001" />
-            <inertia ixx="0.0000001" ixy="0.0" ixz="0.0" iyy="0.0000001" iyz="0.0" izz="0.0000001" />
-          </inertial>
-        </link>
+
+        <!-- Virtual elbow camera link -->
+        <xacro:virtual_link link_name="${link03_cam}" />
 
         <!-- Camera fixed on elbow -->
         <xacro:dynaarm_joint_fixed joint_name="${joint_3_cam_name}"
@@ -278,7 +268,7 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     <!-- 5 DoF -->
     <xacro:if value="${dof >= 5}">
 
-      <!-- dynaarm_WRIST_1 -->
+      <!-- WRIST_1 -->
       <xacro:dynaarm_link_w_collision link_name="${link05}" file_name="${link05_mesh}">
         <link_inertia>
           <xacro:insert_block name="link05_inertial" />
@@ -288,7 +278,7 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         </link_collision>
       </xacro:dynaarm_link_w_collision>
 
-      <!-- WRIST_1 -->
+      <!-- WR_FLE -->
       <xacro:dynaarm_revolute_joint joint_name="${joint_5_name}" parent="${link04}"
         child="${link05}"
         joint_axis_xyz="${joint_5_axis_xyz}"
@@ -300,22 +290,10 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         <origin xyz="${joint_5_origin_xyz}" rpy="${joint_5_origin_rpy}" />
       </xacro:dynaarm_revolute_joint>
 
-      <xacro:if value="${version == 'v2'}">
-        <!--dynaarm_WRIST_1_CAMERA_BASE-->
-        <link name="${link05_cam}">
-          <visual>
-            <origin rpy="0 0 0" xyz="0 0 0" />
-            <geometry>
-              <box size="0.001 0.001 0.001" />
-            </geometry>
-          </visual>
-          <inertial>
-            <origin rpy="0 0 0" xyz="0.0 0.0 0.0" />
-            <mass value="0.001" />
-            <inertia ixx="0.0000001" ixy="0.0" ixz="0.0" iyy="0.0000001" iyz="0.0" izz="0.0000001" />
-          </inertial>
-        </link>
-
+      <xacro:if value="${version == 'v2'}">        
+        <!-- Virtual wrist camera link -->
+        <xacro:virtual_link link_name="${link05_cam}" />
+        
         <!-- Camera fixed on wrist1 -->
         <xacro:dynaarm_joint_fixed joint_name="${joint_5_cam_name}"
           parent="${link05}"
@@ -342,14 +320,14 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     <!-- 6 DoF -->
     <xacro:if value="${dof >= 6}">
 
-      <!-- dynaarm_WRIST_2 -->
+      <!-- WRIST_2 -->
       <xacro:dynaarm_link link_name="${link06}" file_name="${link06_mesh}">
         <link_inertia>
           <xacro:insert_block name="link06_inertial" />
         </link_inertia>
       </xacro:dynaarm_link>
 
-      <!-- WRIST_2 -->
+      <!-- WR_ROT -->
       <xacro:dynaarm_revolute_joint joint_name="${joint_6_name}" parent="${link05}"
         child="${link06}"
         joint_axis_xyz="${joint_6_axis_xyz}"
