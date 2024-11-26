@@ -290,10 +290,10 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         <origin xyz="${joint_5_origin_xyz}" rpy="${joint_5_origin_rpy}" />
       </xacro:dynaarm_revolute_joint>
 
-      <xacro:if value="${version == 'v2'}">        
+      <xacro:if value="${version == 'v2'}">
         <!-- Virtual wrist camera link -->
         <xacro:virtual_link link_name="${link05_cam}" />
-        
+
         <!-- Camera fixed on wrist1 -->
         <xacro:dynaarm_joint_fixed joint_name="${joint_5_cam_name}"
           parent="${link05}"
