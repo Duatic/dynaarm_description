@@ -121,7 +121,7 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         <xacro:dynaarm_link link_name="${link01}_cover" file_name="${link01_cover_mesh}">
           <link_inertia>
             <xacro:insert_block name="link01_cover_inertial" />
-          </link_inertia>
+          </link_inertia>          
         </xacro:dynaarm_link>
 
         <xacro:dynaarm_joint_fixed joint_name="${link01}_cover" parent="${link01}"
@@ -232,11 +232,14 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     <xacro:if value="${dof >= 4}">
 
       <!-- dynaarm_FOREARM -->
-      <xacro:dynaarm_link link_name="${link04}" file_name="${link04_mesh}">
+      <xacro:dynaarm_link_w_collision link_name="${link04}" file_name="${link04_mesh}">
         <link_inertia>
           <xacro:insert_block name="link04_inertial" />
         </link_inertia>
-      </xacro:dynaarm_link>
+        <link_collision>
+          <xacro:insert_block name="link04_collision" />
+        </link_collision>        
+      </xacro:dynaarm_link_w_collision>
 
       <!-- FA_ROT -->
       <xacro:dynaarm_revolute_joint joint_name="${joint_4_name}" parent="${link03}"
@@ -321,11 +324,14 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     <xacro:if value="${dof >= 6}">
 
       <!-- WRIST_2 -->
-      <xacro:dynaarm_link link_name="${link06}" file_name="${link06_mesh}">
+      <xacro:dynaarm_link_w_collision link_name="${link06}" file_name="${link06_mesh}">
         <link_inertia>
           <xacro:insert_block name="link06_inertial" />
         </link_inertia>
-      </xacro:dynaarm_link>
+        <link_collision>
+          <xacro:insert_block name="link06_collision" />
+        </link_collision> 
+      </xacro:dynaarm_link_w_collision>
 
       <!-- WR_ROT -->
       <xacro:dynaarm_revolute_joint joint_name="${joint_6_name}" parent="${link05}"

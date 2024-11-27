@@ -48,31 +48,31 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
   <!-- Meshes -->
   <xacro:if value="${covers}">
-    <xacro:property name="base_mesh" value="base_mesh.STL" />
+    <xacro:property name="base_mesh" value="base_mesh.dae" />
     <xacro:property name="link01_mesh" value="shoulder_mesh.dae" />
-    <xacro:property name="link02_mesh" value="upperarm_mesh.STL" />
-    <xacro:property name="link03_mesh" value="elbow_mesh.STL" />
-    <xacro:property name="link04_mesh" value="forearm_mesh.STL" />
-    <xacro:property name="link05_mesh" value="wrist1_mesh.STL" />
-    <xacro:property name="link06_mesh" value="wrist2_mesh.STL" />
+    <xacro:property name="link02_mesh" value="upperarm_mesh.dae" />
+    <xacro:property name="link03_mesh" value="elbow_mesh.dae" />
+    <xacro:property name="link04_mesh" value="forearm_mesh.dae" />
+    <xacro:property name="link05_mesh" value="wrist1_mesh.dae" />
+    <xacro:property name="link06_mesh" value="wrist2_mesh.dae" />
 
-    <xacro:property name="base_cover_mesh" value="base_mesh.STL" />
+    <xacro:property name="base_cover_mesh" value="base_mesh.dae" />
     <xacro:property name="link01_cover_mesh" value="shoulder_mesh.dae" />
-    <xacro:property name="link02_cover_mesh" value="upperarm_mesh.STL" />
-    <xacro:property name="link03_cover_mesh" value="elbow_mesh.STL" />
-    <xacro:property name="link04_cover_mesh" value="forearm_mesh.STL" />
-    <xacro:property name="link05_cover_mesh" value="wrist1_mesh.STL" />
-    <xacro:property name="link06_cover_mesh" value="wrist2_mesh.STL" />
+    <xacro:property name="link02_cover_mesh" value="upperarm_mesh.dae" />
+    <xacro:property name="link03_cover_mesh" value="elbow_mesh.dae" />
+    <xacro:property name="link04_cover_mesh" value="forearm_mesh.dae" />
+    <xacro:property name="link05_cover_mesh" value="wrist1_mesh.dae" />
+    <xacro:property name="link06_cover_mesh" value="wrist2_mesh.dae" />
   </xacro:if>
 
   <xacro:unless value="${covers}">
-    <xacro:property name="base_mesh" value="base_mesh.STL" />
+    <xacro:property name="base_mesh" value="base_mesh.dae" />
     <xacro:property name="link01_mesh" value="shoulder_mesh.dae" />
-    <xacro:property name="link02_mesh" value="upperarm_mesh.STL" />
-    <xacro:property name="link03_mesh" value="elbow_mesh.STL" />
-    <xacro:property name="link04_mesh" value="forearm_mesh.STL" />
-    <xacro:property name="link05_mesh" value="wrist1_mesh.STL" />
-    <xacro:property name="link06_mesh" value="wrist2_mesh.STL" />
+    <xacro:property name="link02_mesh" value="upperarm_mesh.dae" />
+    <xacro:property name="link03_mesh" value="elbow_mesh.dae" />
+    <xacro:property name="link04_mesh" value="forearm_mesh.dae" />
+    <xacro:property name="link05_mesh" value="wrist1_mesh.dae" />
+    <xacro:property name="link06_mesh" value="wrist2_mesh.dae" />
   </xacro:unless>
 
   <!-- Joint properties -->
@@ -305,7 +305,7 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://dynaarm_description/meshes/collision_meshes/base_collision_mesh.STL"
+          filename="package://dynaarm_description/meshes/collision_meshes/base_collision_mesh.stl"
           scale="1 1 1" />
       </geometry>
     </collision>
@@ -313,54 +313,66 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
   <xacro:property name="link01_collision">
     <collision>
-      <origin xyz="0 0 0.0105" rpy="0 0 0" />
+      <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <cylinder radius="0.05" length="0.24" />
+        <mesh
+          filename="package://dynaarm_description/meshes/collision_meshes/shoulder_collision_mesh.stl"
+          scale="1 1 1" />
       </geometry>
     </collision>
   </xacro:property>
 
   <xacro:property name="link02_collision">
     <collision>
-      <origin xyz="0 0 0.047" rpy="${J_PI/2} ${-J_PI/2} 0" />
+      <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <cylinder radius="0.05" length="0.4" />
+        <mesh
+          filename="package://dynaarm_description/meshes/collision_meshes/upperarm_collision_mesh.stl"
+          scale="1 1 1" />
       </geometry>
     </collision>
   </xacro:property>
 
   <xacro:property name="link03_collision">
     <collision>
-      <origin xyz="0.4127 0 0" rpy="${J_PI} 0 0" />
+      <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <cylinder radius="0.047" length="0.46" />
+        <mesh
+          filename="package://dynaarm_description/meshes/collision_meshes/elbow_collision_mesh.stl"
+          scale="1 1 1" />
       </geometry>
     </collision>
   </xacro:property>
 
   <xacro:property name="link04_collision">
     <collision>
-      <origin xyz="0.0262 -0.0855 0" rpy="${J_PI/2} 0 ${J_PI/2}" />
+      <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <cylinder radius="0.05" length="0.2" />
+        <mesh
+          filename="package://dynaarm_description/meshes/collision_meshes/forearm_collision_mesh.stl"
+          scale="1 1 1" />
       </geometry>
     </collision>
   </xacro:property>
 
   <xacro:property name="link05_collision">
     <collision>
-      <origin xyz="0.0295 0 0.4207" rpy="0 ${-J_PI/2} 0" />
+      <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <cylinder radius="0.055" length="0.18" />
+        <mesh
+          filename="package://dynaarm_description/meshes/collision_meshes/wrist1_collision_mesh.stl"
+          scale="1 1 1" />
       </geometry>
     </collision>
   </xacro:property>
 
   <xacro:property name="link06_collision">
     <collision>
-      <origin xyz="0.117 0.0 0.0295" rpy="${-J_PI/2} ${J_PI/2} ${-J_PI/2}" />
+      <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <cylinder radius="0.045" length="0.16" />
+        <mesh
+          filename="package://dynaarm_description/meshes/collision_meshes/wrist2_collision_mesh.stl"
+          scale="1 1 1" />
       </geometry>
     </collision>
   </xacro:property>
