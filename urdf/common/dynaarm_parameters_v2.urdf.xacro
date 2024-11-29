@@ -1,15 +1,28 @@
 <!--
 Copyright 2024 Duatic AG
 
-Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+Redistribution and use in source and binary forms, with or without modification, are permitted
+provided that the following conditions are met:
 
-1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+1. Redistributions of source code must retain the above copyright notice, this list of conditions
+and the following disclaimer.
 
-2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
+2. Redistributions in binary form must reproduce the above copyright notice, this list of
+conditions and the following disclaimer in the documentation and/or other materials provided with
+the distribution.
 
-3. Neither the name of the copyright holder nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission.
+3. Neither the name of the copyright holder nor the names of its contributors may be used to
+endorse or promote products derived from this software without specific prior written permission.
 
-THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS “AS IS” AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS “AS IS” AND ANY EXPRESS OR
+IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR
+CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER
+IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
+OF
+THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 -->
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
 
@@ -35,31 +48,31 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS “AS IS” 
 
   <!-- Meshes -->
   <xacro:if value="${covers}">
-    <xacro:property name="base_mesh" value="base_mesh.STL" />
-    <xacro:property name="link01_mesh" value="shoulderColor.dae" />
-    <xacro:property name="link02_mesh" value="upperarm_mesh.STL" />
-    <xacro:property name="link03_mesh" value="elbow_mesh.STL" />
-    <xacro:property name="link04_mesh" value="forearm_mesh.STL" />
-    <xacro:property name="link05_mesh" value="wrist1_mesh.STL" />
-    <xacro:property name="link06_mesh" value="wrist2_mesh.STL" />
+    <xacro:property name="base_mesh" value="base_mesh.dae" />
+    <xacro:property name="link01_mesh" value="shoulder_mesh.dae" />
+    <xacro:property name="link02_mesh" value="upperarm_mesh.dae" />
+    <xacro:property name="link03_mesh" value="elbow_mesh.dae" />
+    <xacro:property name="link04_mesh" value="forearm_mesh.dae" />
+    <xacro:property name="link05_mesh" value="wrist1_mesh.dae" />
+    <xacro:property name="link06_mesh" value="wrist2_mesh.dae" />
 
-    <xacro:property name="base_cover_mesh" value="base_mesh.STL" />
-    <xacro:property name="link01_cover_mesh" value="shoulderColor.dae" />
-    <xacro:property name="link02_cover_mesh" value="upperarm_mesh.STL" />
-    <xacro:property name="link03_cover_mesh" value="elbow_mesh.STL" />
-    <xacro:property name="link04_cover_mesh" value="forearm_mesh.STL" />
-    <xacro:property name="link05_cover_mesh" value="wrist1_mesh.STL" />
-    <xacro:property name="link06_cover_mesh" value="wrist2_mesh.STL" />
+    <xacro:property name="base_cover_mesh" value="base_mesh.dae" />
+    <xacro:property name="link01_cover_mesh" value="shoulder_mesh.dae" />
+    <xacro:property name="link02_cover_mesh" value="upperarm_mesh.dae" />
+    <xacro:property name="link03_cover_mesh" value="elbow_mesh.dae" />
+    <xacro:property name="link04_cover_mesh" value="forearm_mesh.dae" />
+    <xacro:property name="link05_cover_mesh" value="wrist1_mesh.dae" />
+    <xacro:property name="link06_cover_mesh" value="wrist2_mesh.dae" />
   </xacro:if>
 
   <xacro:unless value="${covers}">
-    <xacro:property name="base_mesh" value="base_mesh.STL" />
-    <xacro:property name="link01_mesh" value="shoulderColor.dae" />
-    <xacro:property name="link02_mesh" value="upperarm_mesh.STL" />
-    <xacro:property name="link03_mesh" value="elbow_mesh.STL" />
-    <xacro:property name="link04_mesh" value="forearm_mesh.STL" />
-    <xacro:property name="link05_mesh" value="wrist1_mesh.STL" />
-    <xacro:property name="link06_mesh" value="wrist2_mesh.STL" />
+    <xacro:property name="base_mesh" value="base_mesh.dae" />
+    <xacro:property name="link01_mesh" value="shoulder_mesh.dae" />
+    <xacro:property name="link02_mesh" value="upperarm_mesh.dae" />
+    <xacro:property name="link03_mesh" value="elbow_mesh.dae" />
+    <xacro:property name="link04_mesh" value="forearm_mesh.dae" />
+    <xacro:property name="link05_mesh" value="wrist1_mesh.dae" />
+    <xacro:property name="link06_mesh" value="wrist2_mesh.dae" />
   </xacro:unless>
 
   <!-- Joint properties -->
@@ -107,7 +120,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS “AS IS” 
   <xacro:property name="joint_4_lower_limit" value="${-J_PI - J_PI/2}" />
   <xacro:property name="joint_4_upper_limit" value="${J_PI + J_PI/2}" />
 
-  <xacro:property name="joint_5_name" value="${tf_prefix}WRIST_1" />
+  <xacro:property name="joint_5_name" value="${tf_prefix}WR_FLE" />
   <xacro:property name="joint_5_joint_type" value="revolute" />
   <xacro:property name="joint_5_axis_xyz" value="0 0 1" />
   <xacro:property name="joint_5_origin_xyz" value="0.0295 0 0.4207" />
@@ -115,13 +128,13 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS “AS IS” 
   <xacro:property name="joint_5_lower_limit" value="${-J_PI/2}" />
   <xacro:property name="joint_5_upper_limit" value="${J_PI/2}" />
 
-  <xacro:property name="joint_5_cam_name" value="${tf_prefix}WRIST_1_CAMERA" />
+  <xacro:property name="joint_5_cam_name" value="${tf_prefix}WR_FLE_CAMERA" />
   <xacro:property name="joint_5_cam_joint_type" value="fixed" />
   <xacro:property name="joint_5_cam_axis_xyz" value="0 0 0" />
   <xacro:property name="joint_5_cam_origin_xyz" value="0.032 0 -0.017" />
   <xacro:property name="joint_5_cam_origin_rpy" value="0.0 0.0 0.0" />
 
-  <xacro:property name="joint_6_name" value="${tf_prefix}WRIST_2" />
+  <xacro:property name="joint_6_name" value="${tf_prefix}WR_ROT" />
   <xacro:property name="joint_6_joint_type" value="revolute" />
   <xacro:property name="joint_6_axis_xyz" value="0 0 1" />
   <xacro:property name="joint_6_origin_xyz" value="0.117 0.0 0.0295" />
@@ -292,7 +305,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS “AS IS” 
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://dynaarm_description/meshes/collision_meshes/base_collision_mesh.STL"
+          filename="package://dynaarm_description/meshes/collision_meshes/base_collision_mesh.stl"
           scale="1 1 1" />
       </geometry>
     </collision>
@@ -300,54 +313,66 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS “AS IS” 
 
   <xacro:property name="link01_collision">
     <collision>
-      <origin xyz="0 0 0.0105" rpy="0 0 0" />
+      <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <cylinder radius="0.05" length="0.24" />
+        <mesh
+          filename="package://dynaarm_description/meshes/collision_meshes/shoulder_collision_mesh.stl"
+          scale="1 1 1" />
       </geometry>
     </collision>
   </xacro:property>
 
   <xacro:property name="link02_collision">
     <collision>
-      <origin xyz="0 0 0.047" rpy="${J_PI/2} ${-J_PI/2} 0" />
+      <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <cylinder radius="0.05" length="0.4" />
+        <mesh
+          filename="package://dynaarm_description/meshes/collision_meshes/upperarm_collision_mesh.stl"
+          scale="1 1 1" />
       </geometry>
     </collision>
   </xacro:property>
 
   <xacro:property name="link03_collision">
     <collision>
-      <origin xyz="0.4127 0 0" rpy="${J_PI} 0 0" />
+      <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <cylinder radius="0.047" length="0.46" />
+        <mesh
+          filename="package://dynaarm_description/meshes/collision_meshes/elbow_collision_mesh.stl"
+          scale="1 1 1" />
       </geometry>
     </collision>
   </xacro:property>
 
   <xacro:property name="link04_collision">
     <collision>
-      <origin xyz="0.0262 -0.0855 0" rpy="${J_PI/2} 0 ${J_PI/2}" />
+      <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <cylinder radius="0.05" length="0.2" />
+        <mesh
+          filename="package://dynaarm_description/meshes/collision_meshes/forearm_collision_mesh.stl"
+          scale="1 1 1" />
       </geometry>
     </collision>
   </xacro:property>
 
   <xacro:property name="link05_collision">
     <collision>
-      <origin xyz="0.0295 0 0.4207" rpy="0 ${-J_PI/2} 0" />
+      <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <cylinder radius="0.055" length="0.18" />
+        <mesh
+          filename="package://dynaarm_description/meshes/collision_meshes/wrist1_collision_mesh.stl"
+          scale="1 1 1" />
       </geometry>
     </collision>
   </xacro:property>
 
   <xacro:property name="link06_collision">
     <collision>
-      <origin xyz="0.117 0.0 0.0295" rpy="${-J_PI/2} ${J_PI/2} ${-J_PI/2}" />
+      <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <cylinder radius="0.045" length="0.16" />
+        <mesh
+          filename="package://dynaarm_description/meshes/collision_meshes/wrist2_collision_mesh.stl"
+          scale="1 1 1" />
       </geometry>
     </collision>
   </xacro:property>
