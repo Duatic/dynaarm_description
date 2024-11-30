@@ -31,7 +31,7 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   <!-- DynaArm Macro-->
   <!-- -->
   <xacro:macro name="dynaarm"
-    params="tf_prefix parent_link dof mode ethercat_bus covers version *origin">
+    params="tf_prefix parent_link dof mode ethercat_bus start_in_freeze_mode:=false covers version *origin">
 
     <!-- Set ee_parent based on the specified DoF -->
     <xacro:property name="ee_parent" value="${base}" />
@@ -57,7 +57,7 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     </xacro:if>
 
     <!--ros2control-->
-    <xacro:dynaarm_ros2_control tf_prefix="${tf_prefix}" />
+    <xacro:dynaarm_ros2_control tf_prefix="${tf_prefix}" ethercat_bus="${ethercat_bus}" start_in_freeze_mode="${start_in_freeze_mode}"  />
   </xacro:macro>
 
   <!-- -->
