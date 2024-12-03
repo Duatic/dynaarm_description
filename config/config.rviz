@@ -62,46 +62,46 @@ Visualization Manager:
       Enabled: true
       Links:
         All Links Enabled: true
+        ELBOW:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        END_EFFECTOR:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
         Expand Joint Details: false
         Expand Link Details: false
         Expand Tree: false
+        FOREARM:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
         Link Tree Style: Links in Alphabetic Order
-        dynaarm_ELBOW:
+        SHOULDER:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        dynaarm_END_EFFECTOR:
+        UPPERARM:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        dynaarm_FOREARM:
+        WRIST_1:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        dynaarm_SHOULDER:
+        WRIST_2:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        dynaarm_UPPERARM:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        dynaarm_WRIST_1:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        dynaarm_WRIST_2:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        dynaarm_base:
+        base:
           Alpha: 1
           Show Axes: false
           Show Trail: false
@@ -200,5 +200,5 @@ Window Geometry:
   Views:
     collapsed: false
   Width: 1710
-  X: 4957
-  Y: 446
+  X: 2425
+  Y: 44
