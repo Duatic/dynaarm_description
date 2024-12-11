@@ -1,0 +1,92 @@
+<?xml version="1.0"?>
+<!--
+Copyright 2024 Duatic AG
+
+Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+
+1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+
+2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
+
+3. Neither the name of the copyright holder nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS “AS IS” AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+-->
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <xacro:macro name="dynaarm_joint_ros2control_joint_interfaces">
+    <state_interface name="position" />
+    <state_interface name="velocity" />
+    <state_interface name="effort" />
+    <state_interface name="motor_position" />
+    <state_interface name="motor_velocity" />
+    <state_interface name="motor_effort" />
+    <state_interface name="motor_temperature_system" />
+    <state_interface name="motor_temperature_coil_A" />
+    <state_interface name="motor_temperature_coil_B" />
+    <state_interface name="motor_temperature_coil_C" />
+    <state_interface name="motor_bus_voltage" />
+    <command_interface name="position" />
+    <command_interface name="velocity" />
+    <command_interface name="effort" />
+    <command_interface name="p_gain" />
+    <command_interface name="i_gain" />
+    <command_interface name="d_gain" />
+  </xacro:macro>
+
+  <xacro:macro name="dynaarm_ros2control_joint" params="name address">
+    <joint name="${name}">
+      <param name="address">${address}</param>
+      <xacro:dynaarm_joint_ros2control_joint_interfaces />
+    </joint>
+  </xacro:macro>
+
+  <xacro:macro name="dynaarm_ros2_control" params="tf_prefix ethercat_bus start_in_freeze_mode">
+    <ros2_control name="${tf_prefix}DynaarmSystem" type="system">
+      <hardware>
+        <xacro:if value="${mode == 'sim'}">
+          <plugin>gz_ros2_control/GazeboSimSystem</plugin>
+        </xacro:if>
+        <xacro:if value="${mode == 'mock'}">
+          <plugin>dynaarm_driver/DynaarmMockHardwareInterface</plugin>
+        </xacro:if>
+        <xacro:if value="${mode == 'real'}">
+          <plugin>dynaarm_driver/DynaArmHardwareInterface</plugin>
+          <param name="ethercat_bus">${ethercat_bus}</param>
+          <param name="tf_prefix">${tf_prefix}</param>
+          <param name="start_in_freeze_mode">${start_in_freeze_mode}</param>
+
+        </xacro:if>
+      </hardware>
+
+      <xacro:if value="${dof >= 1}">
+        <xacro:dynaarm_ros2control_joint name="${tf_prefix}SH_ROT" address="1" />
+      </xacro:if>
+
+      <xacro:if value="${dof >= 2}">
+        <xacro:dynaarm_ros2control_joint name="${tf_prefix}SH_FLE" address="2" />
+      </xacro:if>
+
+      <xacro:if value="${dof >= 3}">
+        <xacro:dynaarm_ros2control_joint name="${tf_prefix}EL_FLE" address="3" />
+      </xacro:if>
+
+      <xacro:if value="${dof >= 4}">
+        <xacro:dynaarm_ros2control_joint name="${tf_prefix}FA_ROT" address="4" />
+      </xacro:if>
+
+      <xacro:if value="${dof >= 5}">
+        <xacro:dynaarm_ros2control_joint name="${tf_prefix}WR_FLE" address="5" />
+      </xacro:if>
+
+      <xacro:if value="${dof >= 6}">
+        <xacro:dynaarm_ros2control_joint name="${tf_prefix}WR_ROT" address="6" />
+      </xacro:if>
+      <gpio name="${tf_prefix}DynaarmSystem">
+       <command_interface name="freeze_mode" />
+      </gpio>
+
+    </ros2_control>
+  </xacro:macro>
+
+</robot>

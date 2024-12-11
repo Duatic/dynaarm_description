@@ -1,0 +1,157 @@
+<?xml version="1.0"?>
+<!--
+Copyright 2024 Duatic AG
+
+Redistribution and use in source and binary forms, with or without modification, are permitted
+provided that the following conditions are met:
+
+1. Redistributions of source code must retain the above copyright notice, this list of conditions
+and the following disclaimer.
+
+2. Redistributions in binary form must reproduce the above copyright notice, this list of
+conditions and the following disclaimer in the documentation and/or other materials provided with
+the distribution.
+
+3. Neither the name of the copyright holder nor the names of its contributors may be used to
+endorse or promote products derived from this software without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS “AS IS” AND ANY EXPRESS OR
+IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR
+CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER
+IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
+OF
+THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+-->
+
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <!-- -->
+    <!-- DynaArm Base Link Macro -->
+    <!-- -->
+    <xacro:macro name="dynaarm_baselink"
+        params="link_name file_name **base_inertia **base_collision">
+        <link name="${link_name}">
+            <visual>
+                <geometry>
+                    <mesh
+                        filename="file://$(find dynaarm_description)/meshes/${version}/${file_name}"
+                        scale="1.0 1.0 1.0" />
+                </geometry>
+                <material name="carbon_fiber">
+                    <color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+                </material>
+            </visual>
+            <xacro:insert_block name="base_collision" />
+            <xacro:insert_block name="base_inertia" />
+        </link>
+    </xacro:macro>
+
+    <!-- -->
+    <!-- DynaArm Link Macro -->
+    <!-- -->
+    <xacro:macro name="dynaarm_link"
+        params="link_name file_name **link_inertia">
+        <link name="${link_name}">
+            <visual>
+                <geometry>
+                    <mesh
+                        filename="file://$(find dynaarm_description)/meshes/${version}/${file_name}"
+                        scale="1.0 1.0 1.0" />
+                </geometry>
+            </visual>
+            <xacro:insert_block name="link_inertia" />
+        </link>
+    </xacro:macro>
+
+    <!-- -->
+    <!-- DynaArm Link With Collision Macro -->
+    <!-- -->
+    <xacro:macro name="dynaarm_link_w_collision"
+        params="link_name file_name **link_inertia **link_collision">
+        <link name="${link_name}">
+            <visual>
+                <geometry>
+                    <mesh
+                        filename="file://$(find dynaarm_description)/meshes/${version}/${file_name}"
+                        scale="1.0 1.0 1.0" />
+                </geometry>
+            </visual>
+            <xacro:insert_block name="link_inertia" />
+            <xacro:insert_block name="link_collision" />
+        </link>
+    </xacro:macro>
+
+    <!-- -->
+    <!-- DynaArm Virtual Link Macro -->
+    <!-- -->
+    <xacro:macro name="virtual_link" params="link_name">
+        <link name="${link_name}">
+            <visual>
+                <origin xyz="0 0 0" rpy="0 0 0" />
+                <geometry>
+                    <box size="0.001 0.001 0.001" />
+                </geometry>
+            </visual>
+            <inertial>
+                <origin xyz="0.0 0.0 0.0" rpy="0 0 0" />
+                <mass value="0.001" />
+                <inertia ixx="0.0000001" ixy="0.0" iyy="0.0000001" ixz="0.0" iyz="0.0"
+                    izz="0.0000001" />
+            </inertial>
+        </link>
+        <!-- Gazebo customization -->
+        <!-- Contact model -->
+        <xacro:property name="kp" value="10000.0" />
+        <xacro:property name="kd" value="10.0" />
+        <xacro:property name="mu" value="0.8" />
+        <gazebo reference="${link_name}">
+            <kp>${kp}</kp>
+            <kd>${kd}</kd>
+            <mu1>${mu}</mu1>
+            <mu2>${mu}</mu2>
+        </gazebo>
+    </xacro:macro>
+
+    <!-- -->
+    <!-- DynaArm Revolute Joint Macro -->
+    <!-- -->
+    <xacro:macro name="dynaarm_revolute_joint"
+        params="joint_name
+                parent
+                child
+                joint_axis_xyz
+                joint_lower_limit
+                joint_upper_limit
+                joint_limit_vel
+                joint_limit_effort
+                joint_type
+                *origin">
+        <joint name="${joint_name}" type="${joint_type}">
+            <parent link="${parent}" />
+            <child link="${child}" />
+            <axis xyz="${joint_axis_xyz}" />
+            <limit effort="${joint_limit_effort}" command_effort="${joint_limit_effort}"
+                current="10" gear_velocity="${joint_limit_vel}" velocity="${joint_limit_vel}"
+                lower="${joint_lower_limit}" upper="${joint_upper_limit}" />
+            <!-- limit effort also defines torque limit and freeze controller gains -->
+            <xacro:insert_block name="origin" />
+        </joint>
+    </xacro:macro>
+
+    <!-- -->
+    <!-- DynaArm Fixed Joint Macro -->
+    <!-- -->
+    <xacro:macro name="dynaarm_joint_fixed"
+        params="joint_name parent child *origin">
+        <joint name="${joint_name}" type="fixed">
+            <parent link="${parent}" />
+            <child link="${child}" />
+            <limit effort="2000" velocity="0" lower="0" upper="0" />
+            <xacro:insert_block name="origin" />
+        </joint>
+    </xacro:macro>
+
+</robot>
