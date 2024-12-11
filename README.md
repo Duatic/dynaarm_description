@@ -16,16 +16,25 @@ Images in this repository are to be licensed separately if you want to use them 
 This package contains only the description files for the DynaArm. The [standalone](./urdf/dynaarm_standalone.urdf.xacro) and [standalone dual](./urdf/dynaarm_standalone_dual.urdf.xacro) demonstrate how to integrate the xacro files into your own description. For simple applications they can also be used directly.
 
 
+## Supported Arms
+
+This package current supports the following DynaArms:
+
+| Name     | Description |
+| ---      | ---         |
+| arowana4 | Pre-release version of the arm with 4kg payload at maximum reach |
+| baracuda12 | First publicly released version of the  DynaArm with 12kg payload at maximum reach |
+
 ## Show case
 
 This repository integrates a simple show case you can view by running
 
 ```bash
-ros2 launch dynaarm_description view.launch.py covers:=True dual:=False dof:=6 version:=v2
+ros2 launch dynaarm_description view.launch.py covers:=True dual:=True dof:=6 version:=baracuda12
 ```
 
-![Example: v2, no covers, 6 dof](./doc/example.png)
-Example: v2, no covers, 6 dof
+![Example: baracuda12, no covers, 6 dof](./doc/example.png)
+Example: baracuda12, no covers, 6 dof
 
 # Contributing
 

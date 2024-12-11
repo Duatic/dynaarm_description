@@ -36,15 +36,15 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
   <!-- Links -->
   <xacro:property name="base" value="${tf_prefix}base" />
-  <xacro:property name="link01" value="${tf_prefix}SHOULDER" />
-  <xacro:property name="link02" value="${tf_prefix}UPPERARM" />
-  <xacro:property name="link03" value="${tf_prefix}ELBOW" />
-  <xacro:property name="link03_cam" value="${tf_prefix}ELBOW_CAMERA_MOUNT" />
-  <xacro:property name="link04" value="${tf_prefix}FOREARM" />
-  <xacro:property name="link05" value="${tf_prefix}WRIST_1" />
-  <xacro:property name="link05_cam" value="${tf_prefix}WRIST_1_CAMERA_MOUNT" />
-  <xacro:property name="link06" value="${tf_prefix}WRIST_2" />
-  <xacro:property name="end_effector" value="${tf_prefix}END_EFFECTOR" />
+  <xacro:property name="link01" value="${tf_prefix}shoulder" />
+  <xacro:property name="link02" value="${tf_prefix}upperarm" />
+  <xacro:property name="link03" value="${tf_prefix}elbow" />
+  <xacro:property name="link03_cam" value="${tf_prefix}elbow_camera_mount" />
+  <xacro:property name="link04" value="${tf_prefix}forearm" />
+  <xacro:property name="link05" value="${tf_prefix}wrist_1" />
+  <xacro:property name="link05_cam" value="${tf_prefix}wrist_1_camera_mount" />
+  <xacro:property name="link06" value="${tf_prefix}wrist_2" />
+  <xacro:property name="end_effector" value="${tf_prefix}flange" />
 
   <!-- Meshes -->
   <xacro:if value="${covers}">
@@ -82,7 +82,7 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   <xacro:property name="joint_base_origin_xyz" value="0 0 0" />
   <xacro:property name="joint_base_origin_rpy" value="0 0 0" />
 
-  <xacro:property name="joint_1_name" value="${tf_prefix}SH_ROT" />
+  <xacro:property name="joint_1_name" value="${tf_prefix}shoulder_rotation" />
   <xacro:property name="joint_1_joint_type" value="revolute" />
   <xacro:property name="joint_1_axis_xyz" value="0 0 1" />
   <xacro:property name="joint_1_origin_xyz" value="0 0 0.0105" />
@@ -90,7 +90,7 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   <xacro:property name="joint_1_lower_limit" value="${-J_PI - J_PI/2}" />
   <xacro:property name="joint_1_upper_limit" value="${J_PI + J_PI/2}" />
 
-  <xacro:property name="joint_2_name" value="${tf_prefix}SH_FLE" />
+  <xacro:property name="joint_2_name" value="${tf_prefix}shoulder_flexion" />
   <xacro:property name="joint_2_joint_type" value="revolute" />
   <xacro:property name="joint_2_axis_xyz" value="0 0 1" />
   <xacro:property name="joint_2_origin_xyz" value="0 0 0.047" />
@@ -98,7 +98,7 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   <xacro:property name="joint_2_lower_limit" value="${-J_PI/2 - 0.3}" />
   <xacro:property name="joint_2_upper_limit" value="${J_PI/2 + 0.3}" />
 
-  <xacro:property name="joint_3_name" value="${tf_prefix}EL_FLE" />
+  <xacro:property name="joint_3_name" value="${tf_prefix}elbow_flexion" />
   <xacro:property name="joint_3_joint_type" value="revolute" />
   <xacro:property name="joint_3_axis_xyz" value="0 0 1" />
   <xacro:property name="joint_3_origin_xyz" value="0.4127 0 0" />
@@ -106,13 +106,13 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   <xacro:property name="joint_3_lower_limit" value="-0.05" />
   <xacro:property name="joint_3_upper_limit" value="${J_PI}" />
 
-  <xacro:property name="joint_3_cam_name" value="${tf_prefix}EL_CAMERA" />
+  <xacro:property name="joint_3_cam_name" value="${tf_prefix}elbow_camera" />
   <xacro:property name="joint_3_cam_joint_type" value="fixed" />
   <xacro:property name="joint_3_cam_axis_xyz" value="0 0 0" />
   <xacro:property name="joint_3_cam_origin_xyz" value="0.0345 -0.1235 0" />
   <xacro:property name="joint_3_cam_origin_rpy" value="0.0 0.0 0.0" />
 
-  <xacro:property name="joint_4_name" value="${tf_prefix}FA_ROT" />
+  <xacro:property name="joint_4_name" value="${tf_prefix}forearm_rotation" />
   <xacro:property name="joint_4_joint_type" value="revolute" />
   <xacro:property name="joint_4_axis_xyz" value="0 0 1" />
   <xacro:property name="joint_4_origin_xyz" value="0.0262 -0.0855 0" />
@@ -120,7 +120,7 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   <xacro:property name="joint_4_lower_limit" value="${-J_PI - J_PI/2}" />
   <xacro:property name="joint_4_upper_limit" value="${J_PI + J_PI/2}" />
 
-  <xacro:property name="joint_5_name" value="${tf_prefix}WR_FLE" />
+  <xacro:property name="joint_5_name" value="${tf_prefix}wrist_flexion" />
   <xacro:property name="joint_5_joint_type" value="revolute" />
   <xacro:property name="joint_5_axis_xyz" value="0 0 1" />
   <xacro:property name="joint_5_origin_xyz" value="0.0295 0 0.4207" />
@@ -128,13 +128,13 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   <xacro:property name="joint_5_lower_limit" value="${-J_PI/2}" />
   <xacro:property name="joint_5_upper_limit" value="${J_PI/2}" />
 
-  <xacro:property name="joint_5_cam_name" value="${tf_prefix}WR_FLE_CAMERA" />
+  <xacro:property name="joint_5_cam_name" value="${tf_prefix}wrist_flexion_camera" />
   <xacro:property name="joint_5_cam_joint_type" value="fixed" />
   <xacro:property name="joint_5_cam_axis_xyz" value="0 0 0" />
   <xacro:property name="joint_5_cam_origin_xyz" value="0.032 0 -0.017" />
   <xacro:property name="joint_5_cam_origin_rpy" value="0.0 0.0 0.0" />
 
-  <xacro:property name="joint_6_name" value="${tf_prefix}WR_ROT" />
+  <xacro:property name="joint_6_name" value="${tf_prefix}wrist_rotation" />
   <xacro:property name="joint_6_joint_type" value="revolute" />
   <xacro:property name="joint_6_axis_xyz" value="0 0 1" />
   <xacro:property name="joint_6_origin_xyz" value="0.117 0.0 0.0295" />
@@ -142,10 +142,10 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   <xacro:property name="joint_6_lower_limit" value="${-J_PI - J_PI/2}" />
   <xacro:property name="joint_6_upper_limit" value="${J_PI + J_PI/2}" />
 
-  <xacro:property name="joint_ee_name" value="${tf_prefix}ee_fix_joint" />
-  <xacro:property name="joint_ee_xyz" value="0.0 0.0 0.05" />
-  <xacro:property name="joint_ee_origin_xyz" value="0.0 0.0 0.05" />
-  <xacro:property name="joint_ee_origin_4dof_xyz" value="0.0 0.0 0.4" />
+  <xacro:property name="joint_ee_name" value="${tf_prefix}flange_fix_joint" />
+  <xacro:property name="joint_ee_xyz" value="0.0 0.0 0.009" />
+  <xacro:property name="joint_ee_origin_xyz" value="0.0 0.0 0.009" />
+  <xacro:property name="joint_ee_origin_4dof_xyz" value="0.0 0.0 0.009" />
   <xacro:property name="joint_ee_origin_rpy" value="0.0 0.0 ${J_PI/2}" />
   <xacro:property name="joint_ee_origin_4dof_rpy" value="0.0 0.0 ${J_PI/2}" />
   <xacro:property name="joint_ee_rpy" value="0 0 0" />
