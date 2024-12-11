@@ -38,7 +38,7 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
     <xacro:include filename="$(find dynaarm_description)/urdf/common/dynaarm_common.urdf.xacro" />
     <xacro:include
-      filename="$(find dynaarm_description)/urdf/common/dynaarm_parameters_${version}.urdf.xacro" />
+      filename="$(find dynaarm_description)/urdf/common/${version}/dynaarm_parameters.urdf.xacro" />
     <xacro:include filename="$(find dynaarm_description)/urdf/common/dynaarm.ros2control.xacro" />
 
     <xacro:dynaarm_joint_fixed joint_name="${joint_base_name}"
@@ -200,7 +200,7 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       </xacro:dynaarm_revolute_joint>
 
       <!--dynaarm_ELBOW_CAMERA_BASE-->
-      <xacro:if value="${version == 'v2'}">
+      <xacro:if value="${version == 'baracuda12'}">
 
         <!-- Virtual elbow camera link -->
         <xacro:virtual_link link_name="${link03_cam}" />
@@ -231,7 +231,7 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     <!-- 4 DoF -->
     <xacro:if value="${dof >= 4}">
 
-      <xacro:if value="${version == 'v1'}">
+      <xacro:if value="${version == 'arowana4'}">
         <!-- dynaarm_FOREARM -->
         <xacro:dynaarm_link link_name="${link04}" file_name="${link04_mesh}">
           <link_inertia>
@@ -240,7 +240,7 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         </xacro:dynaarm_link>
       </xacro:if>
 
-      <xacro:if value="${version == 'v2'}">
+      <xacro:if value="${version == 'baracuda12'}">
         <!-- dynaarm_FOREARM -->
         <xacro:dynaarm_link_w_collision link_name="${link04}" file_name="${link04_mesh}">
           <link_inertia>
@@ -305,7 +305,7 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         <origin xyz="${joint_5_origin_xyz}" rpy="${joint_5_origin_rpy}" />
       </xacro:dynaarm_revolute_joint>
 
-      <xacro:if value="${version == 'v2'}">
+      <xacro:if value="${version == 'baracuda12'}">
         <!-- Virtual wrist camera link -->
         <xacro:virtual_link link_name="${link05_cam}" />
 
@@ -335,7 +335,7 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     <!-- 6 DoF -->
     <xacro:if value="${dof >= 6}">
 
-      <xacro:if value="${version == 'v1'}">
+      <xacro:if value="${version == 'arowana4'}">
         <!-- WRIST_2 -->
         <xacro:dynaarm_link link_name="${link06}" file_name="${link06_mesh}">
           <link_inertia>
@@ -344,7 +344,7 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         </xacro:dynaarm_link>
       </xacro:if>
 
-      <xacro:if value="${version == 'v2'}">
+      <xacro:if value="${version == 'baracuda12'}">
         <!-- WRIST_2 -->
         <xacro:dynaarm_link_w_collision link_name="${link06}" file_name="${link06_mesh}">
           <link_inertia>

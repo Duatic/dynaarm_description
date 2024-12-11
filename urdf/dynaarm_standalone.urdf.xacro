@@ -25,7 +25,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS “AS IS” 
   <!-- Change to add covers to the arm -->
   <xacro:arg name="covers" default="false" />
   <!-- v1, v2, ... -->
-  <xacro:arg name="version" default="v2" />
+  <xacro:arg name="version" default="baracuda12" />
 
   <xacro:include filename="$(find dynaarm_description)/urdf/dynaarm.urdf.xacro" />
 
