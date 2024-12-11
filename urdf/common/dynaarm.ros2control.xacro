@@ -26,14 +26,12 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS “AS IS” 
     <state_interface name="motor_temperature_coil_B" />
     <state_interface name="motor_temperature_coil_C" />
     <state_interface name="motor_bus_voltage" />
-    <state_interface name="command_freeze_mode" />
     <command_interface name="position" />
     <command_interface name="velocity" />
     <command_interface name="effort" />
     <command_interface name="p_gain" />
     <command_interface name="i_gain" />
     <command_interface name="d_gain" />
-    <command_interface name="command_freeze_mode" />
   </xacro:macro>
 
   <xacro:macro name="dynaarm_ros2control_joint" params="name address">
@@ -43,8 +41,8 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS “AS IS” 
     </joint>
   </xacro:macro>
 
-  <xacro:macro name="dynaarm_ros2_control" params="tf_prefix">
-    <ros2_control name="DynaarmSystem" type="system">
+  <xacro:macro name="dynaarm_ros2_control" params="tf_prefix ethercat_bus start_in_freeze_mode">
+    <ros2_control name="${tf_prefix}DynaarmSystem" type="system">
       <hardware>
         <xacro:if value="${mode == 'sim'}">
           <plugin>gz_ros2_control/GazeboSimSystem</plugin>
@@ -56,6 +54,8 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS “AS IS” 
           <plugin>dynaarm_driver/DynaArmHardwareInterface</plugin>
           <param name="ethercat_bus">${ethercat_bus}</param>
           <param name="tf_prefix">${tf_prefix}</param>
+          <param name="start_in_freeze_mode">${start_in_freeze_mode}</param>
+
         </xacro:if>
       </hardware>
 
@@ -82,6 +82,9 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS “AS IS” 
       <xacro:if value="${dof >= 6}">
         <xacro:dynaarm_ros2control_joint name="${tf_prefix}WR_ROT" address="6" />
       </xacro:if>
+      <gpio name="${tf_prefix}DynaarmSystem">
+       <command_interface name="freeze_mode" />
+      </gpio>
 
     </ros2_control>
   </xacro:macro>

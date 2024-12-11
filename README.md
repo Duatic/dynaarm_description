@@ -1,11 +1,15 @@
 # dynaarm_description
 
-This repository contains the xacro/urdf description file for the [Duatic DynaArms](https://duatic.com/robotic-arm/)
+This repository contains the xacro/urdf description file for the [Duatic DynaArms](https://duatic.com/robotic-arm/). The official ROS2 driver can be found in the [dynaarm_driver](https://github.com/Duatic/dynaarm_driver/) repository.
+
+<img src="./doc/dynaarm.webp" width="300">\
+Duatic DynaArm v2
+
 
 # License
 
 The contents are licensed under the BSD-3-Clause  [license](LICENSE).\
-Images in this repository are to be licensed separately if you want to use them for any other usecase than forking this repository. Please open an issue in order to get in touch with us.
+Images in this repository are to be licensed separately if you want to use them for any other usecase than forking/cloning this repository for your application. Please open an issue in order to get in touch with us.
 
 # Usage
 
@@ -20,8 +24,8 @@ This repository integrates a simple show case you can view by running
 ros2 launch dynaarm_description view.launch.py covers:=True dual:=False dof:=6 version:=v2
 ```
 
-![Example: v1, no covers, 6 dof](./doc/example.png)
-Example: v1, no covers, 6 dof
+![Example: v2, no covers, 6 dof](./doc/example.png)
+Example: v2, no covers, 6 dof
 
 # Contributing
 

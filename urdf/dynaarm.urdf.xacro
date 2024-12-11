@@ -2,15 +2,28 @@
 <!--
 Copyright 2024 Duatic AG
 
-Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+Redistribution and use in source and binary forms, with or without modification, are permitted
+provided that the following conditions are met:
 
-1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+1. Redistributions of source code must retain the above copyright notice, this list of conditions
+and the following disclaimer.
 
-2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
+2. Redistributions in binary form must reproduce the above copyright notice, this list of
+conditions and the following disclaimer in the documentation and/or other materials provided with
+the distribution.
 
-3. Neither the name of the copyright holder nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission.
+3. Neither the name of the copyright holder nor the names of its contributors may be used to
+endorse or promote products derived from this software without specific prior written permission.
 
-THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS “AS IS” AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS “AS IS” AND ANY EXPRESS OR
+IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR
+CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER
+IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
+OF
+THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 -->
 <robot name="dynaarm" xmlns:xacro="http://www.ros.org/wiki/xacro">
 
@@ -18,13 +31,14 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS “AS IS” 
   <!-- DynaArm Macro-->
   <!-- -->
   <xacro:macro name="dynaarm"
-    params="tf_prefix parent_link dof mode ethercat_bus covers version *origin">
+    params="tf_prefix parent_link dof mode ethercat_bus start_in_freeze_mode:=false covers version *origin">
 
     <!-- Set ee_parent based on the specified DoF -->
     <xacro:property name="ee_parent" value="${base}" />
 
     <xacro:include filename="$(find dynaarm_description)/urdf/common/dynaarm_common.urdf.xacro" />
-    <xacro:include filename="$(find dynaarm_description)/urdf/common/dynaarm_parameters_${version}.urdf.xacro" />
+    <xacro:include
+      filename="$(find dynaarm_description)/urdf/common/dynaarm_parameters_${version}.urdf.xacro" />
     <xacro:include filename="$(find dynaarm_description)/urdf/common/dynaarm.ros2control.xacro" />
 
     <xacro:dynaarm_joint_fixed joint_name="${joint_base_name}"
@@ -43,7 +57,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS “AS IS” 
     </xacro:if>
 
     <!--ros2control-->
-    <xacro:dynaarm_ros2_control tf_prefix="${tf_prefix}" />
+    <xacro:dynaarm_ros2_control tf_prefix="${tf_prefix}" ethercat_bus="${ethercat_bus}" start_in_freeze_mode="${start_in_freeze_mode}"  />
   </xacro:macro>
 
   <!-- -->
@@ -185,6 +199,20 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS “AS IS” 
         <origin xyz="${joint_3_origin_xyz}" rpy="${joint_3_origin_rpy}" />
       </xacro:dynaarm_revolute_joint>
 
+      <!--dynaarm_ELBOW_CAMERA_BASE-->
+      <xacro:if value="${version == 'v2'}">
+
+        <!-- Virtual elbow camera link -->
+        <xacro:virtual_link link_name="${link03_cam}" />
+
+        <!-- Camera fixed on elbow -->
+        <xacro:dynaarm_joint_fixed joint_name="${joint_3_cam_name}"
+          parent="${link03}"
+          child="${link03_cam}">
+          <origin xyz="${joint_3_cam_origin_xyz}" rpy="${joint_3_cam_origin_rpy}" />
+        </xacro:dynaarm_joint_fixed>
+      </xacro:if>
+
       <!-- 3 Dof & Covers-->
       <xacro:if value="${covers}">
         <xacro:dynaarm_link link_name="${link03}_cover" file_name="${link03_cover_mesh}">
@@ -203,12 +231,27 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS “AS IS” 
     <!-- 4 DoF -->
     <xacro:if value="${dof >= 4}">
 
-      <!-- dynaarm_FOREARM -->
-      <xacro:dynaarm_link link_name="${link04}" file_name="${link04_mesh}">
-        <link_inertia>
-          <xacro:insert_block name="link04_inertial" />
-        </link_inertia>
-      </xacro:dynaarm_link>
+      <xacro:if value="${version == 'v1'}">
+        <!-- dynaarm_FOREARM -->
+        <xacro:dynaarm_link link_name="${link04}" file_name="${link04_mesh}">
+          <link_inertia>
+            <xacro:insert_block name="link04_inertial" />
+          </link_inertia>
+        </xacro:dynaarm_link>
+      </xacro:if>
+
+      <xacro:if value="${version == 'v2'}">
+        <!-- dynaarm_FOREARM -->
+        <xacro:dynaarm_link_w_collision link_name="${link04}" file_name="${link04_mesh}">
+          <link_inertia>
+            <xacro:insert_block name="link04_inertial" />
+          </link_inertia>
+
+          <link_collision>
+            <xacro:insert_block name="link04_collision" />
+          </link_collision>
+        </xacro:dynaarm_link_w_collision>
+      </xacro:if>
 
       <!-- FA_ROT -->
       <xacro:dynaarm_revolute_joint joint_name="${joint_4_name}" parent="${link03}"
@@ -240,7 +283,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS “AS IS” 
     <!-- 5 DoF -->
     <xacro:if value="${dof >= 5}">
 
-      <!-- dynaarm_WRIST_1 -->
+      <!-- WRIST_1 -->
       <xacro:dynaarm_link_w_collision link_name="${link05}" file_name="${link05_mesh}">
         <link_inertia>
           <xacro:insert_block name="link05_inertial" />
@@ -250,7 +293,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS “AS IS” 
         </link_collision>
       </xacro:dynaarm_link_w_collision>
 
-      <!-- WRIST_1 -->
+      <!-- WR_FLE -->
       <xacro:dynaarm_revolute_joint joint_name="${joint_5_name}" parent="${link04}"
         child="${link05}"
         joint_axis_xyz="${joint_5_axis_xyz}"
@@ -261,6 +304,18 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS “AS IS” 
         joint_type="${joint_5_joint_type}">
         <origin xyz="${joint_5_origin_xyz}" rpy="${joint_5_origin_rpy}" />
       </xacro:dynaarm_revolute_joint>
+
+      <xacro:if value="${version == 'v2'}">
+        <!-- Virtual wrist camera link -->
+        <xacro:virtual_link link_name="${link05_cam}" />
+
+        <!-- Camera fixed on wrist1 -->
+        <xacro:dynaarm_joint_fixed joint_name="${joint_5_cam_name}"
+          parent="${link05}"
+          child="${link05_cam}">
+          <origin xyz="${joint_5_cam_origin_xyz}" rpy="${joint_5_cam_origin_rpy}" />
+        </xacro:dynaarm_joint_fixed>
+      </xacro:if>
 
       <!-- 5 Dof & Covers-->
       <xacro:if value="${covers}">
@@ -280,14 +335,28 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS “AS IS” 
     <!-- 6 DoF -->
     <xacro:if value="${dof >= 6}">
 
-      <!-- dynaarm_WRIST_2 -->
-      <xacro:dynaarm_link link_name="${link06}" file_name="${link06_mesh}">
-        <link_inertia>
-          <xacro:insert_block name="link06_inertial" />
-        </link_inertia>
-      </xacro:dynaarm_link>
+      <xacro:if value="${version == 'v1'}">
+        <!-- WRIST_2 -->
+        <xacro:dynaarm_link link_name="${link06}" file_name="${link06_mesh}">
+          <link_inertia>
+            <xacro:insert_block name="link06_inertial" />
+          </link_inertia>
+        </xacro:dynaarm_link>
+      </xacro:if>
 
-      <!-- WRIST_2 -->
+      <xacro:if value="${version == 'v2'}">
+        <!-- WRIST_2 -->
+        <xacro:dynaarm_link_w_collision link_name="${link06}" file_name="${link06_mesh}">
+          <link_inertia>
+            <xacro:insert_block name="link06_inertial" />
+          </link_inertia>
+          <link_collision>
+            <xacro:insert_block name="link06_collision" />
+          </link_collision>
+        </xacro:dynaarm_link_w_collision>
+      </xacro:if>
+
+      <!-- WR_ROT -->
       <xacro:dynaarm_revolute_joint joint_name="${joint_6_name}" parent="${link05}"
         child="${link06}"
         joint_axis_xyz="${joint_6_axis_xyz}"
