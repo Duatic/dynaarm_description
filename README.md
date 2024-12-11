@@ -45,5 +45,3 @@ Ubuntu 24.04: `apt install pipx && pipx install pre-commit`. Open a new terminal
 
 __Usage:__
 In the repository folder run: `pre-commit run --all`. This can be automated with `pre-commit install`, so all checks are run every time a commit is done.
-
-
