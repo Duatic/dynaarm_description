@@ -3,7 +3,7 @@
 <package format="3">
   <name>dynaarm_description</name>
   <version>0.0.1</version>
-  <description>URDF description for the DUATIC Dynaarm robot</description>
+  <description>URDF description for the DUATIC DynaArms</description>
 
   <license file="LICENSE">BSD-3-Clause</license>
 
