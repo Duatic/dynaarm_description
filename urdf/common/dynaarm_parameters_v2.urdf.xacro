@@ -143,9 +143,9 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   <xacro:property name="joint_6_upper_limit" value="${J_PI + J_PI/2}" />
 
   <xacro:property name="joint_ee_name" value="${tf_prefix}flange_fix_joint" />
-  <xacro:property name="joint_ee_xyz" value="0.0 0.0 0.05" />
-  <xacro:property name="joint_ee_origin_xyz" value="0.0 0.0 0.05" />
-  <xacro:property name="joint_ee_origin_4dof_xyz" value="0.0 0.0 0.4" />
+  <xacro:property name="joint_ee_xyz" value="0.0 0.0 0.009" />
+  <xacro:property name="joint_ee_origin_xyz" value="0.0 0.0 0.009" />
+  <xacro:property name="joint_ee_origin_4dof_xyz" value="0.0 0.0 0.009" />
   <xacro:property name="joint_ee_origin_rpy" value="0.0 0.0 ${J_PI/2}" />
   <xacro:property name="joint_ee_origin_4dof_rpy" value="0.0 0.0 ${J_PI/2}" />
   <xacro:property name="joint_ee_rpy" value="0 0 0" />
