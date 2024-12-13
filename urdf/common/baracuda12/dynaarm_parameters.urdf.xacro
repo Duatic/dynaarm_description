@@ -216,7 +216,8 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
   <xacro:property name="link05_inertial">
     <inertial>
-      <mass value="0.75007482" />
+      <!-- <mass value="0.75007482" />  original value but doesn't work well - Needs investigation also regarding the other values, is this the forearm link?-->
+      <mass value="0.95007482" />
       <origin xyz="0.07972553 -0.00005038 0.02334747" rpy="0 0 0" />
       <inertia ixx="0.00065953" iyy="0.00088282"
         izz="0.00078106" ixy="0.00000076"
