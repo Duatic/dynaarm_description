@@ -1,6 +1,7 @@
 # dynaarm_description
 
 This repository contains the xacro/urdf description file for the [Duatic DynaArms](https://duatic.com/robotic-arm/). The official ROS2 driver can be found in the [dynaarm_driver](https://github.com/Duatic/dynaarm_driver/) repository.
+Please see the DynaArm [documentation](https://docs.duatic.com) for more information.
 
 <img src="./doc/dynaarm.webp" width="300">\
 Duatic DynaArm v2
