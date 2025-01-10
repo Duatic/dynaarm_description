@@ -1,4 +1,4 @@
-name: pre-commit
+name: build-jazzy
 
 on:
   workflow_dispatch:
@@ -9,7 +9,7 @@ on:
 
 jobs:
   build:
-    name: Format
+    name: build
     runs-on: docker.io/osrf/ros:jazzy-desktop-full
     steps:
       - uses: actions/checkout@v4
