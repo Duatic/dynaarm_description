@@ -1,0 +1,19 @@
+name: pre-commit
+
+on:
+  workflow_dispatch:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    name: Format
+    runs-on: docker.io/osrf/ros:jazzy-desktop-full
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Deps
+        run: sudo rosdep install -r --from-paths /src --ignore-src --rosdistro $ROS_DISTRO -y
+      - name: build
+        run: colcon build --cmake-args -DCMAKE_BUILD_TYPE=Release
