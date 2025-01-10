@@ -63,4 +63,3 @@ jobs:
           UPSTREAM_WORKSPACE: ${{ inputs.upstream_workspace }}
           ROS_DISTRO: ${{ inputs.ros_distro }}
           ROS_REPO: ${{ inputs.ros_repo }}
-        
