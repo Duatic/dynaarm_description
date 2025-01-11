@@ -1,4 +1,4 @@
-name: Jazzy Build Main
+name: Rolling Build Main
 on:
   workflow_dispatch:
   pull_request:

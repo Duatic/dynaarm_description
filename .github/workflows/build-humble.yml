@@ -1,4 +1,4 @@
-name: Jazzy Build Main
+name: Humble Build Main
 on:
   workflow_dispatch:
   pull_request:
