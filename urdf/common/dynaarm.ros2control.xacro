@@ -62,27 +62,27 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS “AS IS” 
       </hardware>
 
       <xacro:if value="${dof >= 1}">
-        <xacro:dynaarm_ros2control_joint name="${tf_prefix}shoulder_rotation" address="${ethercat_addresses[0]}" />
+        <xacro:dynaarm_ros2control_joint name="${tf_prefix}shoulder_rotation" address="${ethercat_addresses['shoulder_rotation']}" />
       </xacro:if>
 
       <xacro:if value="${dof >= 2}">
-        <xacro:dynaarm_ros2control_joint name="${tf_prefix}shoulder_flexion" address="${ethercat_addresses[1]}" />
+        <xacro:dynaarm_ros2control_joint name="${tf_prefix}shoulder_flexion" address="${ethercat_addresses['shoulder_flexion']}" />
       </xacro:if>
 
       <xacro:if value="${dof >= 3}">
-        <xacro:dynaarm_ros2control_joint name="${tf_prefix}elbow_flexion" address="${ethercat_addresses[2]}" />
+        <xacro:dynaarm_ros2control_joint name="${tf_prefix}elbow_flexion" address="${ethercat_addresses['elbow_flexion']}" />
       </xacro:if>
 
       <xacro:if value="${dof >= 4}">
-        <xacro:dynaarm_ros2control_joint name="${tf_prefix}forearm_rotation" address="${ethercat_addresses[3]}" />
+        <xacro:dynaarm_ros2control_joint name="${tf_prefix}forearm_rotation" address="${ethercat_addresses['forearm_rotation']}" />
       </xacro:if>
 
       <xacro:if value="${dof >= 5}">
-        <xacro:dynaarm_ros2control_joint name="${tf_prefix}wrist_flexion" address="${ethercat_addresses[4]}" />
+        <xacro:dynaarm_ros2control_joint name="${tf_prefix}wrist_flexion" address="${ethercat_addresses['wrist_flexion']}" />
       </xacro:if>
 
       <xacro:if value="${dof >= 6}">
-        <xacro:dynaarm_ros2control_joint name="${tf_prefix}wrist_rotation" address="${ethercat_addresses[5]}" />
+        <xacro:dynaarm_ros2control_joint name="${tf_prefix}wrist_rotation" address="${ethercat_addresses['wrist_rotation']}" />
       </xacro:if>
       <gpio name="${tf_prefix}DynaarmSystem">
        <command_interface name="freeze_mode" />
