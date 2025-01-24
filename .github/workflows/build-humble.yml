@@ -12,10 +12,17 @@ on:
     - cron: '13 4 * * *'
 
 jobs:
-  jazzy_binary_main:
+  humble_binary_main:
     uses: ./.github/workflows/reusable_ici.yml
     with:
       ros_distro: humble
       ros_repo: main
       upstream_workspace: ''
       ref_for_scheduled_build: main
+
+  humble_binary_main_test:
+      steps:  
+        - name: "xacro"
+          run: | 
+            cd ./urdf/
+            xacro dynaarm_standaline.urdf.xacro > out.xml
