@@ -65,6 +65,7 @@ jobs:
           ROS_REPO: ${{ inputs.ros_repo }}
       - name: Xacro Test
         run: |
+            source /opt/ros/$ROS_DISTRO/setup.bash
             rosdep db | grep xacro
             cd ./urdf/
             xacro dynaarm_standaline.urdf.xacro > out.xml
