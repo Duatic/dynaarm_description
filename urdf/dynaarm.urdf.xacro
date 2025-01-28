@@ -402,7 +402,7 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     <gazebo>
       <plugin filename="libgz_ros2_control-system.so"
         name="gz_ros2_control::GazeboSimROS2ControlPlugin">
-        <parameters>$(find dynaarm_examples)/config/controllers.yaml</parameters>                
+        <parameters>$(find dynaarm_examples)/config/controllers.yaml</parameters>
       </plugin>
     </gazebo>
   </xacro:macro>
