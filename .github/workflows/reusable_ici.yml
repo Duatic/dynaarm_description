@@ -63,4 +63,4 @@ jobs:
           UPSTREAM_WORKSPACE: ${{ inputs.upstream_workspace }}
           ROS_DISTRO: ${{ inputs.ros_distro }}
           ROS_REPO: ${{ inputs.ros_repo }}
-          AFTER_SCRIPT: "xacro urdf/dynaarm_standalone.urdf.xacro"
+          AFTER_SCRIPT: "rosenv && xacro urdf/dynaarm_standalone.urdf.xacro"
