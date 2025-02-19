@@ -107,7 +107,7 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   <xacro:property name="joint_3_axis_xyz" value="0 0 1" />
   <xacro:property name="joint_3_origin_xyz" value="0.4127 0 0" />
   <xacro:property name="joint_3_origin_rpy" value="0 0 0" />
-  <xacro:property name="joint_3_lower_limit" value="-0.05" />
+  <xacro:property name="joint_3_lower_limit" value="0.00" />
   <xacro:property name="joint_3_upper_limit" value="${J_PI}" />
 
   <xacro:property name="joint_3_cam_name" value="${tf_prefix}elbow_camera" />
@@ -120,7 +120,7 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   <xacro:property name="joint_4_joint_type" value="revolute" />
   <xacro:property name="joint_4_axis_xyz" value="0 0 1" />
   <xacro:property name="joint_4_origin_xyz" value="0.0262 -0.0855 0" />
-  <xacro:property name="joint_4_origin_rpy" value="${J_PI/2} 0 ${J_PI/2}" />
+  <xacro:property name="joint_4_origin_rpy" value="${J_PI/2} ${J_PI/2} ${J_PI/2}" />
   <xacro:property name="joint_4_lower_limit" value="${-J_PI - J_PI/2}" />
   <xacro:property name="joint_4_upper_limit" value="${J_PI + J_PI/2}" />
 
