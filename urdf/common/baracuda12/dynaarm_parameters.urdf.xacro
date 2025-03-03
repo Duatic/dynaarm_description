@@ -91,16 +91,16 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   <xacro:property name="joint_1_axis_xyz" value="0 0 1" />
   <xacro:property name="joint_1_origin_xyz" value="0 0 0.0105" />
   <xacro:property name="joint_1_origin_rpy" value="0 0 0" />
-  <xacro:property name="joint_1_lower_limit" value="${-J_PI - J_PI/2}" />
-  <xacro:property name="joint_1_upper_limit" value="${J_PI + J_PI/2}" />
+  <xacro:property name="joint_1_lower_limit" value="${-J_PI - J_PI/2 + 0.4}" />
+  <xacro:property name="joint_1_upper_limit" value="${J_PI + J_PI/2 - 0.4}" />
 
   <xacro:property name="joint_2_name" value="${tf_prefix}shoulder_flexion" />
   <xacro:property name="joint_2_joint_type" value="revolute" />
   <xacro:property name="joint_2_axis_xyz" value="0 0 1" />
   <xacro:property name="joint_2_origin_xyz" value="0 0 0.047" />
   <xacro:property name="joint_2_origin_rpy" value="${J_PI/2} ${-J_PI/2} 0" />
-  <xacro:property name="joint_2_lower_limit" value="${-J_PI/2 - 0.3}" />
-  <xacro:property name="joint_2_upper_limit" value="${J_PI/2 + 0.3}" />
+  <xacro:property name="joint_2_lower_limit" value="${-J_PI/2 - 0.15}" />
+  <xacro:property name="joint_2_upper_limit" value="${J_PI/2 + 0.15}" />
 
   <xacro:property name="joint_3_name" value="${tf_prefix}elbow_flexion" />
   <xacro:property name="joint_3_joint_type" value="revolute" />
@@ -108,7 +108,7 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   <xacro:property name="joint_3_origin_xyz" value="0.4127 0 0" />
   <xacro:property name="joint_3_origin_rpy" value="0 0 0" />
   <xacro:property name="joint_3_lower_limit" value="0.00" />
-  <xacro:property name="joint_3_upper_limit" value="${J_PI}" />
+  <xacro:property name="joint_3_upper_limit" value="${J_PI - 0.05}" />
 
   <xacro:property name="joint_3_cam_name" value="${tf_prefix}elbow_camera" />
   <xacro:property name="joint_3_cam_joint_type" value="fixed" />
@@ -129,8 +129,8 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   <xacro:property name="joint_5_axis_xyz" value="0 0 1" />
   <xacro:property name="joint_5_origin_xyz" value="0.0295 0 0.4207" />
   <xacro:property name="joint_5_origin_rpy" value="0 ${-J_PI/2} 0" />
-  <xacro:property name="joint_5_lower_limit" value="${-J_PI/2}" />
-  <xacro:property name="joint_5_upper_limit" value="${J_PI/2}" />
+  <xacro:property name="joint_5_lower_limit" value="${-J_PI/2 -0.25}" />
+  <xacro:property name="joint_5_upper_limit" value="${J_PI/2 + 0.25}" />
 
   <xacro:property name="joint_5_cam_name" value="${tf_prefix}wrist_flexion_camera" />
   <xacro:property name="joint_5_cam_joint_type" value="fixed" />
