@@ -91,24 +91,24 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   <xacro:property name="joint_1_axis_xyz" value="0 0 1" />
   <xacro:property name="joint_1_origin_xyz" value="0 0 0.0105" />
   <xacro:property name="joint_1_origin_rpy" value="0 0 0" />
-  <xacro:property name="joint_1_lower_limit" value="${-J_PI - J_PI/2}" />
-  <xacro:property name="joint_1_upper_limit" value="${J_PI + J_PI/2}" />
+  <xacro:property name="joint_1_lower_limit" value="${-J_PI - J_PI/2 + 0.4}" />
+  <xacro:property name="joint_1_upper_limit" value="${J_PI + J_PI/2 - 0.4}" />
 
   <xacro:property name="joint_2_name" value="${tf_prefix}shoulder_flexion" />
   <xacro:property name="joint_2_joint_type" value="revolute" />
   <xacro:property name="joint_2_axis_xyz" value="0 0 1" />
   <xacro:property name="joint_2_origin_xyz" value="0 0 0.047" />
   <xacro:property name="joint_2_origin_rpy" value="${J_PI/2} ${-J_PI/2} 0" />
-  <xacro:property name="joint_2_lower_limit" value="${-J_PI/2 - 0.3}" />
-  <xacro:property name="joint_2_upper_limit" value="${J_PI/2 + 0.3}" />
+  <xacro:property name="joint_2_lower_limit" value="${-J_PI/2 - 0.15}" />
+  <xacro:property name="joint_2_upper_limit" value="${J_PI/2 + 0.15}" />
 
   <xacro:property name="joint_3_name" value="${tf_prefix}elbow_flexion" />
   <xacro:property name="joint_3_joint_type" value="revolute" />
   <xacro:property name="joint_3_axis_xyz" value="0 0 1" />
   <xacro:property name="joint_3_origin_xyz" value="0.4127 0 0" />
   <xacro:property name="joint_3_origin_rpy" value="0 0 0" />
-  <xacro:property name="joint_3_lower_limit" value="-0.05" />
-  <xacro:property name="joint_3_upper_limit" value="${J_PI}" />
+  <xacro:property name="joint_3_lower_limit" value="0.00" />
+  <xacro:property name="joint_3_upper_limit" value="${J_PI - 0.05}" />
 
   <xacro:property name="joint_3_cam_name" value="${tf_prefix}elbow_camera" />
   <xacro:property name="joint_3_cam_joint_type" value="fixed" />
@@ -120,7 +120,7 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   <xacro:property name="joint_4_joint_type" value="revolute" />
   <xacro:property name="joint_4_axis_xyz" value="0 0 1" />
   <xacro:property name="joint_4_origin_xyz" value="0.0262 -0.0855 0" />
-  <xacro:property name="joint_4_origin_rpy" value="${J_PI/2} 0 ${J_PI/2}" />
+  <xacro:property name="joint_4_origin_rpy" value="${J_PI/2} ${J_PI/2} ${J_PI/2}" />
   <xacro:property name="joint_4_lower_limit" value="${-J_PI - J_PI/2}" />
   <xacro:property name="joint_4_upper_limit" value="${J_PI + J_PI/2}" />
 
@@ -129,8 +129,8 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   <xacro:property name="joint_5_axis_xyz" value="0 0 1" />
   <xacro:property name="joint_5_origin_xyz" value="0.0295 0 0.4207" />
   <xacro:property name="joint_5_origin_rpy" value="0 ${-J_PI/2} 0" />
-  <xacro:property name="joint_5_lower_limit" value="${-J_PI/2}" />
-  <xacro:property name="joint_5_upper_limit" value="${J_PI/2}" />
+  <xacro:property name="joint_5_lower_limit" value="${-J_PI/2 -0.25}" />
+  <xacro:property name="joint_5_upper_limit" value="${J_PI/2 + 0.25}" />
 
   <xacro:property name="joint_5_cam_name" value="${tf_prefix}wrist_flexion_camera" />
   <xacro:property name="joint_5_cam_joint_type" value="fixed" />
@@ -167,6 +167,7 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     </inertial>
   </xacro:property>
 
+  <!-- Shoulder -->
   <xacro:property name="link01_inertial">
     <inertial>
       <mass value="2.73096676" />
@@ -177,9 +178,11 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     </inertial>
   </xacro:property>
 
+  <!-- Upper Arm -->
   <xacro:property name="link02_inertial">
     <inertial>
-      <mass value="1.72040464" />
+      <!-- Original - <mass value="1.72040464" /> -->
+      <mass value="2.12040464" />
       <origin xyz="0.20391301 -0.00000528 -0.00015224"
         rpy="0 0 0" />
       <inertia ixx="0.00155499" iyy="0.05067934"
@@ -188,6 +191,7 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     </inertial>
   </xacro:property>
 
+  <!-- Elbow -->
   <xacro:property name="link03_inertial">
     <inertial>
       <mass value="0.82320237" />
@@ -198,9 +202,11 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     </inertial>
   </xacro:property>
 
+  <!-- Camera Mounting Point 1 -->
   <xacro:property name="link03_cam_inertial">
     <inertial>
       <mass value="1e-6" />
+
       <origin xyz="0.0 0.0 0.0" rpy="0 0 0" />
       <inertia ixx="1e-6" iyy="1e-6"
         izz="1e-6" ixy="1e-6"
@@ -208,6 +214,7 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     </inertial>
   </xacro:property>
 
+  <!-- Forearm -->
   <xacro:property name="link04_inertial">
     <inertial>
       <mass value="1.15674546" />
@@ -218,10 +225,11 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     </inertial>
   </xacro:property>
 
+  <!-- wrist_1 -->
   <xacro:property name="link05_inertial">
     <inertial>
-      <!-- <mass value="0.75007482" />  original value but doesn't work well - Needs investigation also regarding the other values, is this the forearm link?-->
-      <mass value="0.95007482" />
+      <!-- <mass value="0.75007482" />  original value but doesn't work well - Needs to include the cables inside the forearm tube?-->
+      <mass value="1.15007482" />
       <origin xyz="0.07972553 -0.00005038 0.02334747" rpy="0 0 0" />
       <inertia ixx="0.00065953" iyy="0.00088282"
         izz="0.00078106" ixy="0.00000076"
@@ -229,6 +237,7 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     </inertial>
   </xacro:property>
 
+  <!-- Camera Mounting Point 2 -->
   <xacro:property name="link05_cam_inertial">
     <inertial>
       <mass value="1e-6" />
@@ -239,6 +248,7 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     </inertial>
   </xacro:property>
 
+  <!-- Wrist 2 -->
   <xacro:property name="link06_inertial">
     <inertial>
       <mass value="0.0478406" />
