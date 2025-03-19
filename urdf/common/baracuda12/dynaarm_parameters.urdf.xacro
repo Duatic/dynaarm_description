@@ -247,7 +247,7 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         ixz="1e-6" iyz="1e-6" />
     </inertial>
   </xacro:property>
-  
+
   <!-- Wrist 2 -->
   <xacro:property name="link06_inertial">
     <inertial>
