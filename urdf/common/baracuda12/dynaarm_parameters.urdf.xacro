@@ -167,6 +167,7 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     </inertial>
   </xacro:property>
 
+  <!-- Shoulder -->
   <xacro:property name="link01_inertial">
     <inertial>
       <mass value="2.73096676" />
@@ -177,9 +178,11 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     </inertial>
   </xacro:property>
 
+  <!-- Upper Arm -->
   <xacro:property name="link02_inertial">
     <inertial>
-      <mass value="1.72040464" />
+      <!-- Original - <mass value="1.72040464" /> -->
+      <mass value="2.12040464" />
       <origin xyz="0.20391301 -0.00000528 -0.00015224"
         rpy="0 0 0" />
       <inertia ixx="0.00155499" iyy="0.05067934"
@@ -188,6 +191,7 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     </inertial>
   </xacro:property>
 
+  <!-- Elbow -->
   <xacro:property name="link03_inertial">
     <inertial>
       <mass value="0.82320237" />
@@ -198,9 +202,11 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     </inertial>
   </xacro:property>
 
+  <!-- Camera Mounting Point 1 -->
   <xacro:property name="link03_cam_inertial">
     <inertial>
       <mass value="1e-6" />
+
       <origin xyz="0.0 0.0 0.0" rpy="0 0 0" />
       <inertia ixx="1e-6" iyy="1e-6"
         izz="1e-6" ixy="1e-6"
@@ -208,6 +214,7 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     </inertial>
   </xacro:property>
 
+  <!-- Forearm -->
   <xacro:property name="link04_inertial">
     <inertial>
       <mass value="1.15674546" />
@@ -218,10 +225,11 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     </inertial>
   </xacro:property>
 
+  <!-- wrist_1 -->
   <xacro:property name="link05_inertial">
     <inertial>
       <!-- <mass value="0.75007482" />  original value but doesn't work well - Needs to include the cables inside the forearm tube?-->
-      <mass value="0.95007482" />
+      <mass value="1.15007482" />
       <origin xyz="0.07972553 -0.00005038 0.02334747" rpy="0 0 0" />
       <inertia ixx="0.00065953" iyy="0.00088282"
         izz="0.00078106" ixy="0.00000076"
@@ -229,6 +237,7 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     </inertial>
   </xacro:property>
 
+  <!-- Camera Mounting Point 2 -->
   <xacro:property name="link05_cam_inertial">
     <inertial>
       <mass value="1e-6" />
@@ -238,11 +247,11 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         ixz="1e-6" iyz="1e-6" />
     </inertial>
   </xacro:property>
-
+  
+  <!-- Wrist 2 -->
   <xacro:property name="link06_inertial">
     <inertial>
-      <!-- <mass value="0.0478406" />  mass without the plastic EE handle -->
-      <mass value="0.1578406" />
+      <mass value="0.0478406" />
       <origin xyz="0.00045711 0.00000557 0.00344945" rpy="0 0 0" />
       <inertia ixx="0.00001366" iyy="0.00001419"
         izz="0.00002702" ixy="0"
