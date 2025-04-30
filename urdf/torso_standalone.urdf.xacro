@@ -1,0 +1,44 @@
+<robot name="dynaarm_dual_with_torso" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <xacro:arg name="tf_prefix" default="" />
+  <xacro:arg name="dof" default="6" />
+  <xacro:arg name="mode" default="mock" />
+  <xacro:arg name="ethercat_bus" default="eth0" />
+  <xacro:arg name="covers" default="false" />
+  <xacro:arg name="dynaarm_version" default="baracuda12" />
+
+  <!-- Include dynaarm and torso definitions -->
+  <xacro:include filename="$(find dynaarm_description)/urdf/dynaarm.urdf.xacro" />
+  <xacro:include filename="$(find dynaarm_description)/urdf/torso.urdf.xacro" />
+
+  <link name="world" />
+
+  <!-- Add torso to world -->
+  <xacro:torso tf_prefix="$(arg tf_prefix)"
+    parent_link="world"
+    mode="$(arg mode)">
+    <origin xyz="0 0 0.0" rpy="0 0 0" />
+  </xacro:torso>
+
+  <!-- Add two arms to torso -->
+  <xacro:dynaarm tf_prefix="$(arg tf_prefix)_arm1"
+    parent_link="left_arm_flange"
+    dof="$(arg dof)"
+    mode="$(arg mode)"
+    ethercat_bus="$(arg ethercat_bus)"
+    covers="$(arg covers)"
+    version="$(arg dynaarm_version)">
+    <origin xyz="0.3 0.2 0.2" rpy="0 0 0" />
+  </xacro:dynaarm>
+
+  <xacro:dynaarm tf_prefix="$(arg tf_prefix)_arm2"
+    parent_link="right_arm_flange"
+    dof="$(arg dof)"
+    mode="$(arg mode)"
+    ethercat_bus="$(arg ethercat_bus)"
+    covers="$(arg covers)"
+    version="$(arg dynaarm_version)">
+    <origin xyz="0.3 -0.2 0.2" rpy="0 0 0" />
+  </xacro:dynaarm>
+
+</robot>

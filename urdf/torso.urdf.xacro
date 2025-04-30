@@ -31,29 +31,10 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   <!-- Torso Macro-->
   <!-- -->
 
-  <xacro:macro name="torso"
-    params="tf_prefix parent_link dof mode ethercat_bus start_in_freeze_mode:=false drive_parameter_folder:='' covers version *origin">
+  <xacro:macro name="torso" params="tf_prefix parent_link mode *origin">
 
-    <!--Allow the user to pass a custom folder for drive parameters-->
-    <xacro:property name="default_drive_parameter_folder" value="$(find dynaarm_driver)/config/${version}" />
-    <xacro:if value="${drive_parameter_folder == ''}">
-      <xacro:property name="drive_parameter_folder_internal" value="${default_drive_parameter_folder}" />
-    </xacro:if>
-    <xacro:unless value="${drive_parameter_folder == ''}">
-      <xacro:property name="drive_parameter_folder_internal" value="${drive_parameter_folder}" />
-    </xacro:unless>
-
-    <!-- Set left_arm_parent based on the specified DoF -->
-    <xacro:property name="left_arm_parent" value="${base}" />
-    
-    <!-- Set left_arm_parent based on the specified DoF -->
-    <xacro:property name="right_arm_parent" value="${base}" />
-
-    <xacro:include filename="$(find dynaarm_description)/urdf/common/torso_common.urdf.xacro" />
-    <!-- Include the version specific information-->
-    <xacro:include
-      filename="$(find dynaarm_description)/urdf/common/${version}/torso_parameters.urdf.xacro" />
-    <xacro:include filename="$(find dynaarm_description)/urdf/common/torso.ros2control.xacro" />
+    <xacro:include filename="$(find dynaarm_description)/urdf/common/torso/torso_common.urdf.xacro" />    
+    <xacro:include filename="$(find dynaarm_description)/urdf/common/torso/torso_parameters.urdf.xacro" />    
 
     <xacro:torso_joint_fixed joint_name="${joint_tbase_name}"
       parent="${parent_link}"
@@ -63,58 +44,53 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
     <!-- Torso -->
     <xacro:torso_main_body />
-    <xacro:torso_tool />
+    <xacro:torso_left_arm />
+    <xacro:torso_right_arm />
 
     <!-- Gazebo plugin -->
     <xacro:if value="${mode == 'sim'}">
       <xacro:torso_gazebo />
     </xacro:if>
 
-    <!--ros2control-->
-    <xacro:dynaarm_ros2_control tf_prefix="${tf_prefix}" ethercat_bus="${ethercat_bus}" start_in_freeze_mode="${start_in_freeze_mode}"  drive_parameter_folder="${drive_parameter_folder_internal}" drive_parameter_folder_default="${default_drive_parameter_folder}" ethercat_addresses="${ethercat_addresses}"/>
   </xacro:macro>
 
   <!-- -->
   <!-- DynaArm Main Body-->
   <!-- -->
   <xacro:macro name="torso_main_body">
-
     <!-- torso_base -->
-    <xacro:torso_baselink link_name="${tbase}" file_name="${tbase_mesh}">
+    <xacro:torso_link_w_collision link_name="${tbase}" file_name="${torso_mesh}">
       <tbase_inertia>
         <xacro:insert_block name="tbase_inertial" />
       </tbase_inertia>
       <tbase_collision>
         <xacro:insert_block name="tbase_collision" />
       </tbase_collision>
-    </xacro:torso_baselink>
+    </xacro:torso_link_w_collision>
+  </xacro:macro>
 
   <!-- Torso left arm-->
-
   <xacro:macro name="torso_left_arm">
-    <xacro:torso_virtual_link link_name="${left_arm}" />
+    <xacro:torso_virtual_link link_name="${torso_left_arm}" />
     <xacro:torso_joint_fixed joint_name="${joint_left_arm_name}"
       parent="${left_arm_parent}"
-      child="${left_arm}">
+      child="${torso_left_arm}">
       <origin xyz="${joint_left_arm_origin_xyz}" rpy="${joint_left_arm_origin_rpy}" />
     </xacro:torso_joint_fixed>
   </xacro:macro>
 
   <!-- Torso right arm-->
-
   <xacro:macro name="torso_right_arm">
-    <xacro:torso_virtual_link link_name="${right_arm}" />
+    <xacro:torso_virtual_link link_name="${torso_right_arm}" />
     <xacro:torso_joint_fixed joint_name="${joint_right_arm_name}"
       parent="${right_arm_parent}"
-      child="${right_arm}">
+      child="${torso_right_arm}">
       <origin xyz="${joint_right_arm_origin_xyz}" rpy="${joint_right_arm_origin_rpy}" />
     </xacro:torso_joint_fixed>
   </xacro:macro>
 
-   <!-- Torso Gazebo-->
-  
+   <!-- Torso Gazebo-->  
   <xacro:macro name="torso_gazebo">
-
     <gazebo>
       <plugin filename="libgz_ros2_control-system.so"
         name="gz_ros2_control::GazeboSimROS2ControlPlugin">

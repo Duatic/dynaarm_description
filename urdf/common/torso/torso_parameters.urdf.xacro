@@ -1,0 +1,94 @@
+<!--
+Copyright 2024 Duatic AG
+
+Redistribution and use in source and binary forms, with or without modification, are permitted
+provided that the following conditions are met:
+
+1. Redistributions of source code must retain the above copyright notice, this list of conditions
+and the following disclaimer.
+
+2. Redistributions in binary form must reproduce the above copyright notice, this list of
+conditions and the following disclaimer in the documentation and/or other materials provided with
+the distribution.
+
+3. Neither the name of the copyright holder nor the names of its contributors may be used to
+endorse or promote products derived from this software without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS “AS IS” AND ANY EXPRESS OR
+IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR
+CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER
+IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
+OF
+THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+-->
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <xacro:property name="torso_version_name" value="v1"/>
+      
+  <xacro:property name="J_PI" value="3.14159265359" />
+
+  <xacro:property name="baboon_peak_torque" value="40" />
+  <xacro:property name="baboon_max_speed" value="4" />
+
+  <xacro:property name="mm2_to_m2" value="0.000001" />
+  <xacro:property name="mm_to_m" value="0.001" />
+
+  <!-- Links -->
+  <xacro:property name="tbase" value="${tf_prefix}tbase" />
+  <xacro:property name="torso_left_arm" value="${tf_prefix}left_arm_flange" />
+  <xacro:property name="torso_right_arm" value="${tf_prefix}right_arm_flange" />
+
+  <!-- Meshes -->
+  <xacro:property name="torso_mesh" value="torso_mesh.stl" />
+
+  <!-- Joint properties -->
+  <xacro:property name="joint_tbase_name" value="${tf_prefix}joint_tbase" />
+  <xacro:property name="joint_tbase_joint_type" value="revolute" />
+  <xacro:property name="joint_tbase_axis_xyz" value="0 0 0" />
+  <xacro:property name="joint_tbase_origin_xyz" value="0 0 0" />
+  <xacro:property name="joint_tbase_origin_rpy" value="0 0 0" />
+
+  <xacro:property name="joint_left_arm_name" value="${tf_prefix}left_arm_flange_fix_joint" />
+  <xacro:property name="joint_left_arm_origin_xyz" value="0.0 0.084464 0.55554" />
+  <xacro:property name="joint_left_arm_origin_rpy" value="0.0 2.3562 ${-J_PI}" />
+  <xacro:property name="joint_left_arm_xyz" value="0.0 0.084464 0.55554" />
+  <xacro:property name="joint_left_arm_rpy" value="0 0 0" />
+
+  <xacro:property name="joint_right_arm_name" value="${tf_prefix}right_arm_flange_fix_joint" />
+  <xacro:property name="joint_right_arm_origin_xyz" value="0.0 -0.084464 0.55554" />
+  <xacro:property name="joint_right_arm_origin_rpy" value="0.0 2.3562 0.0" />
+  <xacro:property name="joint_right_arm_xyz" value="0.0 -0.084464 0.55554" />
+  <xacro:property name="joint_right_arm_rpy" value="0 0 0" />
+
+  <!-- Base Robot -->
+  <xacro:property name="tbase_inertial">
+    <inertial>
+      <mass value="1.894" />
+      <origin
+        xyz="${0.008222641*mm_to_m} ${-0.310936808*mm_to_m} ${-36.738569268*mm_to_m}"
+        rpy="0 0 0" />
+      <inertia ixx="${2767.258474185*mm2_to_m2}" iyy="${2895.160105441*mm2_to_m2}"
+        izz="${3138.952392041*mm2_to_m2}" ixy="${0.393414115*mm2_to_m2}"
+        ixz="${-0.149570272*mm2_to_m2}" iyz="${25.32409214*mm2_to_m2}" />
+    </inertial>
+  </xacro:property>
+
+  <!-- Collision properties -->
+  <xacro:property name="tbase_collision">
+    <collision>
+      <origin xyz="0 0 -0.04" rpy="0 0 0" />
+      <geometry>
+        <cylinder radius="0.5" length="0.08" />
+      </geometry>
+    </collision>
+  </xacro:property>
+
+  <!-- set the left_arm_parent relative to the tbase -->
+  <xacro:property name="left_arm_parent" value="${tbase}" />
+
+  <!-- set the right_arm_parent relative to the tbase -->
+  <xacro:property name="right_arm_parent" value="${tbase}" />
+
+</robot>
