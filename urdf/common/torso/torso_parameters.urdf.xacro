@@ -51,16 +51,12 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   <xacro:property name="joint_tbase_origin_rpy" value="0 0 0" />
 
   <xacro:property name="joint_left_arm_name" value="${tf_prefix}left_arm_flange_fix_joint" />
-  <xacro:property name="joint_left_arm_origin_xyz" value="0.0 0.084464 0.55554" />
-  <xacro:property name="joint_left_arm_origin_rpy" value="0.0 2.3562 ${-J_PI}" />
-  <xacro:property name="joint_left_arm_xyz" value="0.0 0.084464 0.55554" />
-  <xacro:property name="joint_left_arm_rpy" value="0 0 0" />
+  <xacro:property name="joint_left_arm_origin_xyz" value="0.0 0.088 0.552" />
+  <xacro:property name="joint_left_arm_origin_rpy" value="2.3562 0.0 ${-J_PI}" />
 
   <xacro:property name="joint_right_arm_name" value="${tf_prefix}right_arm_flange_fix_joint" />
-  <xacro:property name="joint_right_arm_origin_xyz" value="0.0 -0.084464 0.55554" />
-  <xacro:property name="joint_right_arm_origin_rpy" value="0.0 2.3562 0.0" />
-  <xacro:property name="joint_right_arm_xyz" value="0.0 -0.084464 0.55554" />
-  <xacro:property name="joint_right_arm_rpy" value="0 0 0" />
+  <xacro:property name="joint_right_arm_origin_xyz" value="0.0 -0.088 0.552" />
+  <xacro:property name="joint_right_arm_origin_rpy" value="2.3562 0.0 0.0" />
 
   <!-- Base Robot -->
   <xacro:property name="tbase_inertial">

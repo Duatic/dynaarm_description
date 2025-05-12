@@ -21,14 +21,15 @@
   </xacro:torso>
 
   <!-- Add two arms to torso -->
-  <xacro:dynaarm tf_prefix="$(arg tf_prefix)_arm1"
+  <xacro:dynaarm 
+    tf_prefix="$(arg tf_prefix)_arm1"
     parent_link="left_arm_flange"
     dof="$(arg dof)"
     mode="$(arg mode)"
     ethercat_bus="$(arg ethercat_bus)"
     covers="$(arg covers)"
     version="$(arg dynaarm_version)">
-    <origin xyz="0.3 0.2 0.2" rpy="0 0 0" />
+    <origin xyz="0 0 0.095" rpy="0 0 0" />
   </xacro:dynaarm>
 
   <xacro:dynaarm tf_prefix="$(arg tf_prefix)_arm2"
@@ -38,7 +39,7 @@
     ethercat_bus="$(arg ethercat_bus)"
     covers="$(arg covers)"
     version="$(arg dynaarm_version)">
-    <origin xyz="0.3 -0.2 0.2" rpy="0 0 0" />
+    <origin xyz="0 0 0.095" rpy="0 0 0" />
   </xacro:dynaarm>
 
 </robot>
