@@ -38,6 +38,9 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   <xacro:property name="mm2_to_m2" value="0.000001" />
   <xacro:property name="mm_to_m" value="0.001" />
 
+  <xacro:property name="distance_from_world_general_flange" value="0.001" />
+  <xacro:property name="distance_from_world_torso_flange" value="0.00096" />
+  
   <!-- Links -->
   <xacro:property name="base" value="${tf_prefix}base" />
   <xacro:property name="link01" value="${tf_prefix}shoulder" />
@@ -85,6 +88,7 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   <xacro:property name="joint_base_axis_xyz" value="0 0 0" />
   <xacro:property name="joint_base_origin_xyz" value="0 0 0" />
   <xacro:property name="joint_base_origin_rpy" value="0 0 0" />
+
 
   <xacro:property name="joint_1_name" value="${tf_prefix}shoulder_rotation" />
   <xacro:property name="joint_1_joint_type" value="revolute" />

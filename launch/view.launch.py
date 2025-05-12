@@ -76,7 +76,8 @@ def launch_setup(context, *args, **kwargs):
         )
     else:
         doc = xacro.parse(
-            open(os.path.join(pkg_share_description, "urdf/dynaarm_standalone.urdf.xacro"))
+            #open(os.path.join(pkg_share_description, "urdf/dynaarm_standalone.urdf.xacro"))
+            open(os.path.join(pkg_share_description, "urdf/torso_standalone.urdf.xacro"))
         )
 
     xacro.process_doc(

@@ -1,0 +1,102 @@
+<?xml version="1.0"?>
+<!--
+Copyright 2024 Duatic AG
+
+Redistribution and use in source and binary forms, with or without modification, are permitted
+provided that the following conditions are met:
+
+1. Redistributions of source code must retain the above copyright notice, this list of conditions
+and the following disclaimer.
+
+2. Redistributions in binary form must reproduce the above copyright notice, this list of
+conditions and the following disclaimer in the documentation and/or other materials provided with
+the distribution.
+
+3. Neither the name of the copyright holder nor the names of its contributors may be used to
+endorse or promote products derived from this software without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS “AS IS” AND ANY EXPRESS OR
+IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR
+CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER
+IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
+OF
+THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+-->
+<robot name="torso" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <!-- -->
+  <!-- Torso Macro-->
+  <!-- -->
+
+  <xacro:macro name="torso" params="tf_prefix parent_link mode *origin">
+
+    <xacro:include filename="$(find dynaarm_description)/urdf/common/torso/torso_common.urdf.xacro" />    
+    <xacro:include filename="$(find dynaarm_description)/urdf/common/torso/torso_parameters.urdf.xacro" />    
+
+    <xacro:torso_joint_fixed joint_name="${joint_tbase_name}"
+      parent="${parent_link}"
+      child="${tbase}">
+      <xacro:insert_block name="origin" />
+    </xacro:torso_joint_fixed>
+
+    <!-- Torso -->
+    <xacro:torso_main_body />
+    <xacro:torso_left_arm />
+    <xacro:torso_right_arm />
+
+    <!-- Gazebo plugin -->
+    <xacro:if value="${mode == 'sim'}">
+      <xacro:torso_gazebo />
+    </xacro:if>
+
+  </xacro:macro>
+
+  <!-- -->
+  <!-- DynaArm Main Body-->
+  <!-- -->
+  <xacro:macro name="torso_main_body">
+    <!-- torso_base -->
+    <xacro:torso_link_w_collision link_name="${tbase}" file_name="${torso_mesh}">
+      <tbase_inertia>
+        <xacro:insert_block name="tbase_inertial" />
+      </tbase_inertia>
+      <tbase_collision>
+        <xacro:insert_block name="tbase_collision" />
+      </tbase_collision>
+    </xacro:torso_link_w_collision>
+  </xacro:macro>
+
+  <!-- Torso left arm-->
+  <xacro:macro name="torso_left_arm">
+    <xacro:torso_virtual_link link_name="${torso_left_arm}" />
+    <xacro:torso_joint_fixed joint_name="${joint_left_arm_name}"
+      parent="${left_arm_parent}"
+      child="${torso_left_arm}">
+      <origin xyz="${joint_left_arm_origin_xyz}" rpy="${joint_left_arm_origin_rpy}" />
+    </xacro:torso_joint_fixed>
+  </xacro:macro>
+
+  <!-- Torso right arm-->
+  <xacro:macro name="torso_right_arm">
+    <xacro:torso_virtual_link link_name="${torso_right_arm}" />
+    <xacro:torso_joint_fixed joint_name="${joint_right_arm_name}"
+      parent="${right_arm_parent}"
+      child="${torso_right_arm}">
+      <origin xyz="${joint_right_arm_origin_xyz}" rpy="${joint_right_arm_origin_rpy}" />
+    </xacro:torso_joint_fixed>
+  </xacro:macro>
+
+   <!-- Torso Gazebo-->  
+  <xacro:macro name="torso_gazebo">
+    <gazebo>
+      <plugin filename="libgz_ros2_control-system.so"
+        name="gz_ros2_control::GazeboSimROS2ControlPlugin">
+        <parameters>$(find dynaarm_examples)/config/controllers.yaml</parameters>
+      </plugin>
+    </gazebo>
+  </xacro:macro>
+
+</robot>
