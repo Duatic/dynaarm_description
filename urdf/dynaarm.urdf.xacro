@@ -32,7 +32,7 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   <!-- -->
 
   <xacro:macro name="dynaarm"
-    params="tf_prefix parent_link dof mode ethercat_bus start_in_freeze_mode:=false drive_parameter_folder:='' covers version *origin">
+    params="tf_prefix parent_link dof mode ethercat_bus controller_path start_in_freeze_mode:=false drive_parameter_folder:='' covers version *origin">
 
     <!--Allow the user to pass a custom folder for drive parameters-->
     <xacro:property name="default_drive_parameter_folder" value="$(find dynaarm_driver)/config/${version}" />
@@ -63,7 +63,7 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
     <!-- Gazebo plugin -->
     <xacro:if value="${mode == 'sim'}">
-      <xacro:dynaarm_gazebo />
+      <xacro:dynaarm_gazebo controller_path="${controller_path}"/>
     </xacro:if>
 
     <!--ros2control-->
@@ -386,23 +386,36 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   <!-- DynaArm Tool-->
   <!-- -->
   <xacro:macro name="dynaarm_tool">
-    <xacro:virtual_link link_name="${end_effector}" />
-    <xacro:dynaarm_joint_fixed joint_name="${joint_ee_name}"
-      parent="${ee_parent}"
-      child="${end_effector}">
-      <origin xyz="${joint_ee_origin_xyz}" rpy="${joint_ee_origin_rpy}" />
-    </xacro:dynaarm_joint_fixed>
+      <xacro:virtual_link link_name="${end_effector}" />
+      <xacro:dynaarm_joint_fixed joint_name="${joint_ee_name}"
+          parent="${ee_parent}"
+          child="${end_effector}">
+          <origin xyz="${joint_ee_origin_xyz}" rpy="${joint_ee_origin_rpy}" />
+      </xacro:dynaarm_joint_fixed>
+
+      <!-- Add x_kg weight to flange -->
+      <!-- <xacro:virtual_link link_name="${end_effector}_weight"
+          mass="0.2"
+          ixx="0.036" iyy="0.036" izz="0.002">
+      </xacro:virtual_link>
+
+      <xacro:dynaarm_joint_fixed joint_name="${end_effector}_weight_joint"
+          parent="${end_effector}"
+          child="${end_effector}_weight">
+          <origin xyz="0.0 0.0 0.02" rpy="0 0 0" />
+      </xacro:dynaarm_joint_fixed> -->
   </xacro:macro>
+
 
   <!-- -->
   <!-- DynaArm Gazebo-->
   <!-- -->
-  <xacro:macro name="dynaarm_gazebo">
+  <xacro:macro name="dynaarm_gazebo" params="controller_path">
 
     <gazebo>
       <plugin filename="libgz_ros2_control-system.so"
         name="gz_ros2_control::GazeboSimROS2ControlPlugin">
-        <parameters>$(find dynaarm_examples)/config/controllers.yaml</parameters>
+        <parameters>${controller_path}</parameters>
       </plugin>
     </gazebo>
   </xacro:macro>

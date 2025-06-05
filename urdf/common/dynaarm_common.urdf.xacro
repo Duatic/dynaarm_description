@@ -87,20 +87,25 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     <!-- -->
     <!-- DynaArm Virtual Link Macro -->
     <!-- -->
-    <xacro:macro name="virtual_link" params="link_name">
+    <xacro:macro name="virtual_link" params="link_name mass:=0.001 ixx:=0.0000001 iyy:=0.0000001 izz:=0.0000001">
         <link name="${link_name}">
             <visual>
                 <origin xyz="0 0 0" rpy="0 0 0" />
                 <geometry>
-                    <box size="0.001 0.001 0.001" />
+                    <box size="0.01 0.01 0.01" />
                 </geometry>
             </visual>
             <inertial>
                 <origin xyz="0.0 0.0 0.0" rpy="0 0 0" />
-                <mass value="0.001" />
-                <inertia ixx="0.0000001" ixy="0.0" iyy="0.0000001" ixz="0.0" iyz="0.0"
-                    izz="0.0000001" />
+                <mass value="${mass}" />
+                <inertia ixx="${ixx}" ixy="0.0" iyy="${iyy}" ixz="0.0" iyz="0.0" izz="${izz}" />
             </inertial>
+            <collision>
+                <origin xyz="0 0 0" rpy="0 0 0" />
+                <geometry>
+                    <box size="0.01 0.01 0.01" />
+                </geometry>
+            </collision>
         </link>
         <!-- Gazebo customization -->
         <!-- Contact model -->
