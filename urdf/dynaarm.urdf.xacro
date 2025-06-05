@@ -394,9 +394,9 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       </xacro:dynaarm_joint_fixed>
 
       <!-- Add x_kg weight to flange -->
-      <!-- <xacro:virtual_link link_name="${end_effector}_weight" 
-          mass="0.2" 
-          ixx="0.036" iyy="0.036" izz="0.002">          
+      <!-- <xacro:virtual_link link_name="${end_effector}_weight"
+          mass="0.2"
+          ixx="0.036" iyy="0.036" izz="0.002">
       </xacro:virtual_link>
 
       <xacro:dynaarm_joint_fixed joint_name="${end_effector}_weight_joint"
