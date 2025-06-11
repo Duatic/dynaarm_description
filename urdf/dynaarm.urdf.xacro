@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <!--
-Copyright 2024 Duatic AG
+Copyright 2025 Duatic AG
 
 Redistribution and use in source and binary forms, with or without modification, are permitted
 provided that the following conditions are met:
@@ -113,7 +113,7 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         </link_collision>
       </xacro:dynaarm_link_w_collision>
 
-      <!-- SH_ROT -->
+      <!-- shoulder_rotation -->
       <xacro:dynaarm_revolute_joint joint_name="${joint_1_name}"
         parent="${base}"
         child="${link01}"
@@ -155,7 +155,7 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         </link_collision>
       </xacro:dynaarm_link_w_collision>
 
-      <!-- SH_FLE -->
+      <!-- shoulder_flexion -->
       <xacro:dynaarm_revolute_joint joint_name="${joint_2_name}"
         parent="${link01}"
         child="${link02}"
@@ -196,7 +196,7 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         </link_collision>
       </xacro:dynaarm_link_w_collision>
 
-      <!-- EL_FLE -->
+      <!-- elbow_flexion -->
       <xacro:dynaarm_revolute_joint joint_name="${joint_3_name}"
         parent="${link02}"
         child="${link03}"
@@ -263,7 +263,7 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         </xacro:dynaarm_link_w_collision>
       </xacro:if>
 
-      <!-- FA_ROT -->
+      <!-- forearm_rotation -->
       <xacro:dynaarm_revolute_joint joint_name="${joint_4_name}" parent="${link03}"
         child="${link04}"
         joint_axis_xyz="${joint_4_axis_xyz}"
@@ -303,7 +303,7 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         </link_collision>
       </xacro:dynaarm_link_w_collision>
 
-      <!-- WR_FLE -->
+      <!-- wrist_flexion -->
       <xacro:dynaarm_revolute_joint joint_name="${joint_5_name}" parent="${link04}"
         child="${link05}"
         joint_axis_xyz="${joint_5_axis_xyz}"
@@ -366,7 +366,7 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         </xacro:dynaarm_link_w_collision>
       </xacro:if>
 
-      <!-- WR_ROT -->
+      <!-- wrist_rotation -->
       <xacro:dynaarm_revolute_joint joint_name="${joint_6_name}" parent="${link05}"
         child="${link06}"
         joint_axis_xyz="${joint_6_axis_xyz}"
