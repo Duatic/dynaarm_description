@@ -32,7 +32,7 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   <!-- -->
 
   <xacro:macro name="dynaarm"
-    params="tf_prefix parent_link dof mode ethercat_bus controller_path start_in_freeze_mode:=false drive_parameter_folder:='' covers version *origin">
+    params="tf_prefix parent_link dof mode ethercat_bus start_in_freeze_mode:=false drive_parameter_folder:='' controller_path:='' covers version *origin">
 
     <!--Allow the user to pass a custom folder for drive parameters-->
     <xacro:property name="default_drive_parameter_folder" value="$(find dynaarm_driver)/config/${version}" />
