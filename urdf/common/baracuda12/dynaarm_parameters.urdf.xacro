@@ -314,83 +314,152 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     </inertial>
   </xacro:property>
 
-  <!-- Collision properties -->
-  <xacro:property name="base_collision">
-    <collision>
-      <origin xyz="0 0 0" rpy="0 0 0" />
-      <geometry>
-        <mesh
-          filename="file://$(find dynaarm_description)/meshes/baracuda12/collision_meshes/base_collision_mesh.stl"
-          scale="1 1 1" />
-      </geometry>
-    </collision>
-  </xacro:property>
+ <xacro:if value="${collision == 'simple'}">
+    <!-- Collision properties -->
+    <xacro:property name="base_collision">
+        <collision>
+            <geometry>
+                <cylinder length='0.1' radius='0.05'/>
+            </geometry>
+            <origin xyz='0 0 0' rpy='0 0 0'/>
+        </collision>
+    </xacro:property>
 
-  <xacro:property name="link01_collision">
-    <collision>
-      <origin xyz="0 0 0" rpy="0 0 0" />
-      <geometry>
-        <mesh
-          filename="file://$(find dynaarm_description)/meshes/baracuda12/collision_meshes/shoulder_collision_mesh.stl"
-          scale="1 1 1" />
-      </geometry>
-    </collision>
-  </xacro:property>
+    <xacro:property name="link01_collision">
+          <collision>
+              <geometry>
+                  <cylinder length='0.25' radius='0.06'/>
+              </geometry>
+              <origin xyz='0 0 0.05' rpy='${J_PI/2} 0 0'/>
+          </collision>
+    </xacro:property>
 
-  <xacro:property name="link02_collision">
-    <collision>
-      <origin xyz="0 0 0" rpy="0 0 0" />
-      <geometry>
-        <mesh
-          filename="file://$(find dynaarm_description)/meshes/baracuda12/collision_meshes/upperarm_collision_mesh.stl"
-          scale="1 1 1" />
-      </geometry>
-    </collision>
-  </xacro:property>
+    <xacro:property name="link02_collision">
+          <collision>
+              <geometry>
+                  <cylinder length='0.4' radius='0.05'/>
+              </geometry>
+              <origin xyz='0.15 0 0' rpy='0 ${J_PI/2} 0'/>
+          </collision>
+    </xacro:property>
 
-  <xacro:property name="link03_collision">
-    <collision>
-      <origin xyz="0 0 0" rpy="0 0 0" />
-      <geometry>
-        <mesh
-          filename="file://$(find dynaarm_description)/meshes/baracuda12/collision_meshes/elbow_collision_mesh.stl"
-          scale="1 1 1" />
-      </geometry>
-    </collision>
-  </xacro:property>
+    <xacro:property name="link03_collision">
+      <collision>
+          <geometry>
+              <cylinder length='0.2' radius='0.065'/>
+          </geometry>
+          <origin xyz='-0.01 -0.05 0' rpy='${J_PI/2} 0 0'/>
+      </collision>
+    </xacro:property>
 
-  <xacro:property name="link04_collision">
-    <collision>
-      <origin xyz="0 0 0" rpy="0 0 0" />
-      <geometry>
-        <mesh
-          filename="file://$(find dynaarm_description)/meshes/baracuda12/collision_meshes/forearm_collision_mesh.stl"
-          scale="1 1 1" />
-      </geometry>
-    </collision>
-  </xacro:property>
+    <xacro:property name="link04_collision">
+      <collision>
+          <geometry>
+              <cylinder length='0.4' radius='0.04'/>
+          </geometry>
+          <origin xyz='0 0 0.2' rpy='0 0 0'/>
+      </collision>
+    </xacro:property>
 
-  <xacro:property name="link05_collision">
-    <collision>
-      <origin xyz="0 0 0" rpy="0 0 0" />
-      <geometry>
-        <mesh
-          filename="file://$(find dynaarm_description)/meshes/baracuda12/collision_meshes/wrist1_collision_mesh.stl"
-          scale="1 1 1" />
-      </geometry>
-    </collision>
-  </xacro:property>
+    <xacro:property name="link05_collision">
+      <collision>
+          <geometry>
+              <cylinder length='0.125' radius='0.05'/>
+          </geometry>
+          <origin xyz='0 0 0.025' rpy='0 0 ${J_PI/2}'/>
+      </collision>
+    </xacro:property>
 
-  <xacro:property name="link06_collision">
-    <collision>
-      <origin xyz="0 0 0" rpy="0 0 0" />
-      <geometry>
-        <mesh
-          filename="file://$(find dynaarm_description)/meshes/baracuda12/collision_meshes/wrist2_collision_mesh.stl"
-          scale="1 1 1" />
-      </geometry>
-    </collision>
-  </xacro:property>
+    <xacro:property name="link06_collision">
+      <collision>
+          <geometry>
+              <cylinder length='0.15' radius='0.052'/>
+          </geometry>
+          <origin xyz='0.005 0 -0.05' rpy='0 0 0'/>
+      </collision>
+    </xacro:property>
+
+  </xacro:if>
+
+  <xacro:if value="${collision == 'complex'}">
+    <!-- Collision properties -->
+    <xacro:property name="base_collision">
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh
+            filename="file://$(find dynaarm_description)/meshes/baracuda12/collision_meshes/base_collision_mesh.stl"
+            scale="1 1 1" />
+        </geometry>
+      </collision>
+    </xacro:property>
+
+    <xacro:property name="link01_collision">
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh
+            filename="file://$(find dynaarm_description)/meshes/baracuda12/collision_meshes/shoulder_collision_mesh.stl"
+            scale="1 1 1" />
+        </geometry>
+      </collision>
+    </xacro:property>
+
+    <xacro:property name="link02_collision">
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh
+            filename="file://$(find dynaarm_description)/meshes/baracuda12/collision_meshes/upperarm_collision_mesh.stl"
+            scale="1 1 1" />
+        </geometry>
+      </collision>
+    </xacro:property>
+
+    <xacro:property name="link03_collision">
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh
+            filename="file://$(find dynaarm_description)/meshes/baracuda12/collision_meshes/elbow_collision_mesh.stl"
+            scale="1 1 1" />
+        </geometry>
+      </collision>
+    </xacro:property>
+
+    <xacro:property name="link04_collision">
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh
+            filename="file://$(find dynaarm_description)/meshes/baracuda12/collision_meshes/forearm_collision_mesh.stl"
+            scale="1 1 1" />
+        </geometry>
+      </collision>
+    </xacro:property>
+
+    <xacro:property name="link05_collision">
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh
+            filename="file://$(find dynaarm_description)/meshes/baracuda12/collision_meshes/wrist1_collision_mesh.stl"
+            scale="1 1 1" />
+        </geometry>
+      </collision>
+    </xacro:property>
+
+    <xacro:property name="link06_collision">
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh
+            filename="file://$(find dynaarm_description)/meshes/baracuda12/collision_meshes/wrist2_collision_mesh.stl"
+            scale="1 1 1" />
+        </geometry>
+      </collision>
+    </xacro:property>
+  </xacro:if>
 
   <!-- set the ee_parent relative to the DoF -->
   <xacro:property name="ee_parent" value="${base}" />
