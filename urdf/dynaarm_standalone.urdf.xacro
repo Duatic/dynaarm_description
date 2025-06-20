@@ -18,6 +18,8 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS “AS IS” 
   <xacro:arg name="tf_prefix" default="" />
   <!-- e.g.: 6-->
   <xacro:arg name="dof" default="6" />
+  <!-- collision: simple, complex -->
+  <xacro:arg name="collision" default="complex" />
   <!-- real, mock, sim -->
   <xacro:arg name="mode" default="mock" />
   <!-- physical ethercat bus, only used for real -->
@@ -35,6 +37,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS “AS IS” 
   <xacro:dynaarm tf_prefix="$(arg tf_prefix)"
                 parent_link="world"
                 dof="$(arg dof)"
+                collision="$(arg collision)"
                 mode="$(arg mode)"
                 ethercat_bus="$(arg ethercat_bus)"
                 covers="$(arg covers)"
