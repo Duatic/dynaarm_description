@@ -392,20 +392,7 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
           child="${end_effector}">
           <origin xyz="${joint_ee_origin_xyz}" rpy="${joint_ee_origin_rpy}" />
       </xacro:dynaarm_joint_fixed>
-
-      <!-- Add x_kg weight to flange -->
-      <!-- <xacro:virtual_link link_name="${end_effector}_weight"
-          mass="0.2"
-          ixx="0.036" iyy="0.036" izz="0.002">
-      </xacro:virtual_link>
-
-      <xacro:dynaarm_joint_fixed joint_name="${end_effector}_weight_joint"
-          parent="${end_effector}"
-          child="${end_effector}_weight">
-          <origin xyz="0.0 0.0 0.02" rpy="0 0 0" />
-      </xacro:dynaarm_joint_fixed> -->
   </xacro:macro>
-
 
   <!-- -->
   <!-- DynaArm Gazebo-->
