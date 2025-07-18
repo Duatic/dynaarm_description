@@ -56,6 +56,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS “AS IS” 
           <param name="start_in_freeze_mode">${start_in_freeze_mode}</param>
           <param name="drive_parameter_folder">${drive_parameter_folder}</param>
           <param name="drive_parameter_folder_default">${drive_parameter_folder_default}</param>
+          <param name="initial_positions">[0.05, 0.05, 0.10, 0.05, 0.05, 0.05]</param>
         </xacro:if>
         <xacro:if value="${mode == 'real'}">
           <plugin>dynaarm_driver/DynaArmHardwareInterface</plugin>
