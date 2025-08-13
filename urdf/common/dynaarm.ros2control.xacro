@@ -48,7 +48,10 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS “AS IS” 
     <ros2_control name="${tf_prefix}DynaarmSystem" type="system">
       <hardware>
         <xacro:if value="${mode == 'sim'}">
-          <plugin>gz_ros2_control/GazeboSimSystem</plugin>
+          <plugin>dynaarm_gz_ros2_control/GazeboSimSystem</plugin>
+          <param name="drive_parameter_folder">${drive_parameter_folder}</param>
+          <param name="drive_parameter_folder_default">${drive_parameter_folder_default}</param>
+          <param name="drive_mode">JointPositionVelocityTorquePidGains</param>
         </xacro:if>
         <xacro:if value="${mode == 'mock'}">
           <plugin>dynaarm_driver/DynaarmMockHardwareInterface</plugin>
