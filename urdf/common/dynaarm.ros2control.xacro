@@ -16,8 +16,8 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS “AS IS” 
 
   <xacro:macro name="dynaarm_joint_ros2control_joint_interfaces">
     <state_interface name="position">
-      <!-- Slightly offset the initial position for the gazebo sim-->
-      <param name="initial_value">0.05</param>
+        <!-- Slightly offset the initial position for the gazebo sim-->
+        <param name="initial_value">0.05</param>
     </state_interface>
     <state_interface name="velocity" />
     <state_interface name="effort" />
@@ -48,11 +48,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS “AS IS” 
     <ros2_control name="${tf_prefix}DynaarmSystem" type="system">
       <hardware>
         <xacro:if value="${mode == 'sim'}">
-          <plugin>dynaarm_gz_ros2_control/GazeboSimSystem</plugin>
-          <param name="drive_parameter_folder">${drive_parameter_folder}</param>
-          <param name="drive_parameter_folder_default">${drive_parameter_folder_default}</param>
-          <param name="drive_mode">JointPositionVelocityTorquePidGains</param>
-          <use_force_commands>true</use_force_commands>
+          <plugin>gz_ros2_control/GazeboSimSystem</plugin>
         </xacro:if>
         <xacro:if value="${mode == 'mock'}">
           <plugin>dynaarm_driver/DynaarmMockHardwareInterface</plugin>
@@ -97,7 +93,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS “AS IS” 
         <xacro:dynaarm_ros2control_joint name="${tf_prefix}wrist_rotation" address="${ethercat_addresses['wrist_rotation']}" />
       </xacro:if>
       <gpio name="${tf_prefix}DynaarmSystem">
-        <command_interface name="freeze_mode" />
+       <command_interface name="freeze_mode" />
       </gpio>
 
     </ros2_control>
