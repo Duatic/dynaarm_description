@@ -386,12 +386,12 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   <!-- DynaArm Tool-->
   <!-- -->
   <xacro:macro name="dynaarm_tool">
-      <xacro:virtual_link link_name="${end_effector}" />
-      <xacro:dynaarm_joint_fixed joint_name="${joint_ee_name}"
-          parent="${ee_parent}"
-          child="${end_effector}">
-          <origin xyz="${joint_ee_origin_xyz}" rpy="${joint_ee_origin_rpy}" />
-      </xacro:dynaarm_joint_fixed>
+    <xacro:virtual_link link_name="${end_effector}" />
+    <xacro:dynaarm_joint_fixed joint_name="${joint_ee_name}"
+      parent="${ee_parent}"
+      child="${end_effector}">
+      <origin xyz="${joint_ee_origin_xyz}" rpy="${joint_ee_origin_rpy}" />
+    </xacro:dynaarm_joint_fixed>
   </xacro:macro>
 
   <!-- -->
@@ -400,10 +400,10 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   <xacro:macro name="dynaarm_gazebo" params="controller_path">
 
     <gazebo>
-      <plugin filename="libgz_ros2_control-system.so"
-        name="gz_ros2_control::GazeboSimROS2ControlPlugin">
+      <plugin filename="libdynaarm_gz_ros2_control-system.so"
+        name="dynaarm_gz_ros2_control::GazeboSimROS2ControlPlugin">
         <parameters>${controller_path}</parameters>
-        <update_rate>100</update_rate>
+        <pid_update_rate>1000</pid_update_rate>
       </plugin>
     </gazebo>
   </xacro:macro>
