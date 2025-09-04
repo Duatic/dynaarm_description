@@ -373,9 +373,9 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     <xacro:property name="link06_collision">
       <collision>
           <geometry>
-              <cylinder length='0.15' radius='0.052'/>
+              <cylinder length='0.09' radius='0.052'/>
           </geometry>
-          <origin xyz='0.005 0 -0.05' rpy='0 0 0'/>
+          <origin xyz='0.005 0 -0.035' rpy='0 0 0'/>
       </collision>
     </xacro:property>
 
