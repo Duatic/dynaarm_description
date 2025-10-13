@@ -42,7 +42,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS “AS IS” 
                 covers="$(arg covers)"
                 collision="$(arg collision)"
                 version="$(arg version)">
-    <origin xyz="0 0 0.085" rpy="0.0 0.0 0.0" />
+    <origin xyz="0 0 0" rpy="0.0 0.0 0.0" />
   </xacro:dynaarm>
 
   <!-- Note: for a real world application you would pass different parameters for both arms (e.g. different ethercat_bus)-->
@@ -54,7 +54,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS “AS IS” 
                 covers="$(arg covers)"
                 collision="$(arg collision)"
                 version="$(arg version)">
-    <origin xyz="1.0 0 0.085" rpy="0.0 0.0 0.0" />
+    <origin xyz="1.0 0 0" rpy="0.0 0.0 0.0" />
   </xacro:dynaarm>
 
 
