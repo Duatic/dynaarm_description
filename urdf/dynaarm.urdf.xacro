@@ -55,7 +55,7 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     <xacro:property name="ee_parent" value="${base}" />
 
     <xacro:include filename="$(find dynaarm_description)/urdf/common/dynaarm_common.urdf.xacro" />
-    <!-- Include the version specific information-->
+    <!-- Include the version specific information and also load the ethercat addresses from the drive file -->
     <xacro:include filename="$(find dynaarm_description)/urdf/common/${version}/dynaarm_parameters.urdf.xacro" />
     <xacro:include filename="$(find dynaarm_description)/urdf/common/dynaarm.ros2control.xacro" />
 
