@@ -36,12 +36,9 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
     <!-- Allow the user to pass the drive order file -->
     <xacro:property name="default_drive_order_file" value="$(find dynaarm_description)/urdf/common/${version}/drive_order.yaml" />
-    <xacro:if value="${drive_order == ''}">
-      <xacro:property name="drive_order_file" value="${default_drive_order_file}" />
-    </xacro:if>
-    <xacro:unless value="${drive_order == ''}">
-      <xacro:property name="drive_order_file" value="${drive_order}" />
-    </xacro:unless>
+    <xacro:property name="drive_order_file" value="${default_drive_order_file if drive_order == '' else drive_order}" />
+    <!-- Obtain the EtherCAT drive order (address order list) -->     
+    <xacro:property name="ethercat_addresses" value="${xacro.load_yaml(drive_order_file)}"/>
 
     <!--Allow the user to pass a custom folder for drive parameters-->
     <xacro:property name="default_drive_parameter_folder" value="$(find dynaarm_driver)/config/${version}" />

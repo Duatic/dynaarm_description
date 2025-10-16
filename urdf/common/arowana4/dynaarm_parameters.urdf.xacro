@@ -26,12 +26,6 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 -->
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
   <xacro:property name="arm_version_name" value="arowana4"/>
-  <!--
-    Obtain the EtherCAT drive order (address order list).
-    The drive_order.yaml file is either loaded from the default location
-    in dynaarm.urdf.xacro or passed down from another launch file.
-  -->
-  <xacro:property name="ethercat_addresses" value="${xacro.load_yaml(drive_order_file)}"/>
 
   <xacro:property name="J_PI" value="3.14159265359" />
 
