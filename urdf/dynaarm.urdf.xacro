@@ -32,7 +32,13 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   <!-- -->
 
   <xacro:macro name="dynaarm"
-    params="tf_prefix parent_link collision:='simple' dof mode ethercat_bus start_in_freeze_mode:=false drive_parameter_folder:='' controller_path:='' covers version *origin">
+    params="tf_prefix parent_link collision:='simple' dof mode ethercat_bus drive_order:='' start_in_freeze_mode:=false drive_parameter_folder:='' controller_path:='' covers version *origin">
+
+    <!-- Allow the user to pass the drive order file -->
+    <xacro:property name="default_drive_order_file" value="$(find dynaarm_description)/urdf/common/${version}/drive_order.yaml" />
+    <xacro:property name="drive_order_file" value="${default_drive_order_file if drive_order == '' else drive_order}" />
+    <!-- Obtain the EtherCAT drive order (address order list) -->
+    <xacro:property name="ethercat_addresses" value="${xacro.load_yaml(drive_order_file)}"/>
 
     <!--Allow the user to pass a custom folder for drive parameters-->
     <xacro:property name="default_drive_parameter_folder" value="$(find dynaarm_driver)/config/${version}" />
@@ -46,9 +52,8 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     <xacro:property name="ee_parent" value="${base}" />
 
     <xacro:include filename="$(find dynaarm_description)/urdf/common/dynaarm_common.urdf.xacro" />
-    <!-- Include the version specific information-->
-    <xacro:include
-      filename="$(find dynaarm_description)/urdf/common/${version}/dynaarm_parameters.urdf.xacro" />
+    <!-- Include the version specific information and also load the ethercat addresses from the drive file -->
+    <xacro:include filename="$(find dynaarm_description)/urdf/common/${version}/dynaarm_parameters.urdf.xacro" />
     <xacro:include filename="$(find dynaarm_description)/urdf/common/dynaarm.ros2control.xacro" />
 
     <xacro:dynaarm_joint_fixed joint_name="${joint_base_name}"
@@ -67,7 +72,12 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     </xacro:if>
 
     <!--ros2control-->
-    <xacro:dynaarm_ros2_control tf_prefix="${tf_prefix}" ethercat_bus="${ethercat_bus}" start_in_freeze_mode="${start_in_freeze_mode}"  drive_parameter_folder="${drive_parameter_folder_internal}" drive_parameter_folder_default="${default_drive_parameter_folder}" ethercat_addresses="${ethercat_addresses}"/>
+    <xacro:dynaarm_ros2_control tf_prefix="${tf_prefix}"
+                                ethercat_bus="${ethercat_bus}"
+                                start_in_freeze_mode="${start_in_freeze_mode}"
+                                drive_parameter_folder="${drive_parameter_folder_internal}"
+                                drive_parameter_folder_default="${default_drive_parameter_folder}"
+                                ethercat_addresses="${ethercat_addresses}"/>
   </xacro:macro>
 
   <!-- -->

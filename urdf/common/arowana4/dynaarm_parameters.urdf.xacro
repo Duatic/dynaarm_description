@@ -26,9 +26,6 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 -->
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
   <xacro:property name="arm_version_name" value="arowana4"/>
-  <!-- Obtain the ethercat drive order (address order list)-->
-  <xacro:property name="drive_order_path" value="$(find dynaarm_description)/urdf/common/${arm_version_name}/drive_order.yaml"/>
-  <xacro:property name="ethercat_addresses" value="${xacro.load_yaml(drive_order_path)}"/>
 
   <xacro:property name="J_PI" value="3.14159265359" />
 
