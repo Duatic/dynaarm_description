@@ -42,7 +42,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS “AS IS” 
                 ethercat_bus="$(arg ethercat_bus)"
                 covers="$(arg covers)"
                 version="$(arg version)">
-    <origin xyz="0 0 0.085" rpy="0.0 0.0 0.0" />
+    <origin xyz="0 0 0" rpy="0.0 0.0 0.0" />
   </xacro:dynaarm>
 
 </robot>
