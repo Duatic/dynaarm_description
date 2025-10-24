@@ -28,6 +28,8 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS “AS IS” 
   <xacro:arg name="covers" default="false" />
   <!-- v1, v2, ... -->
   <xacro:arg name="version" default="baracuda12" />
+  <!-- Path to ros2_control controller config file -->
+  <xacro:arg name="controller_path" default="" />
 
   <xacro:include filename="$(find dynaarm_description)/urdf/dynaarm.urdf.xacro" />
 
@@ -44,5 +46,14 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS “AS IS” 
                 version="$(arg version)">
     <origin xyz="0 0 0" rpy="0.0 0.0 0.0" />
   </xacro:dynaarm>
+
+  <!-- DynaArm Gazebo Ros2 Control-->
+  <gazebo>
+    <plugin filename="libgz_ros2_control-system.so"
+      name="gz_ros2_control::GazeboSimROS2ControlPlugin">
+      <parameters>$(arg controller_path)</parameters>
+      <update_rate>100</update_rate>
+    </plugin>
+  </gazebo>
 
 </robot>

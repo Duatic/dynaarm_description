@@ -32,7 +32,7 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   <!-- -->
 
   <xacro:macro name="dynaarm"
-    params="tf_prefix parent_link collision:='simple' dof mode ethercat_bus drive_order:='' start_in_freeze_mode:=false drive_parameter_folder:='' controller_path:='' covers version *origin">
+    params="tf_prefix parent_link collision:='simple' dof mode ethercat_bus drive_order:='' start_in_freeze_mode:=false drive_parameter_folder:='' covers version *origin">
 
     <!-- Allow the user to pass the drive order file -->
     <xacro:property name="default_drive_order_file" value="$(find dynaarm_description)/urdf/common/${version}/drive_order.yaml" />
@@ -65,11 +65,6 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     <!-- DynaArm-->
     <xacro:dynaarm_main_body />
     <xacro:dynaarm_tool />
-
-    <!-- Gazebo plugin -->
-    <xacro:if value="${mode == 'sim'}">
-      <xacro:dynaarm_gazebo controller_path="${controller_path}"/>
-    </xacro:if>
 
     <!--ros2control-->
     <xacro:dynaarm_ros2_control tf_prefix="${tf_prefix}"
@@ -402,20 +397,6 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
           child="${end_effector}">
           <origin xyz="${joint_ee_origin_xyz}" rpy="${joint_ee_origin_rpy}" />
       </xacro:dynaarm_joint_fixed>
-  </xacro:macro>
-
-  <!-- -->
-  <!-- DynaArm Gazebo-->
-  <!-- -->
-  <xacro:macro name="dynaarm_gazebo" params="controller_path">
-
-    <gazebo>
-      <plugin filename="libgz_ros2_control-system.so"
-        name="gz_ros2_control::GazeboSimROS2ControlPlugin">
-        <parameters>${controller_path}</parameters>
-        <update_rate>100</update_rate>
-      </plugin>
-    </gazebo>
   </xacro:macro>
 
 </robot>
