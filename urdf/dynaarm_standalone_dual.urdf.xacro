@@ -33,11 +33,11 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS “AS IS” 
 
   <xacro:include filename="$(find dynaarm_description)/urdf/dynaarm.urdf.xacro" />
 
-  <link name="world" />
+  <link name="base_link" />
 
   <!-- create two dynaarms and fix their bases, move them up such that they do not intersect with the ground -->
   <xacro:dynaarm tf_prefix="$(arg tf_prefix)_1/"
-                parent_link="world"
+                parent_link="base_link"
                 dof="$(arg dof)"
                 mode="$(arg mode)"
                 ethercat_bus="$(arg ethercat_bus)"
@@ -49,7 +49,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS “AS IS” 
 
   <!-- Note: for a real world application you would pass different parameters for both arms (e.g. different ethercat_bus)-->
   <xacro:dynaarm tf_prefix="$(arg tf_prefix)_2/"
-                parent_link="world"
+                parent_link="base_link"
                 dof="$(arg dof)"
                 mode="$(arg mode)"
                 ethercat_bus="$(arg ethercat_bus)"
@@ -60,12 +60,10 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS “AS IS” 
   </xacro:dynaarm>
 
   <!-- DynaArm Gazebo Ros2 Control-->
-  <gazebo>
-    <plugin filename="libgz_ros2_control-system.so"
-      name="gz_ros2_control::GazeboSimROS2ControlPlugin">
-      <parameters>$(arg controller_path)</parameters>
-      <update_rate>100</update_rate>
-    </plugin>
-  </gazebo>
+  <!-- Gazebo Ros2 Control -->
+  <xacro:include filename="$(find duatic_control)/urdf/plugins.urdf.xacro" />
+  <xacro:control namespace="$(arg namespace)">
+    <remapping>cmd_vel:=cmd_vel</remapping> <!-- TODO: This line only exists, because otherwise the xacro doesn't compile -->
+  </xacro:control>
 
 </robot>

@@ -33,11 +33,11 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS “AS IS” 
 
   <xacro:include filename="$(find dynaarm_description)/urdf/dynaarm.urdf.xacro" />
 
-  <link name="world" />
+  <link name="base_link" />
 
   <!-- create an instance of the dynaarm xacro macro and fix its base, move it up such that it doesn't intersect with the ground -->
   <xacro:dynaarm tf_prefix="$(arg tf_prefix)"
-                parent_link="world"
+                parent_link="base_link"
                 dof="$(arg dof)"
                 collision="$(arg collision)"
                 mode="$(arg mode)"
@@ -47,13 +47,10 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS “AS IS” 
     <origin xyz="0 0 0" rpy="0.0 0.0 0.0" />
   </xacro:dynaarm>
 
-  <!-- DynaArm Gazebo Ros2 Control-->
-  <gazebo>
-    <plugin filename="libgz_ros2_control-system.so"
-      name="gz_ros2_control::GazeboSimROS2ControlPlugin">
-      <parameters>$(arg controller_path)</parameters>
-      <update_rate>100</update_rate>
-    </plugin>
-  </gazebo>
+  <!-- Gazebo Ros2 Control -->
+  <xacro:include filename="$(find duatic_control)/urdf/plugins.urdf.xacro" />
+  <xacro:control namespace="$(arg namespace)">
+    <remapping>cmd_vel:=cmd_vel</remapping> <!-- TODO: This line only exists, because otherwise the xacro doesn't compile -->
+  </xacro:control>
 
 </robot>
