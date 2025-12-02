@@ -31,6 +31,8 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS “AS IS” 
   <!-- Path to ros2_control controller config file -->
   <xacro:arg name="controller_path" default="" />
 
+  <xacro:arg name="namespace" default="dynaarm1" />
+
   <xacro:include filename="$(find dynaarm_description)/urdf/dynaarm.urdf.xacro" />
 
   <link name="base_link" />
