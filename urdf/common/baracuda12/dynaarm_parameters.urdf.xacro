@@ -167,11 +167,11 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   <!-- Shoulder -->
   <xacro:property name="link01_inertial">
     <inertial>
-      <mass value="2.73096676" />
-      <origin xyz="0.00001348 0.00013521 0.0430259" rpy="0 0 0" />
-      <inertia ixx="0.01291668" iyy="0.00874231"
-        izz="0.01243436" ixy="0.0000044"
-        ixz="-0.00000179" iyz="-0.00000203" />
+      <mass value="2.825469" />
+      <origin xyz="0.000012 0.000480 0.039513" rpy="0 0 0" />
+      <inertia ixx="0.013069" iyy="0.004793"
+        izz="0.000046" ixy="0.000033"
+        ixz="-0.000002" iyz="-0.000046" />
     </inertial>
   </xacro:property>
 
@@ -214,11 +214,11 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   <!-- Forearm -->
   <xacro:property name="link04_inertial">
     <inertial>
-      <mass value="1.15674546" />
-      <origin xyz="-0.00115165 0.00001056 0.30067314" rpy="0 0 0" />
-      <inertia ixx="0.03129519" iyy="0.03125954"
-        izz="0.00090392" ixy="0.00000151"
-        ixz="-0.00017171" iyz="0.00000159" />
+      <mass value="1.237246" />
+      <origin xyz="-0.001568 0.000046 0.292163" rpy="0 0 0" />
+      <inertia ixx="0.033872" iyy="0.033868"
+        izz="0.001041" ixy="0.000002"
+        ixz="-0.000276" iyz="0.000018" />
     </inertial>
   </xacro:property>
 
