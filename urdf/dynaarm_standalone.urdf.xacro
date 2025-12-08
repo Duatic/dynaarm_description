@@ -14,7 +14,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS “AS IS” 
 <robot name="dynaarm" xmlns:xacro="http://www.ros.org/wiki/xacro">
 
   <!--Example single arm setup-->
-
+  <xacro:arg name="namespace" default="" />
   <xacro:arg name="tf_prefix" default="" />
   <!-- e.g.: 6-->
   <xacro:arg name="dof" default="6" />
