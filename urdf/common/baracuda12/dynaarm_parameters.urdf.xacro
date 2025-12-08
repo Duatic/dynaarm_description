@@ -154,13 +154,13 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   <!-- Base Robot -->
   <xacro:property name="base_inertial">
     <inertial>
-      <mass value="2.00205474" />
+      <mass value="1.94219788" />
       <origin
-        xyz="0.00347077 0.00328869 -0.0488212"
+        xyz="0.00243205 0.00250861 0.05299306"
         rpy="0 0 0" />
-      <inertia ixx="0.00403342" iyy="0.00417534"
-        izz="0.00460211" ixy="0.00040828"
-        ixz="-0.00018775" iyz="-0.0001821" />
+      <inertia ixx="0.00434815" iyy="0.00446542"
+        izz="0.00446174" ixy="0.00028867"
+        ixz="-0.00015925" iyz="-0.00015771" />
     </inertial>
   </xacro:property>
 
@@ -318,7 +318,7 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <geometry>
                 <cylinder length='0.1' radius='0.05'/>
             </geometry>
-            <origin xyz='0 0 0' rpy='0 0 0'/>
+            <origin xyz='0 0 0.05' rpy='0 0 0'/>
         </collision>
     </xacro:property>
 
