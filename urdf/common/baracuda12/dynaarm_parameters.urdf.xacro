@@ -214,7 +214,8 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   <!-- Forearm -->
   <xacro:property name="link04_inertial">
     <inertial>
-      <mass value="1.237246" />
+      <!-- The mass here is 100g more than the value in CAD, but through testing we found out that freedrive works better with the increased value (09.12.25 Antonis & Marc)-->
+      <mass value="1.337246" />
       <origin xyz="-0.001568 0.000046 0.292163" rpy="0 0 0" />
       <inertia ixx="0.033872" iyy="0.033868"
         izz="0.001041" ixy="0.000002"
