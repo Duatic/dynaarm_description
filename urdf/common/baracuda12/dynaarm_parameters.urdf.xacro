@@ -154,24 +154,24 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   <!-- Base Robot -->
   <xacro:property name="base_inertial">
     <inertial>
-      <mass value="2.00205474" />
+      <mass value="1.94219788" />
       <origin
-        xyz="0.00347077 0.00328869 -0.0488212"
+        xyz="0.00243205 0.00250861 0.05299306"
         rpy="0 0 0" />
-      <inertia ixx="0.00403342" iyy="0.00417534"
-        izz="0.00460211" ixy="0.00040828"
-        ixz="-0.00018775" iyz="-0.0001821" />
+      <inertia ixx="0.00434815" iyy="0.00446542"
+        izz="0.00446174" ixy="0.00028867"
+        ixz="-0.00015925" iyz="-0.00015771" />
     </inertial>
   </xacro:property>
 
   <!-- Shoulder -->
   <xacro:property name="link01_inertial">
     <inertial>
-      <mass value="2.73096676" />
-      <origin xyz="0.00001348 0.00013521 0.0430259" rpy="0 0 0" />
-      <inertia ixx="0.01291668" iyy="0.00874231"
-        izz="0.01243436" ixy="0.0000044"
-        ixz="-0.00000179" iyz="-0.00000203" />
+      <mass value="2.825469" />
+      <origin xyz="0.000012 0.000480 0.039513" rpy="0 0 0" />
+      <inertia ixx="0.013069" iyy="0.004793"
+        izz="0.000046" ixy="0.000033"
+        ixz="-0.000002" iyz="-0.000046" />
     </inertial>
   </xacro:property>
 
@@ -214,11 +214,12 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   <!-- Forearm -->
   <xacro:property name="link04_inertial">
     <inertial>
-      <mass value="1.15674546" />
-      <origin xyz="-0.00115165 0.00001056 0.30067314" rpy="0 0 0" />
-      <inertia ixx="0.03129519" iyy="0.03125954"
-        izz="0.00090392" ixy="0.00000151"
-        ixz="-0.00017171" iyz="0.00000159" />
+      <!-- The mass here is 100g more than the value in CAD, but through testing we found out that freedrive works better with the increased value (09.12.25 Antonis & Marc)-->
+      <mass value="1.337246" />
+      <origin xyz="-0.001568 0.000046 0.292163" rpy="0 0 0" />
+      <inertia ixx="0.033872" iyy="0.033868"
+        izz="0.001041" ixy="0.000002"
+        ixz="-0.000276" iyz="0.000018" />
     </inertial>
   </xacro:property>
 
@@ -318,7 +319,7 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <geometry>
                 <cylinder length='0.1' radius='0.05'/>
             </geometry>
-            <origin xyz='0 0 0' rpy='0 0 0'/>
+            <origin xyz='0 0 0.05' rpy='0 0 0'/>
         </collision>
     </xacro:property>
 
