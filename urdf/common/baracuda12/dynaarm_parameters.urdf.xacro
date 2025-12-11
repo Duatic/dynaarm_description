@@ -170,7 +170,7 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       <mass value="2.825469" />
       <origin xyz="0.000012 0.000480 0.039513" rpy="0 0 0" />
       <inertia ixx="0.013069" iyy="0.004793"
-        izz="0.000046" ixy="0.000033"
+        izz="0.012242" ixy="0.000033"
         ixz="-0.000002" iyz="-0.000046" />
     </inertial>
   </xacro:property>
